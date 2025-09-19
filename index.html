@@ -1,195 +1,118 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Queen_Sh0op</title>
   <style>
-    body { font-family: Tahoma, Arial, sans-serif; margin: 0; padding: 0; background: #fff5fa; color: #333; }
-    header { background: #ff4da6; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 20px; margin: 0; }
-    .menu-btn { font-size: 24px; cursor: pointer; }
-    /* رسالة الترحيب */
-    .welcome {
-      background: #ffe6f0; color: #d63384; text-align: center; padding: 15px;
-      font-size: 16px; font-weight: bold; animation: pulse 2s infinite;
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #ffe6f2;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      text-align: center;
     }
-    @keyframes pulse { 0% { background:#ffe6f0; } 50% { background:#ffd6eb; } 100% { background:#ffe6f0; } }
-    /* القائمة الجانبية */
-    .sidebar {
-      height: 100%; width: 0; position: fixed; top: 0; right: 0; background-color: #ff4da6;
-      overflow-x: hidden; transition: 0.4s; padding-top: 60px; z-index: 1000;
+    header {
+      background: #ff3399;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
     }
-    .sidebar a { padding: 10px 20px; text-decoration: none; font-size: 18px; color: white; display: block; transition: 0.3s; }
-    .sidebar a:hover { background: #e60073; }
-    .sidebar .closebtn { position: absolute; top: 15px; left: 15px; font-size: 25px; cursor: pointer; }
-    /* الأقسام */
-    .section { padding: 20px; }
-    h2 { color: #ff4da6; text-align: center; margin-bottom: 20px; }
-    .products { display: flex; flex-wrap: wrap; justify-content: center; }
+    h2 {
+      color: #ff3399;
+      margin: 30px 0 15px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 0 15px;
+    }
     .product {
-      background: #fff; border: 2px solid #ffd6e8; border-radius: 10px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.05); margin: 10px; padding: 15px;
-      width: 180px; text-align: center; transition: transform 0.2s;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 10px;
     }
-    .product:hover { transform: translateY(-5px); }
-    .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
-    .price { color: #ff4da6; font-weight: bold; margin: 8px 0; }
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .product h3 {
+      font-size: 16px;
+      margin: 10px 0 5px;
+    }
+    .product p {
+      margin: 5px 0;
+      color: #555;
+    }
     .btn {
-      display: inline-block; padding: 8px 12px; background: #ff4da6; color: white;
-      border-radius: 6px; text-decoration: none; font-size: 14px;
+      display: inline-block;
+      background: #ff3399;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      text-decoration: none;
     }
-    .btn:hover { background: #e60073; }
-    footer { background: #ffe6f0; text-align: center; padding: 15px; margin-top: 20px; font-size: 14px; }
   </style>
 </head>
 <body>
 
-  <!-- هيدر -->
-  <header>
-    <h1>✨ Queen_Sh0op ✨</h1>
-    <span class="menu-btn" onclick="openNav()">☰</span>
-  </header>
+  <header>✨ Queen_Sh0op ✨</header>
+  <p style="margin:15px;">صاحبة كوين شوب ترحب بكم 💖</p>
 
-  <!-- رسالة ترحيب -->
-  <div class="welcome">👑 أهلاً وسهلاً بكم في متجر <b>Queen_Sh0op</b>، صاحبة المتجر ترحب بكم 💖</div>
-
-  <!-- القائمة الجانبية -->
-  <div id="mySidebar" class="sidebar">
-    <span class="closebtn" onclick="closeNav()">✖️</span>
-    <a href="#new">🆕 وصل حديثًا</a>
-    <a href="#offers">⚡ عروض اليوم</a>
-    <a href="#bestseller">🏆 الأكثر مبيعًا</a>
-    <a href="#skin">💄 العناية بالبشرة</a>
-    <a href="#hair">💇‍♀️ العناية بالشعر</a>
-    <a href="#makeup">💋 مكياج</a>
-    <a href="#oils">🌿 زيوت</a>
-    <a href="#herbs">🍃 أعشاب</a>
-    <a href="#devices">📦 أجهزة</a>
-    <a href="#supplements">💊 مكملات</a>
-    <a href="#slimming">🔥 تنحيف</a>
-    <a href="#expired">❌ انتهت عروضها</a>
-    <a href="#contact">📞 تواصل</a>
+  <!-- قسم المكياج -->
+  <h2>💄 المكياج</h2>
+  <div class="products">
+    <div class="product">
+      <img src="https://i.ibb.co/G4tJzj8/1.jpg" alt="بودرة">
+      <h3>بودرة</h3>
+      <p>4.5 ر.ع</p>
+      <a href="#" class="btn">أضف للسلة</a>
+    </div>
+    <div class="product">
+      <img src="https://i.ibb.co/LXmNv7c/4.jpg" alt="كريم أساس">
+      <h3>كريم أساس</h3>
+      <p>7.0 ر.ع</p>
+      <a href="#" class="btn">أضف للسلة</a>
+    </div>
   </div>
 
-  <!-- الأقسام -->
-  <section id="new" class="section">
-    <h2>🆕 وصل حديثًا</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=سيروم" alt=""><h3>سيروم ترطيب</h3><p class="price">9.9 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=كريم" alt=""><h3>كريم أساس</h3><p class="price">7.0 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
+  <!-- قسم العناية بالبشرة -->
+  <h2>🧴 العناية بالبشرة</h2>
+  <div class="products">
+    <div class="product">
+      <img src="https://i.ibb.co/WWXXZVF/3.jpg" alt="سيروم">
+      <h3>سيروم</h3>
+      <p>9.9 ر.ع</p>
+      <a href="#" class="btn">أضف للسلة</a>
     </div>
-  </section>
-
-  <section id="offers" class="section">
-    <h2>⚡ عروض اليوم</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=ماسك" alt=""><h3>ماسك فيتامين C</h3><p class="price"><del>7.0</del> 5.0 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
+    <div class="product">
+      <img src="https://i.ibb.co/zTm06Dc/2.jpg" alt="ماسك">
+      <h3>ماسك فيتامين C</h3>
+      <p>5.0 ر.ع</p>
+      <a href="#" class="btn">أضف للسلة</a>
     </div>
-  </section>
+  </div>
 
-  <section id="bestseller" class="section">
-    <h2>🏆 الأكثر مبيعًا</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=زيت" alt=""><h3>زيت جوز الهند</h3><p class="price">7.5 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
+  <!-- قسم العناية بالشعر -->
+  <h2>💆‍♀️ العناية بالشعر</h2>
+  <div class="products">
+    <div class="product">
+      <img src="https://i.ibb.co/WN3Crmg/5.jpg" alt="زيت جوز الهند">
+      <h3>زيت جوز الهند</h3>
+      <p>7.5 ر.ع</p>
+      <a href="#" class="btn">أضف للسلة</a>
     </div>
-  </section>
-
-  <section id="skin" class="section">
-    <h2>💄 العناية بالبشرة</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=مرطب" alt=""><h3>مرطب البشرة</h3><p class="price">6.0 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
+    <div class="product">
+      <img src="https://i.ibb.co/Nd2yTCN/6.jpg" alt="شامبو">
+      <h3>شامبو طبيعي</h3>
+      <p>6.0 ر.ع</p>
+      <a href="#" class="btn">أضف للسلة</a>
     </div>
-  </section>
+  </div>
 
-  <section id="hair" class="section">
-    <h2>💇‍♀️ العناية بالشعر</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=شامبو" alt=""><h3>شامبو طبيعي</h3><p class="price">4.0 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
-    </div>
-  </section>
-
-  <section id="makeup" class="section">
-    <h2>💋 مكياج</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=روج" alt=""><h3>روج وردي</h3><p class="price">3.0 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
-    </div>
-  </section>
-
-  <section id="oils" class="section">
-    <h2>🌿 زيوت</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=زيت+ورد" alt=""><h3>زيت الورد</h3><p class="price">5.0 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
-    </div>
-  </section>
-
-  <section id="herbs" class="section">
-    <h2>🍃 أعشاب</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=حناء" alt=""><h3>حناء طبيعية</h3><p class="price">2.5 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
-    </div>
-  </section>
-
-  <section id="devices" class="section">
-    <h2>📦 أجهزة</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=جهاز" alt=""><h3>جهاز بخار وجه</h3><p class="price">12.0 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
-    </div>
-  </section>
-
-  <section id="supplements" class="section">
-    <h2>💊 مكملات غذائية</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=فيتامين" alt=""><h3>فيتامين C</h3><p class="price">4.5 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
-    </div>
-  </section>
-
-  <section id="slimming" class="section">
-    <h2>🔥 تنحيف</h2>
-    <div class="products">
-      <div class="product"><img src="https://via.placeholder.com/150x150.png?text=شاي+تنحيف" alt=""><h3>شاي تنحيف</h3><p class="price">6.5 ر.ع</p><a href="#" class="btn">أضف للسلة</a></div>
-    </div>
-  </section>
-
-  <section id="expired" class="section">
-    <h2>❌ انتهت عروضها</h2>
-    <p style="text-align:center; color:#888;">لا توجد منتجات حالياً</p>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>📞 تواصل معنا</h2>
-    <p style="text-align:center">📱 واتساب: +968 9603 6550</p>
-    <p style="text-align:center">📷 انستغرام: queen_sh0op</p>
-  </section>
-
-  <footer>© 2025 Queen_Sh0op 🌸 جميع الحقوق محفوظة</footer>
-
-  <script>
-    function openNav(){ document.getElementById("mySidebar").style.width="250px"; }
-    function closeNav(){ document.getElementById("mySidebar").style.width="0"; }
-  </script>
 </body>
 </html>
-<script>
-  async function loadProducts() {
-    const response = await fetch('products.json');
-    const products = await response.json();
-
-    const container = document.getElementById('products');
-    container.innerHTML = '';
-
-    products.forEach(product => {
-      const card = `
-        <div class="product">
-          <img src="${product.image}" alt="${product.name}" />
-          <h3>${product.name}</h3>
-          <p>السعر: ${product.price} ر.ع</p>
-          <button>أضف للسلة</button>
-        </div>
-      `;
-      container.innerHTML += card;
-    });
-  }
-
-  loadProducts();
-</script>
