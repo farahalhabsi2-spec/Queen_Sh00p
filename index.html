@@ -5,63 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Queen_Sh00p</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-    }
-    header {
-      background: #ff3399;
-      color: white;
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px;
-    }
-    .product {
-      background: white;
-      margin: 10px;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      width: 200px;
-    }
-    .product img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .product h3 {
-      margin: 10px 0 5px;
-    }
+    body { font-family: Tahoma, sans-serif; text-align: center; background: #f5f5f5; margin:0; }
+    header { background:#ff3399; color:white; padding:15px; font-size:22px; font-weight:bold; }
+    .welcome { background:#fff; margin:20px; padding:20px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,.1); }
+    h2 { color:#ff3399; margin-top:30px; }
+    .section { display:flex; flex-wrap:wrap; justify-content:center; margin:10px 0; }
+    .product { background:white; margin:10px; padding:15px; width:180px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.1); }
+    .product img { width:100%; border-radius:5px; }
   </style>
 </head>
 <body>
-  <header>✨ Queen_Sh00p ✨</header>
 
-  <h2>منتجاتنا</h2>
-  <div class="products">
-    <div class="product">
-      <img src="https://via.placeholder.com/200" alt="منتج 1">
-      <h3>منتج 1</h3>
-      <p>وصف قصير للمنتج.</p>
-    </div>
-    <div class="product">
-      <img src="https://via.placeholder.com/200" alt="منتج 2">
-      <h3>منتج 2</h3>
-      <p>وصف قصير للمنتج.</p>
-    </div>
-    <div class="product">
-      <img src="https://via.placeholder.com/200" alt="منتج 3">
-      <h3>منتج 3</h3>
-      <p>وصف قصير للمنتج.</p>
-    </div>
+<header>✨ Queen_Sh00p ✨</header>
+
+<div class="welcome">
+  <h1>مرحباً بكم في متجر Queen_Sh00p</h1>
+  <p>هنا تجدون أجود منتجات التجميل والعناية ✨</p>
+</div>
+
+<!-- قسم البشرة -->
+<h2>🧴 العناية بالبشرة</h2>
+<div class="section">
+  <div class="product">
+    <img src="link1.jpg" alt="غسول">
+    <h3>غسول طبيعي</h3>
+    <p>ينظف البشرة بعمق</p>
   </div>
+  <div class="product">
+    <img src="link2.jpg" alt="سيروم">
+    <h3>سيروم تفتيح</h3>
+    <p>يمنح إشراقة ونضارة</p>
+  </div>
+</div>
+
+<!-- قسم الشعر -->
+<h2>💇‍♀️ العناية بالشعر</h2>
+<div class="section">
+  <div class="product">
+    <img src="link3.jpg" alt="زيت شعر">
+    <h3>زيت الأرغان</h3>
+    <p>تطويل وتكثيف الشعر</p>
+  </div>
+  <div class="product">
+    <img src="link4.jpg" alt="ماسك شعر">
+    <h3>ماسك ترطيب</h3>
+    <p>يعالج الجفاف والتقصف</p>
+  </div>
+</div>
+
+<!-- قسم المكياج -->
+<h2>💄 المكياج</h2>
+<div class="section">
+  <div class="product">
+    <img src="link5.jpg" alt="أحمر شفاه">
+    <h3>أحمر شفاه</h3>
+    <p>ألوان جذابة وثبات عالي</p>
+  </div>
+  <div class="product">
+    <img src="link6.jpg" alt="بودرة وجه">
+    <h3>بودرة وجه</h3>
+    <p>تمنح بشرة ناعمة</p>
+  </div>
+</div>
+
+<!-- قسم العطور -->
+<h2>🌸 العطور</h2>
+<div class="section">
+  <div class="product">
+    <img src="link7.jpg" alt="عطر">
+    <h3>عطر وردي</h3>
+    <p>رائحة منعشة وأنثوية</p>
+  </div>
+  <div class="product">
+    <img src="link8.jpg" alt="مسك">
+    <h3>مسك فاخر</h3>
+    <p>ثبات طويل الأمد</p>
+  </div>
+</div>
+
 </body>
 </html>
