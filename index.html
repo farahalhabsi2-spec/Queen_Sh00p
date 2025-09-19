@@ -3,93 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Queen Shop</title>
+  <title>Queen_Sh00p</title>
   <style>
     body {
-      font-family: "Tahoma", sans-serif;
-      background-color: #fffafc;
+      font-family: Arial, sans-serif;
+      text-align: center;
       margin: 0;
       padding: 0;
-      direction: rtl;
-      text-align: center;
+      background: #f5f5f5;
     }
     header {
-      background: #8e44ad;
+      background: #ff3399;
       color: white;
       padding: 20px;
-      font-size: 28px;
+      font-size: 24px;
       font-weight: bold;
     }
-    nav {
-      margin: 20px 0;
-    }
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #8e44ad;
-      font-weight: bold;
-    }
-    section {
-      padding: 20px;
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
     }
     .product {
-      border: 1px solid #ddd;
-      border-radius: 10px;
+      background: white;
+      margin: 10px;
       padding: 15px;
-      margin: 15px;
-      display: inline-block;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       width: 200px;
-      vertical-align: top;
-      background: #f9f9f9;
     }
     .product img {
       width: 100%;
       border-radius: 8px;
     }
-    footer {
-      background: #8e44ad;
-      color: white;
-      padding: 10px;
-      margin-top: 30px;
+    .product h3 {
+      margin: 10px 0 5px;
     }
   </style>
 </head>
 <body>
-  <header>Queen Shop</header>
+  <header>✨ Queen_Sh00p ✨</header>
 
-  <nav>
-    <a href="#products">المنتجات</a>
-    <a href="#about">من نحن</a>
-    <a href="#contact">تواصل معنا</a>
-  </nav>
-
-  <section id="products">
-    <h2>منتجاتنا</h2>
+  <h2>منتجاتنا</h2>
+  <div class="products">
     <div class="product">
       <img src="https://via.placeholder.com/200" alt="منتج 1">
-      <h3>اسم المنتج 1</h3>
-      <p>وصف قصير للمنتج</p>
+      <h3>منتج 1</h3>
+      <p>وصف قصير للمنتج.</p>
     </div>
     <div class="product">
       <img src="https://via.placeholder.com/200" alt="منتج 2">
-      <h3>اسم المنتج 2</h3>
-      <p>وصف قصير للمنتج</p>
+      <h3>منتج 2</h3>
+      <p>وصف قصير للمنتج.</p>
     </div>
-  </section>
-
-  <section id="about">
-    <h2>من نحن</h2>
-    <p>متجر Queen Shop يوفر أجود مستحضرات التجميل والعناية للبنات بأفضل الأسعار.</p>
-  </section>
-
-  <section id="contact">
-    <h2>تواصل معنا</h2>
-    <p>واتساب: 000000000</p>
-    <p>انستجرام: @Queen_Shop</p>
-  </section>
-
-  <footer>
-    جميع الحقوق محفوظة © Queen Shop 2025
-  </footer>
+    <div class="product">
+      <img src="https://via.placeholder.com/200" alt="منتج 3">
+      <h3>منتج 3</h3>
+      <p>وصف قصير للمنتج.</p>
+    </div>
+  </div>
 </body>
 </html>
