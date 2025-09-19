@@ -1,38 +1,23 @@
-[
-  {
-    "name": "بودرة وجه",
-    "price": "3.5 ر.ع",
-    "image": "https://i.ibb.co/G4tJzj8/1.jpg",
-    "category": "makeup"
-  },
-  {
-    "name": "كونسيلر",
-    "price": "4.2 ر.ع",
-    "image": "https://i.ibb.co/zTm06Dc/2.jpg",
-    "category": "makeup"
-  },
-  {
-    "name": "كريم أساس",
-    "price": "5.0 ر.ع",
-    "image": "https://i.ibb.co/WWXXZVF/3.jpg",
-    "category": "makeup"
-  },
-  {
-    "name": "روج",
-    "price": "2.8 ر.ع",
-    "image": "https://i.ibb.co/LXmNv7c/4.jpg",
-    "category": "makeup"
-  },
-  {
-    "name": "آي شادو",
-    "price": "6.0 ر.ع",
-    "image": "https://i.ibb.co/WN3Crmg/5.jpg",
-    "category": "makeup"
-  },
-  {
-    "name": "ماسكارا",
-    "price": "3.9 ر.ع",
-    "image": "https://i.ibb.co/Nd2yTCN/6.jpg",
-    "category": "makeup"
-  }
-]
+<script>
+  // تحميل المنتجات من ملف products.json
+  fetch('products.json')
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('products-container');
+
+      data.forEach(product => {
+        // إنشاء عنصر للمنتج
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" style="width:100%; border-radius:8px;">
+          <h3>${product.name}</h3>
+          <p>${product.price}</p>
+          <button style="background:#ff3399; color:white; padding:5px 10px; border:none; border-radius:5px;">أضف للسلة</button>
+        `;
+        container.appendChild(card);
+      });
+    })
+    .catch(error => console.error('خطأ في تحميل المنتجات:', error));
+</script>
+  
