@@ -1,14 +1,30 @@
-[
-  {
-    "name": "بودرة",
-    "image": "https://i.ibb.co/G4tJzj8q/1.jpg",
-    "price": "4.5",
-    "category": "makeup"
-  },
-  {
-    "name": "كريم أساس",
-    "image": "https://i.ibb.co/LXmNv7cx/4.jpg",
-    "price": "7.0",
-    "category": "makeup"
-  }
-]
+import requests
+from bs4 import BeautifulSoup
+import json
+
+url = "https://toqueen.com"
+
+# نجيب الصفحة
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+products = []
+
+# هذا مثال: لازم نتأكد من الكلاسات الحقيقية في الموقع
+for item in soup.select(".product-item")[:10]:  # أول 10 منتجات
+    name = item.select_one(".product-title").get_text(strip=True) if item.select_one(".product-title") else "بدون اسم"
+    price = item.select_one(".price").get_text(strip=True) if item.select_one(".price") else "غير متوفر"
+    img = item.select_one("img")["src"] if item.select_one("img") else ""
+
+    products.append({
+        "name": name,
+        "price": price,
+        "image": img,
+        "category": "عام"
+    })
+
+# نخزن النتائج في ملف products.json
+with open("products.json", "w", encoding="utf-8") as f:
+    json.dump(products, f, ensure_ascii=False, indent=4)
+
+print("✅ تم استخراج أول 10 منتجات وحفظها في products.json")
