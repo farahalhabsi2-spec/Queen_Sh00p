@@ -1,4 +1,20 @@
-"name": "مرطب شفاه",
-  "image": "https://i.ibb.co/xxxxxx/lipbalm.jpg",
-  "price": "3.5",
-  "category": "makeup"
+[
+  {
+    "name": "بودرة الوجه",
+    "image": "https://i.ibb.co/G4tJzj8q/1.jpg",
+    "price": "4.5",
+    "category": "makeup"
+  },
+  {
+    "name": "كونسيلر",
+    "image": "https://i.ibb.co/zTm06Dcx/2.jpg",
+    "price": "5.0",
+    "category": "makeup"
+  },
+  {
+    "name": "كريم أساس",
+    "image": "https://i.ibb.co/LXmNv7cx/4.jpg",
+    "price": "7.0",
+    "category": "makeup"
+  }
+]
