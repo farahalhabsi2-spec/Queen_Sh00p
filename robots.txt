@@ -1,0 +1,3 @@
+agent: *
+Allow: /
+Sitemap: https://farahalhabsi2-spec.github.io/Queen_Sh00p/sitemap.xml
