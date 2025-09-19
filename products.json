@@ -1,30 +1,38 @@
-import requests
-from bs4 import BeautifulSoup
-import json
-
-url = "https://toqueen.com"
-
-# نجيب الصفحة
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-
-products = []
-
-# هذا مثال: لازم نتأكد من الكلاسات الحقيقية في الموقع
-for item in soup.select(".product-item")[:10]:  # أول 10 منتجات
-    name = item.select_one(".product-title").get_text(strip=True) if item.select_one(".product-title") else "بدون اسم"
-    price = item.select_one(".price").get_text(strip=True) if item.select_one(".price") else "غير متوفر"
-    img = item.select_one("img")["src"] if item.select_one("img") else ""
-
-    products.append({
-        "name": name,
-        "price": price,
-        "image": img,
-        "category": "عام"
-    })
-
-# نخزن النتائج في ملف products.json
-with open("products.json", "w", encoding="utf-8") as f:
-    json.dump(products, f, ensure_ascii=False, indent=4)
-
-print("✅ تم استخراج أول 10 منتجات وحفظها في products.json")
+[
+  {
+    "name": "بودرة وجه",
+    "price": "3.5 ر.ع",
+    "image": "https://i.ibb.co/G4tJzj8/1.jpg",
+    "category": "makeup"
+  },
+  {
+    "name": "كونسيلر",
+    "price": "4.2 ر.ع",
+    "image": "https://i.ibb.co/zTm06Dc/2.jpg",
+    "category": "makeup"
+  },
+  {
+    "name": "كريم أساس",
+    "price": "5.0 ر.ع",
+    "image": "https://i.ibb.co/WWXXZVF/3.jpg",
+    "category": "makeup"
+  },
+  {
+    "name": "روج",
+    "price": "2.8 ر.ع",
+    "image": "https://i.ibb.co/LXmNv7c/4.jpg",
+    "category": "makeup"
+  },
+  {
+    "name": "آي شادو",
+    "price": "6.0 ر.ع",
+    "image": "https://i.ibb.co/WN3Crmg/5.jpg",
+    "category": "makeup"
+  },
+  {
+    "name": "ماسكارا",
+    "price": "3.9 ر.ع",
+    "image": "https://i.ibb.co/Nd2yTCN/6.jpg",
+    "category": "makeup"
+  }
+]
