@@ -170,3 +170,26 @@
   </script>
 </body>
 </html>
+<script>
+  async function loadProducts() {
+    const response = await fetch('products.json');
+    const products = await response.json();
+
+    const container = document.getElementById('products');
+    container.innerHTML = '';
+
+    products.forEach(product => {
+      const card = `
+        <div class="product">
+          <img src="${product.image}" alt="${product.name}" />
+          <h3>${product.name}</h3>
+          <p>السعر: ${product.price} ر.ع</p>
+          <button>أضف للسلة</button>
+        </div>
+      `;
+      container.innerHTML += card;
+    });
+  }
+
+  loadProducts();
+</script>
