@@ -1,116 +1,28 @@
-
-    <<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Queen Sh00p - متجر مستحضرات التجميل</title>
   <style>
-    body {
-      font-family: 'Tahoma', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #ffe6f0;
-      color: #333;
-    }
-    header {
-      background-color: #ff4da6;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background: #ff80bf;
-      padding: 10px;
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 10px;
-      font-weight: bold;
-    }
+    body { font-family: 'Tahoma', sans-serif; margin: 0; padding: 0; background-color: #ffe6f0; color: #333; }
+    header { background-color: #ff4da6; color: white; padding: 20px; text-align: center; font-size: 22px; font-weight: bold; }
+    nav { display: flex; justify-content: center; background: #ff80bf; padding: 10px; flex-wrap: wrap; }
+    nav a { color: white; text-decoration: none; margin: 10px; font-weight: bold; }
     nav a:hover { text-decoration: underline; }
-    section {
-      padding: 20px;
-      text-align: center;
-    }
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .product {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      width: 200px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    .product img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-    .product button {
-      background: #ff4da6;
-      color: white;
-      border: none;
-      padding: 10px;
-      margin-top: 10px;
-      width: 100%;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+    section { padding: 20px; text-align: center; }
+    .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .product { background: white; border-radius: 10px; padding: 15px; width: 200px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .product img { max-width: 100%; border-radius: 8px; }
+    .product button { background: #ff4da6; color: white; border: none; padding: 10px; margin-top: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
     .product button:hover { background: #e60073; }
-    #cart {
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: 350px;
-      height: 100%;
-      background: white;
-      box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-      padding: 20px;
-      transition: 0.3s;
-      overflow-y: auto;
-    }
+    #cart { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: white; box-shadow: -2px 0 8px rgba(0,0,0,0.2); padding: 20px; transition: 0.3s; overflow-y: auto; z-index: 2000; }
     #cart.open { right: 0; }
     #cart h2 { margin-top: 0; }
     .cart-item { margin: 10px 0; }
-    .checkout {
-      background: #25D366;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      margin-top: 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .btn-cart {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #25D366;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 50px;
-      font-size: 14px;
-      text-decoration: none;
-      cursor: pointer;
-      z-index: 1000;
-    }
-    footer {
-      background: #ff4da6;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 20px;
-    }
+    .checkout { background: #25D366; color: white; text-align: center; padding: 12px; margin-top: 20px; border-radius: 5px; cursor: pointer; }
+    .btn-cart { position: fixed; top: 20px; left: 20px; background: #25D366; color: white; padding: 10px 15px; border-radius: 50px; font-size: 14px; text-decoration: none; cursor: pointer; z-index: 2100; }
+    footer { background: #ff4da6; color: white; text-align: center; padding: 15px; margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -129,6 +41,7 @@
   <!-- زر فتح السلة -->
   <div class="btn-cart" onclick="toggleCart()">🛒 السلة</div>
 
+  <!-- نصوص ترحيبية -->
   <section>
     <h1>مرحبًا بكم في Queen Sh00p 🌸</h1>
     <p>
@@ -147,27 +60,52 @@
     </p>
   </section>
 
-  <!-- منتجات -->
-  <section class="products">
-    <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=كريم+تفتيح" alt="كريم تفتيح">
-      <h3>كريم تفتيح</h3>
-      <p>السعر: 5 ريال</p>
-      <button onclick="addToCart('كريم تفتيح', 5)">أضف إلى السلة</button>
+  <!-- الأقسام والمنتجات -->
+  <section id="skin">
+    <h2>🧴 العناية بالبشرة</h2>
+    <div class="products">
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=كريم+ترطيب"><h3>كريم ترطيب</h3><p>4 ريال</p><button onclick="addToCart('كريم ترطيب',4)">أضف</button></div>
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=سيروم+كولاجين"><h3>سيروم كولاجين</h3><p>6 ريال</p><button onclick="addToCart('سيروم كولاجين',6)">أضف</button></div>
     </div>
+  </section>
 
-    <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=زيت+شعر" alt="زيت شعر">
-      <h3>زيت شعر</h3>
-      <p>السعر: 3 ريال</p>
-      <button onclick="addToCart('زيت شعر', 3)">أضف إلى السلة</button>
+  <section id="hair">
+    <h2>💆‍♀️ العناية بالشعر</h2>
+    <div class="products">
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=زيت+جوز+الهند"><h3>زيت جوز الهند</h3><p>3 ريال</p><button onclick="addToCart('زيت جوز الهند',3)">أضف</button></div>
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=شامبو+أعشاب"><h3>شامبو أعشاب</h3><p>5 ريال</p><button onclick="addToCart('شامبو أعشاب',5)">أضف</button></div>
     </div>
+  </section>
 
-    <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=أحمر+شفاه" alt="أحمر شفاه">
-      <h3>أحمر شفاه</h3>
-      <p>السعر: 2 ريال</p>
-      <button onclick="addToCart('أحمر شفاه', 2)">أضف إلى السلة</button>
+  <section id="makeup">
+    <h2>💄 المكياج</h2>
+    <div class="products">
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=أحمر+شفاه"><h3>أحمر شفاه</h3><p>2 ريال</p><button onclick="addToCart('أحمر شفاه',2)">أضف</button></div>
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=ماسكارا"><h3>ماسكارا</h3><p>3 ريال</p><button onclick="addToCart('ماسكارا',3)">أضف</button></div>
+    </div>
+  </section>
+
+  <section id="perfume">
+    <h2>🌸 العطور</h2>
+    <div class="products">
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=عطر+زهري"><h3>عطر زهري</h3><p>7 ريال</p><button onclick="addToCart('عطر زهري',7)">أضف</button></div>
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=عطر+فاكهة"><h3>عطر فاكهة</h3><p>8 ريال</p><button onclick="addToCart('عطر فاكهة',8)">أضف</button></div>
+    </div>
+  </section>
+
+  <section id="oils">
+    <h2>🌿 الزيوت</h2>
+    <div class="products">
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=زيت+اللوز"><h3>زيت اللوز</h3><p>3 ريال</p><button onclick="addToCart('زيت اللوز',3)">أضف</button></div>
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=زيت+الخروع"><h3>زيت الخروع</h3><p>3 ريال</p><button onclick="addToCart('زيت الخروع',3)">أضف</button></div>
+    </div>
+  </section>
+
+  <section id="supplements">
+    <h2>💊 المكملات</h2>
+    <div class="products">
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=فيتامين+ج"><h3>فيتامين ج</h3><p>4 ريال</p><button onclick="addToCart('فيتامين ج',4)">أضف</button></div>
+      <div class="product"><img src="https://via.placeholder.com/200x200?text=كولاجين+بودر"><h3>كولاجين بودر</h3><p>6 ريال</p><button onclick="addToCart('كولاجين بودر',6)">أضف</button></div>
     </div>
   </section>
 
@@ -183,31 +121,20 @@
 
   <script>
     let cart = [];
-    function toggleCart() {
-      document.getElementById("cart").classList.toggle("open");
+    function toggleCart(){ document.getElementById("cart").classList.toggle("open"); }
+    function addToCart(name,price){ cart.push({name,price}); renderCart(); }
+    function renderCart(){
+      let cartItems=document.getElementById("cart-items"); cartItems.innerHTML="";
+      let total=0;
+      cart.forEach(item=>{ cartItems.innerHTML+=`<div class="cart-item">${item.name} - ${item.price} ريال</div>`; total+=item.price; });
+      document.getElementById("total").innerText="الإجمالي: "+total+" ريال";
     }
-    function addToCart(name, price) {
-      cart.push({name, price});
-      renderCart();
-    }
-    function renderCart() {
-      let cartItems = document.getElementById("cart-items");
-      cartItems.innerHTML = "";
-      let total = 0;
-      cart.forEach((item, index) => {
-        cartItems.innerHTML += `<div class="cart-item">${item.name} - ${item.price} ريال</div>`;
-        total += item.price;
-      });
-      document.getElementById("total").innerText = "الإجمالي: " + total + " ريال";
-    }
-    function checkout() {
-      let text = "مرحبًا، أرغب بشراء: %0A";
-      cart.forEach(item => {
-        text += "- " + item.name + " (" + item.price + " ريال)%0A";
-      });
-      let total = cart.reduce((sum, item) => sum + item.price, 0);
-      text += "%0Aالإجمالي: " + total + " ريال";
-      window.open("https://wa.me/96896036550?text=" + text, "_blank");
+    function checkout(){
+      let text="مرحبًا، أرغب بشراء: %0A";
+      cart.forEach(item=>{ text+=`- ${item.name} (${item.price} ريال)%0A`; });
+      let total=cart.reduce((sum,item)=>sum+item.price,0);
+      text+=`%0Aالإجمالي: ${total} ريال`;
+      window.open("https://wa.me/96896036550?text="+text,"_blank");
     }
   </script>
 
