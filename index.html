@@ -5,60 +5,160 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Queen Sh00p - متجر مستحضرات التجميل</title>
-
-  <!-- وصف وصديق لمحركات البحث -->
-  <meta name="description" content="Queen Sh00p 🌸 متجر يوفر أجود مستحضرات التجميل والعناية بالبشرة والشعر، منتجات أصلية عالية الجودة بأسعار تنافسية مع توصيل داخل عمان وخارجها.">
-  <meta name="keywords" content="Queen Sh00p, مستحضرات التجميل, مكياج, عناية بالبشرة, عناية بالشعر, منتجات تجميل, تسوق اونلاين, عمان">
+  <meta name="description" content="Queen Sh00p 🌸 متجر تجميل يقدم أجود منتجات العناية بالبشرة والشعر والمكياج والعطور والزيوت الأصلية بأسعار تنافسية مع خدمة توصيل داخل سلطنة عمان وخارجها.">
+  <meta name="keywords" content="Queen Sh00p, مستحضرات تجميل, مكياج, عناية بالبشرة, عناية بالشعر, عطور, زيوت, مكملات غذائية, Oman">
   <meta name="author" content="Queen Sh00p">
-
   <style>
     body { font-family: 'Tahoma', sans-serif; margin: 0; padding: 0; background-color: #ffe6f0; color: #333; }
-    header { background-color: #ff4da6; color: white; padding: 20px; text-align: center; font-size: 22px; font-weight: bold; }
+    header { background-color: #ff4da6; color: white; padding: 20px; text-align: center; font-size: 24px; font-weight: bold; }
     nav { display: flex; justify-content: center; background: #ff80bf; padding: 10px; flex-wrap: wrap; }
     nav a { color: white; text-decoration: none; margin: 10px; font-weight: bold; }
     nav a:hover { text-decoration: underline; }
     section { padding: 20px; text-align: center; }
+    .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .product { background: white; border-radius: 10px; padding: 15px; width: 200px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .product img { max-width: 100%; border-radius: 8px; }
+    .product button { background: #ff4da6; color: white; border: none; padding: 10px; margin-top: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
+    .product button:hover { background: #e60073; }
+    #cart { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: white; box-shadow: -2px 0 8px rgba(0,0,0,0.2); padding: 20px; transition: 0.3s; overflow-y: auto; z-index: 2000; }
+    #cart.open { right: 0; }
+    #cart h2 { margin-top: 0; }
+    .cart-item { margin: 10px 0; }
+    .checkout { background: #25D366; color: white; text-align: center; padding: 12px; margin-top: 20px; border-radius: 5px; cursor: pointer; }
+    .btn-cart { position: fixed; top: 20px; left: 20px; background: #25D366; color: white; padding: 10px 15px; border-radius: 50px; font-size: 14px; text-decoration: none; cursor: pointer; z-index: 3000; }
     footer { background: #ff4da6; color: white; text-align: center; padding: 15px; margin-top: 20px; }
+    /* قسم آراء العملاء */
+    .testimonials { background: #fff0f5; padding: 30px; }
+    .testimonials h2 { color: #ff4da6; margin-bottom: 20px; }
+    .testimonial { background: white; border-radius: 10px; padding: 15px; margin: 10px auto; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .testimonial p { font-style: italic; }
+    .testimonial strong { display: block; margin-top: 10px; color: #ff4da6; }
+    /* قسم تواصل معنا */
+    .contact { background: #ffeaf5; padding: 40px; }
+    .contact h2 { color: #ff4da6; margin-bottom: 20px; }
+    .contact a { display: block; margin: 10px 0; font-size: 18px; color: #ff0066; text-decoration: none; font-weight: bold; }
+    .contact a:hover { text-decoration: underline; }
+    iframe { width: 100%; height: 250px; border: none; border-radius: 10px; margin-top: 20px; }
+    /* قسم العروض */
+    .offers { background: #ffccdd; padding: 40px; border-radius: 10px; margin: 20px; }
+    .offers h2 { color: #b30059; font-size: 28px; }
+    .offers p { font-size: 18px; margin: 15px 0; }
+    .offers button { background: #ff4da6; color: white; padding: 12px 20px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+    .offers button:hover { background: #e60073; }
   </style>
 </head>
 <body>
 
-  <header>Queen Sh00p 🌸</header>
+  <header>🌸 Queen Sh00p 🌸</header>
 
+  <!-- قائمة الأقسام -->
   <nav>
+    <a href="#offers">العروض</a>
     <a href="#skin">العناية بالبشرة</a>
     <a href="#hair">العناية بالشعر</a>
     <a href="#makeup">المكياج</a>
     <a href="#perfume">العطور</a>
     <a href="#oils">الزيوت</a>
     <a href="#supplements">المكملات</a>
+    <a href="#testimonials">آراء العملاء</a>
+    <a href="#contact">تواصل معنا</a>
   </nav>
 
-  <section>
-    <h1>مرحبًا بكم في Queen Sh00p 🌸</h1>
-    <p>
-      متجر <strong>Queen Sh00p</strong> هو وجهتكِ الأولى لأجود مستحضرات التجميل والعناية بالبشرة والشعر.  
-      نوفّر لكِ منتجات أصلية عالية الجودة بأسعار تنافسية، مع خدمة توصيل داخل سلطنة عمان وخارجها.  
-      في <strong>Queen Sh00p</strong> نؤمن أن الجمال يبدأ من العناية اليومية، لذلك اخترنا لكِ أفضل الزيوت، كريمات الترطيب،  
-      مستحضرات المكياج، وأحدث منتجات العناية بالشعر والبشرة لتظهري بأبهى إطلالة دائمًا.  
-    </p>
+  <!-- زر السلة -->
+  <div class="btn-cart" onclick="toggleCart()">🛒 السلة</div>
 
-    <h2>Welcome to Queen Sh00p 🌸</h2>
-    <p>
-      <strong>Queen Sh00p</strong> is your trusted destination for high-quality beauty and personal care products.  
-      We provide original cosmetics, skincare, and haircare items at competitive prices, with delivery available in Oman and worldwide.  
-      At <strong>Queen Sh00p</strong>, we believe beauty starts with daily care, so we carefully select the best oils, moisturizers,  
-      makeup essentials, and the latest skincare and haircare products to keep you glowing every day.  
-    </p>
-
-    <p>
-      📍 سلطنة عمان | Oman  
-      📱 انستجرام: <a href="https://instagram.com/Queen_Sh00p" target="_blank">@Queen_Sh00p</a>  
-      💬 واتساب: <a href="https://wa.me/96896036550" target="_blank">+968 96036550</a>  
-    </p>
+  <!-- قسم العروض -->
+  <section id="offers" class="offers">
+    <h2>🔥 عروض وخصومات Queen Sh00p 🔥</h2>
+    <p>استمتعي بخصم <strong>20%</strong> على جميع منتجات البشرة والشعر هذا الأسبوع فقط!</p>
+    <button onclick="location.href='#skin'">✨ تسوقي الآن</button>
   </section>
 
-  <footer>© 2025 Queen Sh00p - جميع الحقوق محفوظة</footer>
+  <!-- قسم الترحيب -->
+  <section>
+    <h1>مرحبًا بكم في Queen Sh00p 🌸</h1>
+    <p>متجر <strong>Queen Sh00p</strong> هو وجهتكِ الأولى لأجود مستحضرات التجميل والعناية بالبشرة والشعر.  
+       نوفّر منتجات أصلية عالية الجودة بأسعار تنافسية، مع خدمة توصيل داخل سلطنة عمان وخارجها.</p>
+    <h2>Welcome to Queen Sh00p 🌸</h2>
+    <p><strong>Queen Sh00p</strong> is your trusted destination for high-quality beauty and personal care products.  
+       Delivery available in Oman and worldwide.</p>
+  </section>
+
+  <!-- مثال منتج -->
+  <section id="skin">
+    <h2>🧴 العناية بالبشرة</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://via.placeholder.com/200x200?text=كريم+تفتيح" alt="كريم تفتيح">
+        <h3>كريم تفتيح</h3>
+        <p>5 ريال</p>
+        <button onclick="addToCart('كريم تفتيح', 5)">أضف للسلة</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم آراء العملاء -->
+  <section id="testimonials" class="testimonials">
+    <h2>💬 آراء عملائنا</h2>
+    <div class="testimonial">
+      <p>"أفضل متجر تعاملت معه، المنتجات أصلية والجودة رائعة!"</p>
+      <strong>- فاطمة من مسقط</strong>
+    </div>
+    <div class="testimonial">
+      <p>"خدمة التوصيل سريعة جدًا والأسعار ممتازة، أنصح به 👌"</p>
+      <strong>- مريم من صحار</strong>
+    </div>
+  </section>
+
+  <!-- قسم تواصل معنا -->
+  <section id="contact" class="contact">
+    <h2>📞 تواصل معنا</h2>
+    <a href="https://wa.me/96896036550" target="_blank">💬 واتساب: +96896036550</a>
+    <a href="https://instagram.com/Queen_Sh00p" target="_blank">📸 انستجرام: @Queen_Sh00p</a>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.057078407054!2d58.407!3d23.588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e90a8f4bfb7a0f7%3A0x5e2c7c6d0c03e0!2sOman!5e0!3m2!1sen!2som!4v1700000000000"></iframe>
+  </section>
+
+  <!-- سلة المشتريات -->
+  <div id="cart">
+    <h2>🛒 سلة المشتريات</h2>
+    <div id="cart-items"></div>
+    <h3 id="total">الإجمالي: 0 ريال</h3>
+    <div class="checkout" onclick="checkout()">✅ إكمال الطلب عبر واتساب</div>
+  </div>
+
+  <footer>
+    © 2025 Queen Sh00p - جميع الحقوق محفوظة 🌸
+  </footer>
+
+  <script>
+    let cart = [];
+    function toggleCart() {
+      document.getElementById("cart").classList.toggle("open");
+    }
+    function addToCart(name, price) {
+      cart.push({name, price});
+      renderCart();
+    }
+    function renderCart() {
+      let cartItems = document.getElementById("cart-items");
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        cartItems.innerHTML += `<div class="cart-item">${item.name} - ${item.price} ريال</div>`;
+        total += item.price;
+      });
+      document.getElementById("total").innerText = "الإجمالي: " + total + " ريال";
+    }
+    function checkout() {
+      let text = "مرحبًا، أرغب بشراء: %0A";
+      cart.forEach(item => {
+        text += "- " + item.name + " (" + item.price + " ريال)%0A";
+      });
+      let total = cart.reduce((sum, item) => sum + item.price, 0);
+      text += "%0Aالإجمالي: " + total + " ريال";
+      window.open("https://wa.me/96896036550?text=" + text, "_blank");
+    }
+  </script>
 
 </body>
 </html>
