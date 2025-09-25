@@ -5,312 +5,140 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>كوين شوب - مستحضرات التجميل الأصلية</title>
   <style>
-    body {font-family: Arial, sans-serif; margin:0; padding:0; display:flex; background:#fff0f5;}
-    /* ✅ القائمة الجانبية */
-    .sidebar {
-      width: 280px;
-      background:#ffe6f0;
-      height: 100vh;
-      padding: 15px;
-      overflow-y:auto;
-      border-left:2px solid #e60073;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
+    body {
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#fff0f5;
+      color:#333;
     }
-    .logo {text-align:center; margin-bottom:15px;}
-    .logo img {
-      width:140px; height:140px;
-      border-radius:50%; border:3px solid #e60073;
-    }
-    .logo h1 {margin-top:10px; font-size:22px; color:#e60073; font-weight:bold;}
-    .logo p {font-size:15px; font-weight:bold; color:#e60073; margin-top:5px;}
-    .sidebar ul {list-style:none; padding:0; margin:0;}
-    .sidebar ul li {
-      margin:8px 0; padding:6px;
-      border-radius:6px; color:#333;
-      cursor:pointer; user-select:none;
-      display:flex; justify-content:space-between; align-items:center;
-    }
-    .sidebar ul li:hover {background:#ffd6eb;}
-
-    /* ✅ القوائم الفرعية مع انيميشن */
-    .submenu {
-      margin-right:15px;
-      list-style:circle;
-      color:#e60073;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    .submenu.show {
-      max-height: 500px; /* يكفي لكل العناصر */
-    }
-
-    /* ✨ تأثير Fade + Slide */
-    .submenu li {
-      opacity: 0;
-      transform: translateX(30px); /* يبدأ من اليمين */
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .submenu.show li {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* ✅ تأخير زمني (Staggered) */
-    .submenu.show li:nth-child(1) { transition-delay: 0.05s; }
-    .submenu.show li:nth-child(2) { transition-delay: 0.1s; }
-    .submenu.show li:nth-child(3) { transition-delay: 0.15s; }
-    .submenu.show li:nth-child(4) { transition-delay: 0.2s; }
-    .submenu.show li:nth-child(5) { transition-delay: 0.25s; }
-    .submenu.show li:nth-child(6) { transition-delay: 0.3s; }
-    .submenu.show li:nth-child(7) { transition-delay: 0.35s; }
-    .submenu.show li:nth-child(8) { transition-delay: 0.4s; }
-    .submenu.show li:nth-child(9) { transition-delay: 0.45s; }
-
-    /* ✅ الأيقونات مع انيميشن */
-    .arrow {
-      transition: transform 0.3s;
-      display:inline-block;
-    }
-    .arrow.rotate {
-      transform: rotate(180deg);
-      animation: bounce 0.4s;
-    }
-    @keyframes bounce {
-      0% { transform: rotate(180deg) translateY(0); }
-      30% { transform: rotate(180deg) translateY(-3px); }
-      60% { transform: rotate(180deg) translateY(2px); }
-      100% { transform: rotate(180deg) translateY(0); }
-    }
-
-    /* ✅ زر فتح/إغلاق الكل (Sticky) */
-    .toggle-all {
+    header {
+      text-align:center;
       background:#e60073;
       color:#fff;
-      padding:10px;
-      border-radius:20px;
-      text-align:center;
-      font-weight:bold;
-      margin:10px 0 15px 0;
+      padding:20px;
+    }
+    header h1 {
+      margin:0;
+      font-size:28px;
+    }
+    header p {
+      margin:5px 0 0;
+      font-size:16px;
+    }
+    /* القائمة الجانبية */
+    .sidebar {
+      width:250px;
+      background:#ffe6f0;
+      padding:15px;
+      position:fixed;
+      top:0;
+      bottom:0;
+      right:0;
+      overflow-y:auto;
+      border-left:2px solid #e60073;
+    }
+    .sidebar details {
+      margin:10px 0;
+      padding:8px;
+      border-radius:5px;
+      background:#fff;
       cursor:pointer;
-      transition:0.3s;
-      position: sticky;
-      top: 0;
-      z-index: 10;
     }
-    .toggle-all.close-mode {
-      background:#ff80b3; /* وردي فاتح عند إغلاق الكل */
+    .sidebar summary {
+      font-weight:bold;
+      color:#e60073;
+      cursor:pointer;
+    }
+    .sidebar ul {
+      list-style:none;
+      margin:5px 0 0;
+      padding-right:15px;
+    }
+    .sidebar ul li {
+      margin:5px 0;
+      font-size:14px;
+    }
+    main {
+      margin-right:270px;
+      padding:20px;
+    }
+    footer {
+      text-align:center;
+      background:#e60073;
       color:#fff;
+      padding:15px;
+      margin-top:30px;
     }
-    .toggle-all:hover {opacity:0.9;}
-
-    /* ✅ الروابط السفلية */
-    .footer-links {margin-top:20px; padding-top:10px; border-top:2px solid #e60073;}
-    .footer-links li {font-size:14px; color:#e60073;}
-    .footer-info {margin-top:15px; font-size:13px; color:#333; text-align:right;}
-    .footer-info p {margin:5px 0;}
-
-    /* ✅ المحتوى الرئيسي */
-    .content {flex:1; padding:20px; text-align:center;}
-    .btn {
-      display:inline-block; background:#e60073; color:#fff;
-      padding:10px 20px; border-radius:20px; text-decoration:none;
-      font-weight:bold; margin-top:20px; transition:0.3s;
-    }
-    .btn:hover {background:#cc005f;}
   </style>
 </head>
 <body>
 
-<!-- ✅ القائمة الجانبية -->
+<header>
+  <h1>🌸 كوين شوب 🌸</h1>
+  <p>مستحضرات تجميل ومنتجات أصلية 100%</p>
+</header>
+
+<!-- القائمة الجانبية -->
 <div class="sidebar">
-  <div>
-    <!-- 🖼️ اللوجو + الاسم + الجملة التعريفية -->
-    <div class="logo">
-      <img src="https://queensh0op.netlify.app/logo.png" alt="Queen Sh0op Logo">
-      <h1>Queen Sh0op</h1>
-      <p>مستحضرات تجميل ومنتجات أصلية 100%</p>
-    </div>
-
-    <!-- ✅ زر فتح/إغلاق الكل -->
-    <div class="toggle-all">🔀 فتح الكل</div>
-
+  <details open>
+    <summary>💄 المكياج</summary>
     <ul>
-      <li>🏠 الرئيسية</li>
-      <li>🏷️ الماركات</li>
-      <li>🛒 سلة التسوق</li>
-      <li>👤 حسابي</li>
-
-      <!-- ✅ أقسام -->
-      <li class="toggle">🧴 العناية <span class="arrow">⬇️</span>
-        <ul class="submenu">
-          <li>العناية بالشعر</li>
-          <li>العناية بالبشرة</li>
-          <li>العناية بالوجه</li>
-          <li>العناية بالجسم</li>
-          <li>العناية بالشفاه</li>
-          <li>العناية بالمنطقة الحساسة</li>
-          <li>العناية بالفم والأسنان</li>
-          <li>العناية باليدين</li>
-          <li>العناية بالقدمين</li>
-        </ul>
-      </li>
-
-      <li class="toggle">💨 الأجهزة <span class="arrow">⬇️</span>
-        <ul class="submenu">
-          <li>سيشوار</li>
-          <li>مكواة شعر</li>
-          <li>أدوات تجميل أخرى</li>
-        </ul>
-      </li>
-
-      <li class="toggle">🌿 الأعشاب <span class="arrow">⬇️</span>
-        <ul class="submenu">
-          <li>الحلبة</li>
-          <li>السدر</li>
-          <li>الحناء</li>
-        </ul>
-      </li>
-
-      <li class="toggle">🛢️ الزيوت <span class="arrow">⬇️</span>
-        <ul class="submenu">
-          <li>زيت الأرغان</li>
-          <li>زيت جوز الهند</li>
-          <li>زيت الخروع</li>
-        </ul>
-      </li>
-
-      <li class="toggle">💊 المكملات الغذائية <span class="arrow">⬇️</span>
-        <ul class="submenu">
-          <li>فيتامينات</li>
-          <li>بروتينات</li>
-        </ul>
-      </li>
-
-      <li class="toggle">⚖️ منتجات التخسيس <span class="arrow">⬇️</span>
-        <ul class="submenu">
-          <li>شاي الأعشاب</li>
-          <li>حبوب التنحيف</li>
-        </ul>
-      </li>
-
-      <li class="toggle">💄 المكياج <span class="arrow">⬇️</span>
-        <ul class="submenu">
-          <li>مكياج الوجه</li>
-          <li>مكياج العيون</li>
-          <li>مكياج الشفاه</li>
-        </ul>
-      </li>
-
-      <!-- ✅ باقي الأقسام -->
-      <li>👁️ عدسات</li>
-      <li>🌸 العطور</li>
-      <li>👕 ملابس الأطفال</li>
-      <li>⭐ تقييمات العملاء</li>
-      <li>📝 مدونة كوين شوب</li>
-      <li style="background:#e60073; color:#fff; text-align:center; border-radius:20px; margin-top:10px;">
-        📩 تواصل معنا
-      </li>
+      <li>أحمر شفاه</li>
+      <li>مستحضرات الوجه</li>
+      <li>ظلال العيون</li>
     </ul>
-  </div>
-
-  <!-- ✅ روابط + تواصل + دفع -->
-  <div class="footer-links">
+  </details>
+  <details>
+    <summary>🧴 العناية</summary>
     <ul>
-      <li>ℹ️ من نحن</li>
-      <li>📜 الشروط والأحكام</li>
-      <li>🔒 سياسة الخصوصية</li>
-      <li>🚚 الشحن والتوصيل</li>
-      <li>♻️ سياسة الاستبدال والاسترجاع</li>
-      <li>❓ الأسئلة الشائعة</li>
-      <li>❤️ اهتماماتنا بكم</li>
-      <li>📰 المدونة</li>
+      <li>العناية بالشعر</li>
+      <li>العناية بالبشرة</li>
+      <li>العناية بالوجه</li>
+      <li>العناية بالجسم</li>
+      <li>العناية بالشفاه</li>
+      <li>العناية باليدين</li>
+      <li>العناية بالقدمين</li>
     </ul>
-    <div class="footer-info">
-      <p>📱 WhatsApp: 96036550</p>
-      <p>📸 Instagram: queen sh00p</p>
-      <p>💳 Visa | 💳 Mastercard | 💵 الدفع عند الاستلام</p>
-      <p>🚚 توصيل سريع (عُمان والخليج)</p>
-      <p>🛡️ منتجات أصلية 100% موثوقة</p>
-    </div>
-  </div>
+  </details>
+  <details>
+    <summary>💨 الأجهزة</summary>
+    <ul>
+      <li>مجفف الشعر</li>
+      <li>أدوات التجميل</li>
+    </ul>
+  </details>
+  <details>
+    <summary>🌿 الأعشاب</summary>
+  </details>
+  <details>
+    <summary>🛢️ الزيوت</summary>
+  </details>
+  <details>
+    <summary>💊 المكملات الغذائية</summary>
+  </details>
+  <details>
+    <summary>⚖️ منتجات التخسيس</summary>
+  </details>
+  <details>
+    <summary>👁️ عدسات</summary>
+  </details>
+  <details>
+    <summary>🌸 العطور</summary>
+  </details>
+  <details>
+    <summary>👕 ملابس الأطفال</summary>
+  </details>
 </div>
 
-<!-- ✅ المحتوى الرئيسي -->
-<div class="content">
-  <h1>مرحبًا بكم في كوين شوب 🌸</h1>
-  <p>
-    متجر لمستحضرات التجميل والعناية الأصلية.  
-    فروعنا في <strong>السيب، صحار، السويق</strong>.<br>
-    للتسوق أونلاين: 
-    <a href="https://queensh0op.netlify.app" target="_blank">https://queensh0op.netlify.app</a>
-  </p>
-  <a href="https://wa.me/96896036550" class="btn">تواصل عبر واتساب</a>
-</div>
+<main>
+  <h2>مرحبًا بكم في كوين شوب 💖</h2>
+  <p>كل ما تحتاجينه من منتجات العناية والمكياج الأصلية في مكان واحد.</p>
+</main>
 
-<!-- ✅ JavaScript للتحكم بالقوائم -->
-<script>
-  // فتح/إغلاق الأقسام الفردية
-  document.querySelectorAll('.toggle').forEach(item => {
-    item.addEventListener('click', () => {
-      const submenu = item.querySelector('.submenu');
-      const arrow = item.querySelector('.arrow');
-
-      // لو مفتوحة نقفلها مع انيميشن للخروج
-      if (submenu.classList.contains('show')) {
-        submenu.querySelectorAll('li').forEach((li, index) => {
-          li.style.transitionDelay = (index * 0.05) + "s";
-          li.style.opacity = "0";
-          li.style.transform = "translateX(30px)";
-        });
-        setTimeout(() => submenu.classList.remove('show'), 400);
-        arrow.classList.remove('rotate');
-      } else {
-        submenu.classList.add('show');
-        submenu.querySelectorAll('li').forEach((li, index) => {
-          li.style.transitionDelay = (index * 0.05) + "s";
-        });
-        arrow.classList.add('rotate');
-      }
-    });
-  });
-
-  // زر فتح/إغلاق الكل
-  const toggleAllBtn = document.querySelector('.toggle-all');
-  toggleAllBtn.addEventListener('click', () => {
-    const allSubmenus = document.querySelectorAll('.submenu');
-    const allArrows = document.querySelectorAll('.arrow');
-    const anyClosed = Array.from(allSubmenus).some(menu => !menu.classList.contains('show'));
-
-    if (anyClosed) {
-      // افتح الكل مع انيميشن دخول
-      allSubmenus.forEach(menu => {
-        menu.classList.add('show');
-        menu.querySelectorAll('li').forEach((li, index) => {
-          li.style.transitionDelay = (index * 0.05) + "s";
-        });
-      });
-      allArrows.forEach(arrow => arrow.classList.add('rotate'));
-      toggleAllBtn.textContent = "❌ إغلاق الكل";
-      toggleAllBtn.classList.add("close-mode");
-    } else {
-      // اقفل الكل مع انيميشن خروج
-      allSubmenus.forEach(menu => {
-        menu.querySelectorAll('li').forEach((li, index) => {
-          li.style.transitionDelay = (index * 0.05) + "s";
-          li.style.opacity = "0";
-          li.style.transform = "translateX(30px)";
-        });
-        setTimeout(() => menu.classList.remove('show'), 400);
-      });
-      allArrows.forEach(arrow => arrow.classList.remove('rotate'));
-      toggleAllBtn.textContent = "🔀 فتح الكل";
-      toggleAllBtn.classList.remove("close-mode");
-    }
-  });
-</script>
+<footer>
+  <p>من نحن | سياسة الخصوصية | الشروط والأحكام</p>
+  <p>© 2025 كوين شوب · كل الحقوق محفوظة</p>
+</footer>
 
 </body>
 </html>
