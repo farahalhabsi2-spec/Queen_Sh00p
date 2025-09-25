@@ -18,83 +18,108 @@
       flex-direction:column;
       justify-content:space-between;
     }
-    .logo {
-      text-align:center;
-      margin-bottom:15px;
-    }
+    .logo {text-align:center; margin-bottom:15px;}
     .logo img {
-      width:140px;
-      height:140px;
-      border-radius:50%; /* 🔴 اللوجو دائري */
-      border:3px solid #e60073; /* إطار وردي */
+      width:140px; height:140px;
+      border-radius:50%; border:3px solid #e60073;
     }
-    .logo h1 {
-      margin-top:10px;
-      font-size:22px;
-      color:#e60073;
-      font-weight:bold;
-    }
-    .logo p {
-      font-size:15px;
-      font-weight:bold;
-      color:#e60073; /* الجملة باللون الوردي */
-      margin-top:5px;
-    }
-    .sidebar ul {
-      list-style:none;
-      padding:0;
-      margin:0;
-    }
+    .logo h1 {margin-top:10px; font-size:22px; color:#e60073; font-weight:bold;}
+    .logo p {font-size:15px; font-weight:bold; color:#e60073; margin-top:5px;}
+    .sidebar ul {list-style:none; padding:0; margin:0;}
     .sidebar ul li {
-      margin:8px 0;
-      padding:6px;
-      border-radius:6px;
-      color:#333;
-      cursor:pointer;
+      margin:8px 0; padding:6px;
+      border-radius:6px; color:#333;
+      cursor:pointer; user-select:none;
+      display:flex; justify-content:space-between; align-items:center;
     }
-    .sidebar ul li:hover {
-      background:#ffd6eb;
-    }
+    .sidebar ul li:hover {background:#ffd6eb;}
+
+    /* ✅ القوائم الفرعية مع انيميشن */
     .submenu {
       margin-right:15px;
       list-style:circle;
       color:#e60073;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
     }
-    /* ✅ الروابط السفلية */
-    .footer-links {
-      margin-top:20px;
-      padding-top:10px;
-      border-top:2px solid #e60073;
+    .submenu.show {
+      max-height: 500px; /* يكفي لكل العناصر */
     }
-    .footer-links li {
-      font-size:14px;
-      color:#e60073;
+
+    /* ✨ تأثير Fade + Slide */
+    .submenu li {
+      opacity: 0;
+      transform: translateX(30px); /* يبدأ من اليمين */
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
-    .footer-info {
-      margin-top:15px;
-      font-size:13px;
-      color:#333;
-      text-align:right;
+    .submenu.show li {
+      opacity: 1;
+      transform: translateX(0);
     }
-    .footer-info p {
-      margin:5px 0;
-    }
-    /* ✅ المحتوى الرئيسي */
-    .content {
-      flex:1;
-      padding:20px;
-      text-align:center;
-    }
-    .btn {
+
+    /* ✅ تأخير زمني (Staggered) */
+    .submenu.show li:nth-child(1) { transition-delay: 0.05s; }
+    .submenu.show li:nth-child(2) { transition-delay: 0.1s; }
+    .submenu.show li:nth-child(3) { transition-delay: 0.15s; }
+    .submenu.show li:nth-child(4) { transition-delay: 0.2s; }
+    .submenu.show li:nth-child(5) { transition-delay: 0.25s; }
+    .submenu.show li:nth-child(6) { transition-delay: 0.3s; }
+    .submenu.show li:nth-child(7) { transition-delay: 0.35s; }
+    .submenu.show li:nth-child(8) { transition-delay: 0.4s; }
+    .submenu.show li:nth-child(9) { transition-delay: 0.45s; }
+
+    /* ✅ الأيقونات مع انيميشن */
+    .arrow {
+      transition: transform 0.3s;
       display:inline-block;
+    }
+    .arrow.rotate {
+      transform: rotate(180deg);
+      animation: bounce 0.4s;
+    }
+    @keyframes bounce {
+      0% { transform: rotate(180deg) translateY(0); }
+      30% { transform: rotate(180deg) translateY(-3px); }
+      60% { transform: rotate(180deg) translateY(2px); }
+      100% { transform: rotate(180deg) translateY(0); }
+    }
+
+    /* ✅ زر فتح/إغلاق الكل (Sticky) */
+    .toggle-all {
       background:#e60073;
       color:#fff;
-      padding:10px 20px;
+      padding:10px;
       border-radius:20px;
-      text-decoration:none;
+      text-align:center;
       font-weight:bold;
-      margin-top:20px;
+      margin:10px 0 15px 0;
+      cursor:pointer;
+      transition:0.3s;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
+    .toggle-all.close-mode {
+      background:#ff80b3; /* وردي فاتح عند إغلاق الكل */
+      color:#fff;
+    }
+    .toggle-all:hover {opacity:0.9;}
+
+    /* ✅ الروابط السفلية */
+    .footer-links {margin-top:20px; padding-top:10px; border-top:2px solid #e60073;}
+    .footer-links li {font-size:14px; color:#e60073;}
+    .footer-info {margin-top:15px; font-size:13px; color:#333; text-align:right;}
+    .footer-info p {margin:5px 0;}
+
+    /* ✅ المحتوى الرئيسي */
+    .content {flex:1; padding:20px; text-align:center;}
+    .btn {
+      display:inline-block; background:#e60073; color:#fff;
+      padding:10px 20px; border-radius:20px; text-decoration:none;
+      font-weight:bold; margin-top:20px; transition:0.3s;
+    }
+    .btn:hover {background:#cc005f;}
   </style>
 </head>
 <body>
@@ -108,12 +133,18 @@
       <h1>Queen Sh0op</h1>
       <p>مستحضرات تجميل ومنتجات أصلية 100%</p>
     </div>
+
+    <!-- ✅ زر فتح/إغلاق الكل -->
+    <div class="toggle-all">🔀 فتح الكل</div>
+
     <ul>
       <li>🏠 الرئيسية</li>
       <li>🏷️ الماركات</li>
       <li>🛒 سلة التسوق</li>
       <li>👤 حسابي</li>
-      <li>🧴 العناية
+
+      <!-- ✅ أقسام -->
+      <li class="toggle">🧴 العناية <span class="arrow">⬇️</span>
         <ul class="submenu">
           <li>العناية بالشعر</li>
           <li>العناية بالبشرة</li>
@@ -126,12 +157,54 @@
           <li>العناية بالقدمين</li>
         </ul>
       </li>
-      <li>💄 المكياج</li>
-      <li>💨 الأجهزة</li>
-      <li>🌿 الأعشاب</li>
-      <li>🛢️ الزيوت</li>
-      <li>💊 المكملات الغذائية</li>
-      <li>⚖️ منتجات التخسيس</li>
+
+      <li class="toggle">💨 الأجهزة <span class="arrow">⬇️</span>
+        <ul class="submenu">
+          <li>سيشوار</li>
+          <li>مكواة شعر</li>
+          <li>أدوات تجميل أخرى</li>
+        </ul>
+      </li>
+
+      <li class="toggle">🌿 الأعشاب <span class="arrow">⬇️</span>
+        <ul class="submenu">
+          <li>الحلبة</li>
+          <li>السدر</li>
+          <li>الحناء</li>
+        </ul>
+      </li>
+
+      <li class="toggle">🛢️ الزيوت <span class="arrow">⬇️</span>
+        <ul class="submenu">
+          <li>زيت الأرغان</li>
+          <li>زيت جوز الهند</li>
+          <li>زيت الخروع</li>
+        </ul>
+      </li>
+
+      <li class="toggle">💊 المكملات الغذائية <span class="arrow">⬇️</span>
+        <ul class="submenu">
+          <li>فيتامينات</li>
+          <li>بروتينات</li>
+        </ul>
+      </li>
+
+      <li class="toggle">⚖️ منتجات التخسيس <span class="arrow">⬇️</span>
+        <ul class="submenu">
+          <li>شاي الأعشاب</li>
+          <li>حبوب التنحيف</li>
+        </ul>
+      </li>
+
+      <li class="toggle">💄 المكياج <span class="arrow">⬇️</span>
+        <ul class="submenu">
+          <li>مكياج الوجه</li>
+          <li>مكياج العيون</li>
+          <li>مكياج الشفاه</li>
+        </ul>
+      </li>
+
+      <!-- ✅ باقي الأقسام -->
       <li>👁️ عدسات</li>
       <li>🌸 العطور</li>
       <li>👕 ملابس الأطفال</li>
@@ -176,6 +249,68 @@
   </p>
   <a href="https://wa.me/96896036550" class="btn">تواصل عبر واتساب</a>
 </div>
+
+<!-- ✅ JavaScript للتحكم بالقوائم -->
+<script>
+  // فتح/إغلاق الأقسام الفردية
+  document.querySelectorAll('.toggle').forEach(item => {
+    item.addEventListener('click', () => {
+      const submenu = item.querySelector('.submenu');
+      const arrow = item.querySelector('.arrow');
+
+      // لو مفتوحة نقفلها مع انيميشن للخروج
+      if (submenu.classList.contains('show')) {
+        submenu.querySelectorAll('li').forEach((li, index) => {
+          li.style.transitionDelay = (index * 0.05) + "s";
+          li.style.opacity = "0";
+          li.style.transform = "translateX(30px)";
+        });
+        setTimeout(() => submenu.classList.remove('show'), 400);
+        arrow.classList.remove('rotate');
+      } else {
+        submenu.classList.add('show');
+        submenu.querySelectorAll('li').forEach((li, index) => {
+          li.style.transitionDelay = (index * 0.05) + "s";
+        });
+        arrow.classList.add('rotate');
+      }
+    });
+  });
+
+  // زر فتح/إغلاق الكل
+  const toggleAllBtn = document.querySelector('.toggle-all');
+  toggleAllBtn.addEventListener('click', () => {
+    const allSubmenus = document.querySelectorAll('.submenu');
+    const allArrows = document.querySelectorAll('.arrow');
+    const anyClosed = Array.from(allSubmenus).some(menu => !menu.classList.contains('show'));
+
+    if (anyClosed) {
+      // افتح الكل مع انيميشن دخول
+      allSubmenus.forEach(menu => {
+        menu.classList.add('show');
+        menu.querySelectorAll('li').forEach((li, index) => {
+          li.style.transitionDelay = (index * 0.05) + "s";
+        });
+      });
+      allArrows.forEach(arrow => arrow.classList.add('rotate'));
+      toggleAllBtn.textContent = "❌ إغلاق الكل";
+      toggleAllBtn.classList.add("close-mode");
+    } else {
+      // اقفل الكل مع انيميشن خروج
+      allSubmenus.forEach(menu => {
+        menu.querySelectorAll('li').forEach((li, index) => {
+          li.style.transitionDelay = (index * 0.05) + "s";
+          li.style.opacity = "0";
+          li.style.transform = "translateX(30px)";
+        });
+        setTimeout(() => menu.classList.remove('show'), 400);
+      });
+      allArrows.forEach(arrow => arrow.classList.remove('rotate'));
+      toggleAllBtn.textContent = "🔀 فتح الكل";
+      toggleAllBtn.classList.remove("close-mode");
+    }
+  });
+</script>
 
 </body>
 </html>
