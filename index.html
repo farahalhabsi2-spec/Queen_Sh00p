@@ -1,69 +1,181 @@
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- العنوان الجديد اللي يظهر في جوجل -->
-  <title>Queen Sh0op | متجر مستحضرات التجميل والعناية</title>
-
-  <!-- الوصف اللي يظهر تحت العنوان -->
-  <meta name="description" content="متجر Queen Sh0op يوفر أجود منتجات التجميل والعناية بالبشرة والشعر. تسوقي الآن عبر queensh0op.netlify.app مع أفضل الأسعار وخدمة التوصيل.">
-</head>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Queen Shop</title>
-  
-  <!-- أيقونة الموقع -->
-  <link rel="icon" type="image/png" href="https://queensh0op.netlify.app/logo.png">
-  
+  <title>كوين شوب - مستحضرات التجميل الأصلية</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #fff;
-      margin: 0;
-      padding: 0;
+    body {font-family: Arial, sans-serif; margin:0; padding:0; display:flex; background:#fff0f5;}
+    /* ✅ القائمة الجانبية */
+    .sidebar {
+      width: 280px;
+      background:#ffe6f0;
+      height: 100vh;
+      padding: 15px;
+      overflow-y:auto;
+      border-left:2px solid #e60073;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
-    header {
-      padding: 20px;
+    .logo {
+      text-align:center;
+      margin-bottom:15px;
     }
-    header img {
-      width: 200px;
+    .logo img {
+      width:140px;
+      height:140px;
+      border-radius:50%; /* 🔴 اللوجو دائري */
+      border:3px solid #e60073; /* إطار وردي */
     }
-    h1 {
-      color: #333;
+    .logo h1 {
+      margin-top:10px;
+      font-size:22px;
+      color:#e60073;
+      font-weight:bold;
+    }
+    .logo p {
+      font-size:15px;
+      font-weight:bold;
+      color:#e60073; /* الجملة باللون الوردي */
+      margin-top:5px;
+    }
+    .sidebar ul {
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .sidebar ul li {
+      margin:8px 0;
+      padding:6px;
+      border-radius:6px;
+      color:#333;
+      cursor:pointer;
+    }
+    .sidebar ul li:hover {
+      background:#ffd6eb;
+    }
+    .submenu {
+      margin-right:15px;
+      list-style:circle;
+      color:#e60073;
+    }
+    /* ✅ الروابط السفلية */
+    .footer-links {
+      margin-top:20px;
+      padding-top:10px;
+      border-top:2px solid #e60073;
+    }
+    .footer-links li {
+      font-size:14px;
+      color:#e60073;
+    }
+    .footer-info {
+      margin-top:15px;
+      font-size:13px;
+      color:#333;
+      text-align:right;
+    }
+    .footer-info p {
+      margin:5px 0;
+    }
+    /* ✅ المحتوى الرئيسي */
+    .content {
+      flex:1;
+      padding:20px;
+      text-align:center;
     }
     .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #e91e63;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 18px;
-    }
-    .btn:hover {
-      background: #c2185b;
+      display:inline-block;
+      background:#e60073;
+      color:#fff;
+      padding:10px 20px;
+      border-radius:20px;
+      text-decoration:none;
+      font-weight:bold;
+      margin-top:20px;
     }
   </style>
 </head>
 <body>
-  <!-- الشعار داخل الصفحة -->
-  <header>
-    <img src="https://queensh0op.netlify.app/logo.png" alt="Queen Shop Logo">
-    <h1>مرحبًا بكم في Queen Shop</h1>
-  </header>
 
-  <main>
-    <p>أفضل متجر لمستحضرات التجميل والعناية 🌸</p>
-    
-    <!-- زر لحساب جديد -->
-    <a class="btn" href="https://instagram.com/Queen_Sh0op" target="_blank">
-      تابعنا على انستجرام
-    </a>
-  </main>
+<!-- ✅ القائمة الجانبية -->
+<div class="sidebar">
+  <div>
+    <!-- 🖼️ اللوجو + الاسم + الجملة التعريفية -->
+    <div class="logo">
+      <img src="https://queensh0op.netlify.app/logo.png" alt="Queen Sh0op Logo">
+      <h1>Queen Sh0op</h1>
+      <p>مستحضرات تجميل ومنتجات أصلية 100%</p>
+    </div>
+    <ul>
+      <li>🏠 الرئيسية</li>
+      <li>🏷️ الماركات</li>
+      <li>🛒 سلة التسوق</li>
+      <li>👤 حسابي</li>
+      <li>🧴 العناية
+        <ul class="submenu">
+          <li>العناية بالشعر</li>
+          <li>العناية بالبشرة</li>
+          <li>العناية بالوجه</li>
+          <li>العناية بالجسم</li>
+          <li>العناية بالشفاه</li>
+          <li>العناية بالمنطقة الحساسة</li>
+          <li>العناية بالفم والأسنان</li>
+          <li>العناية باليدين</li>
+          <li>العناية بالقدمين</li>
+        </ul>
+      </li>
+      <li>💄 المكياج</li>
+      <li>💨 الأجهزة</li>
+      <li>🌿 الأعشاب</li>
+      <li>🛢️ الزيوت</li>
+      <li>💊 المكملات الغذائية</li>
+      <li>⚖️ منتجات التخسيس</li>
+      <li>👁️ عدسات</li>
+      <li>🌸 العطور</li>
+      <li>👕 ملابس الأطفال</li>
+      <li>⭐ تقييمات العملاء</li>
+      <li>📝 مدونة كوين شوب</li>
+      <li style="background:#e60073; color:#fff; text-align:center; border-radius:20px; margin-top:10px;">
+        📩 تواصل معنا
+      </li>
+    </ul>
+  </div>
+
+  <!-- ✅ روابط + تواصل + دفع -->
+  <div class="footer-links">
+    <ul>
+      <li>ℹ️ من نحن</li>
+      <li>📜 الشروط والأحكام</li>
+      <li>🔒 سياسة الخصوصية</li>
+      <li>🚚 الشحن والتوصيل</li>
+      <li>♻️ سياسة الاستبدال والاسترجاع</li>
+      <li>❓ الأسئلة الشائعة</li>
+      <li>❤️ اهتماماتنا بكم</li>
+      <li>📰 المدونة</li>
+    </ul>
+    <div class="footer-info">
+      <p>📱 WhatsApp: 96036550</p>
+      <p>📸 Instagram: queen sh00p</p>
+      <p>💳 Visa | 💳 Mastercard | 💵 الدفع عند الاستلام</p>
+      <p>🚚 توصيل سريع (عُمان والخليج)</p>
+      <p>🛡️ منتجات أصلية 100% موثوقة</p>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ المحتوى الرئيسي -->
+<div class="content">
+  <h1>مرحبًا بكم في كوين شوب 🌸</h1>
+  <p>
+    متجر لمستحضرات التجميل والعناية الأصلية.  
+    فروعنا في <strong>السيب، صحار، السويق</strong>.<br>
+    للتسوق أونلاين: 
+    <a href="https://queensh0op.netlify.app" target="_blank">https://queensh0op.netlify.app</a>
+  </p>
+  <a href="https://wa.me/96896036550" class="btn">تواصل عبر واتساب</a>
+</div>
+
 </body>
 </html>
