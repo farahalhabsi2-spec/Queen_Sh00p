@@ -7,191 +7,169 @@
   <style>
     body { font-family: Tahoma, sans-serif; background:#fff0f5; margin:0; padding:0; color:#333; }
 
-    /* ✅ الهيدر */
-    header {
-      background:#e60073; color:#fff; padding:12px 20px;
-      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
-    }
-    header h1 { margin:0; font-size:20px; text-align:center; flex:1; }
-    .menu-btn { font-size:26px; cursor:pointer; background:none; border:none; color:#fff; }
-    .icons { display:flex; gap:15px; align-items:center; }
+    header { background:#e60073; color:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+    header h1 { margin:0; font-size:22px; flex:1; text-align:center; }
+    .menu-btn, .cart-btn { font-size:24px; cursor:pointer; background:none; border:none; color:#fff; margin:0 5px; }
+    .icons { display:flex; gap:10px; align-items:center; }
     .icons a { color:#fff; text-decoration:none; font-size:18px; }
     .search-box { width:100%; margin-top:10px; display:flex; justify-content:center; }
-    .search-box input {
-      width:90%; max-width:400px; padding:8px; border:2px solid #fff;
-      border-radius:20px; font-size:14px; text-align:center;
-    }
+    .search-box input { width:90%; max-width:400px; padding:8px; border:2px solid #fff; border-radius:20px; font-size:14px; text-align:center; }
 
-    /* ✅ الشريط الجانبي (الأقسام + السلة) */
-    .sidebar, .cart {
-      width:280px; background:#ffe6f0; padding:15px; border-left:3px solid #e60073;
-      min-height:100vh; position:fixed; top:0; right:-300px; transition:right 0.3s ease;
-      z-index:999; overflow-y:auto;
-    }
+    .overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:none; z-index:900; }
+    .overlay.active { display:block; }
+
+    .sidebar, .cart { width:280px; background:#ffe6f0; padding:15px; border-left:3px solid #e60073; min-height:100vh; position:fixed; top:0; right:-300px; transition:right 0.4s ease-in-out; z-index:1000; overflow-y:auto; }
     .sidebar.active, .cart.active { right:0; }
+    .close-btn { background:none; border:none; font-size:20px; cursor:pointer; color:#e60073; float:left; }
 
-    .sidebar h2, .cart h2 {
-      margin:0 0 10px 0; font-size:18px; color:#e60073;
-    }
-    .close-btn { cursor:pointer; font-size:22px; }
-
-    .accordion {
-      background:#fff; color:#e60073; cursor:pointer; padding:12px; margin:8px 0;
-      border:none; font-size:16px; font-weight:bold; border-radius:10px;
-      display:flex; justify-content:space-between; align-items:center;
-    }
+    .accordion { background:#fff; color:#e60073; cursor:pointer; padding:12px; margin:8px 0; border:none; font-size:16px; font-weight:bold; border-radius:10px; display:flex; justify-content:space-between; align-items:center; }
     .accordion:hover { background:#ffd6eb; }
-    .panel { max-height:0; overflow:hidden; transition:max-height 0.4s ease;
-      background:#fff; border-radius:0 0 10px 10px; padding:0 10px; }
+    .panel { max-height:0; overflow:hidden; transition:max-height 0.4s ease; background:#fff; border-radius:0 0 10px 10px; padding:0 10px; }
 
-    /* ✅ الرئيسية */
     main { padding:20px; text-align:center; }
     .hero img { max-width:320px; border-radius:15px; border:3px solid #e60073; }
     .products { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:20px; }
-    .products img {
-      width:150px; height:150px; object-fit:cover; border-radius:10px; border:2px solid #e60073;
-    }
+    .products img { width:150px; height:150px; object-fit:cover; border-radius:10px; border:2px solid #e60073; }
 
-    /* ✅ آراء العملاء */
-    .reviews { margin-top:30px; position:relative; overflow:hidden; }
-    .review {
-      display:none; font-size:15px; background:#fff; padding:15px; border-radius:10px;
-      border:2px solid #e60073;
-    }
-    .review.active { display:block; }
-    .stars { color:gold; margin-top:5px; }
+    .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+    .cart-item { display:flex; justify-content:space-between; margin:10px 0; }
+    .checkout-btn { background:#25D366; color:#fff; padding:10px; border:none; border-radius:5px; cursor:pointer; width:100%; }
 
-    /* ✅ زر واتساب */
-    .whatsapp-btn {
-      position:fixed; bottom:20px; left:20px; background:#25D366; color:#fff;
-      padding:12px 20px; border-radius:30px; text-decoration:none; font-weight:bold;
-      box-shadow:0 3px 6px rgba(0,0,0,0.2); z-index:1000;
-    }
+    #checkout { max-width:500px; margin:40px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 3px 6px rgba(0,0,0,0.2); display:none; }
+    #checkout h2 { text-align:center; color:#e60073; }
+    label { display:block; margin:10px 0 5px; font-weight:bold; }
+    input, select { width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px; }
+    .pay-btn { background:#e60073; color:#fff; padding:12px; border:none; border-radius:5px; cursor:pointer; width:100%; }
+    .pay-btn:hover { background:#c2005c; }
 
-    /* ✅ الفوتر */
-    footer {
-      background:#e60073; color:#fff; padding:25px; text-align:right;
-      line-height:1.8; margin-top:30px;
-    }
+    .success-message { display:none; text-align:center; font-size:18px; color:#25D366; font-weight:bold; padding:20px; }
+
+    .whatsapp-btn { position:fixed; bottom:20px; left:20px; background:#25D366; color:#fff; padding:12px 20px; border-radius:30px; text-decoration:none; font-weight:bold; box-shadow:0 3px 6px rgba(0,0,0,0.2); z-index:1100; }
+
+    footer { background:#e60073; color:#fff; padding:25px; text-align:right; line-height:1.8; margin-top:30px; }
     footer h3 {margin-top:0; color:#ffd6eb;}
     footer ul { list-style:none; padding:0; margin:10px 0; }
     footer ul li {margin:6px 0;}
-    footer .rights {
-      text-align:center; margin-top:15px; font-size:14px; border-top:1px solid #fff; padding-top:10px;
-    }
+    footer .rights { text-align:center; margin-top:15px; font-size:14px; border-top:1px solid #fff; padding-top:10px; }
   </style>
 </head>
 <body>
 
-<!-- ✅ الهيدر -->
+<div class="overlay"></div>
+
 <header>
-  <button id="menuBtn" class="menu-btn">☰</button>
+  <button class="menu-btn">☰</button>
   <h1>🌸 كوين شوب 🌸</h1>
   <div class="icons">
+    <button class="cart-btn">🛒</button>
     <a href="https://www.instagram.com/queen_sh00p" target="_blank">📸</a>
     <a href="#">👤</a>
-    <a id="cartBtn">🛒</a>
   </div>
   <div class="search-box"><input type="text" placeholder="🔍 ابحث عن منتج..."></div>
 </header>
 
-<!-- ✅ الأقسام -->
-<div class="sidebar" id="sidebar">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <h2>📂 الأقسام</h2>
-    <span id="closeSidebar" class="close-btn">❌</span>
-  </div>
+<div class="sidebar">
+  <button class="close-btn close-sidebar">❌</button>
+  <h3>📂 الأقسام</h3>
   <button class="accordion">💄 المكياج</button><div class="panel"><p>أحمر شفاه – مستحضرات الوجه – ظلال العيون</p></div>
   <button class="accordion">🧴 العناية</button><div class="panel"><p>شعر – بشرة – وجه – جسم – منطقة حساسة</p></div>
-  <button class="accordion">💨 الأجهزة</button><div class="panel"><p>مجفف شعر – أدوات تجميل</p></div>
-  <button class="accordion">🌿 الأعشاب</button><div class="panel"><p>منتجات طبيعية</p></div>
-  <button class="accordion">🛢️ الزيوت</button><div class="panel"><p>زيوت متنوعة</p></div>
-  <button class="accordion">💊 المكملات</button><div class="panel"><p>فيتامينات</p></div>
-  <button class="accordion">⚖️ التخسيس</button><div class="panel"><p>منتجات التنحيف</p></div>
-  <button class="accordion">👗 ملابس البنات</button><div class="panel"><p>فساتين - أزياء</p></div>
 </div>
 
-<!-- ✅ السلة -->
-<div class="cart" id="cart">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <h2>🛒 سلة المشتريات</h2>
-    <span id="closeCart" class="close-btn">❌</span>
+<div class="cart">
+  <div class="cart-header">
+    <h3>🛒 سلة المشتريات</h3>
+    <button class="close-btn close-cart">❌</button>
   </div>
-  <div id="cartItems"></div>
-  <p><strong>الإجمالي:</strong> <span id="total">0</span> ريال</p>
-  <button style="background:#4CAF50; color:#fff; padding:10px; border:none; border-radius:5px;">✅ إتمام الطلب</button>
+  <div class="cart-item"><span>ماسك x1</span><span>2.50 ر.ع</span></div>
+  <div class="cart-item"><span>أحمر شفاه x1</span><span>1.50 ر.ع</span></div>
+  <p><strong>الإجمالي: 4.00 ريال</strong></p>
+  <button class="checkout-btn">✅ إتمام الطلب</button>
 </div>
 
-<!-- ✅ محتوى رئيسي -->
 <main>
   <h2>✨ مرحبًا بكم في كوين شوب ✨</h2>
   <p>كل ما تحتاجينه من منتجات التجميل والعناية الأصلية في مكان واحد.</p>
-  <div class="hero"><img src="https://i.ibb.co/fQ7PKbN/girls-fashion.jpg" alt="بنات يهتمون بأنفسهم"></div>
-  <h3>🛍️ منتجاتنا المميزة</h3>
-  <div class="products">
-    <img src="https://i.ibb.co/VxvNwT1/shampoo.jpg" alt="شامبو">
-    <img src="https://i.ibb.co/6yZczZt/cream.jpg" alt="كريم">
-    <img src="https://i.ibb.co/3fH4q7h/serum.jpg" alt="سيروم">
-  </div>
-  <h3>⭐ آراء عملائنا</h3>
-  <div class="reviews">
-    <div class="review active">💬 "المنتجات رائعة جدًا واصل أصلية" <div class="stars">⭐⭐⭐⭐⭐</div></div>
-    <div class="review">💬 "التوصيل سريع والخدمة ممتازة" <div class="stars">⭐⭐⭐⭐⭐</div></div>
-    <div class="review">💬 "أفضل متجر جربته 👌" <div class="stars">⭐⭐⭐⭐⭐</div></div>
-  </div>
+  <div class="hero"><img src="https://i.ibb.co/fQ7PKbN/girls-fashion.jpg"></div>
 </main>
 
-<!-- ✅ الفوتر -->
+<section id="checkout">
+  <h2>💳 صفحة الدفع</h2>
+  <form id="order-form">
+    <label>الاسم الكامل</label>
+    <input type="text" required>
+    <label>رقم الهاتف</label>
+    <input type="tel" required>
+    <label>العنوان</label>
+    <input type="text" required>
+    <label>طريقة الدفع</label>
+    <select id="payment-method">
+      <option value="cod">📦 الدفع عند الاستلام</option>
+      <option value="card">💳 بطاقة بنكية</option>
+    </select>
+    <div id="card-fields" style="display:none;">
+      <label>رقم البطاقة</label>
+      <input type="text" maxlength="16">
+      <label>تاريخ الانتهاء</label>
+      <input type="text" placeholder="MM/YY">
+      <label>CVV</label>
+      <input type="text" maxlength="3">
+    </div>
+    <button class="pay-btn" type="submit">✅ تأكيد الطلب</button>
+  </form>
+  <div class="success-message">✅ شكراً لك! تم استلام طلبك وسيتم التواصل معك قريباً.</div>
+</section>
+
 <footer>
   <h3>📩 تواصل معنا</h3>
   <p>📱 WhatsApp: 96036550</p>
   <p>📸 Instagram: queen sh00p</p>
-  <h3>📑 روابط مهمة</h3>
-  <ul>
-    <li>من نحن</li><li>الشروط والأحكام</li><li>سياسة الخصوصية</li><li>الشحن والتوصيل</li>
-    <li>سياسة الاستبدال والاسترجاع</li><li>الأسئلة الشائعة</li><li>اهتماماتنا بكم</li><li>المدونة</li>
-  </ul>
   <h3>💳 طرق الدفع</h3><p>Mastercard | Visa | الدفع عند الاستلام</p>
-  <h3>✅ مميزاتنا</h3>
-  <p>🚚 توصيل سريع (عُمان ودول الخليج)<br>💵 الدفع عند الاستلام<br>🛡️ منتجات أصلية 100% موثوقة</p>
   <div class="rights">© 2025 كوين عمان · كل الحقوق محفوظة</div>
 </footer>
 
-<!-- زر واتساب ثابت -->
 <a href="https://wa.me/96896036550" class="whatsapp-btn">💬 تواصل عبر واتساب</a>
 
 <script>
-  // ✅ فتح وإغلاق الأقسام
-  const sidebar=document.getElementById("sidebar");
-  const menuBtn=document.getElementById("menuBtn");
-  const closeSidebar=document.getElementById("closeSidebar");
-  menuBtn.addEventListener("click",()=> sidebar.classList.add("active"));
-  closeSidebar.addEventListener("click",()=> sidebar.classList.remove("active"));
+  const sidebar=document.querySelector(".sidebar");
+  const cart=document.querySelector(".cart");
+  const overlay=document.querySelector(".overlay");
+  const checkout=document.getElementById("checkout");
+  const orderForm=document.getElementById("order-form");
+  const successMsg=document.querySelector(".success-message");
 
-  // ✅ فتح وإغلاق السلة
-  const cart=document.getElementById("cart");
-  const cartBtn=document.getElementById("cartBtn");
-  const closeCart=document.getElementById("closeCart");
-  cartBtn.addEventListener("click",()=> cart.classList.add("active"));
-  closeCart.addEventListener("click",()=> cart.classList.remove("active"));
+  document.querySelector(".menu-btn").addEventListener("click",()=>{ sidebar.classList.add("active"); overlay.classList.add("active"); });
+  document.querySelector(".close-sidebar").addEventListener("click",()=>{ sidebar.classList.remove("active"); overlay.classList.remove("active"); });
+  document.querySelector(".cart-btn").addEventListener("click",()=>{ cart.classList.add("active"); overlay.classList.add("active"); });
+  document.querySelector(".close-cart").addEventListener("click",()=>{ cart.classList.remove("active"); overlay.classList.remove("active"); });
+  overlay.addEventListener("click",()=>{ sidebar.classList.remove("active"); cart.classList.remove("active"); overlay.classList.remove("active"); });
 
-  // ✅ أكورديون
   document.querySelectorAll(".accordion").forEach(btn=>{
-    btn.addEventListener("click",function(){
-      this.classList.toggle("active");
-      const panel=this.nextElementSibling;
-      panel.style.maxHeight? panel.style.maxHeight=null: panel.style.maxHeight=panel.scrollHeight+"px";
-    });
+    btn.addEventListener("click",function(){ this.classList.toggle("active"); const panel=this.nextElementSibling; panel.style.maxHeight? panel.style.maxHeight=null: panel.style.maxHeight=panel.scrollHeight+"px"; });
   });
 
-  // ✅ سلايدر آراء العملاء
-  let index=0;
-  const reviews=document.querySelectorAll(".review");
-  setInterval(()=>{
-    reviews[index].classList.remove("active");
-    index=(index+1)%reviews.length;
-    reviews[index].classList.add("active");
-  },3000);
+  document.querySelector(".checkout-btn").addEventListener("click",()=>{
+    cart.classList.remove("active");
+    overlay.classList.remove("active");
+    checkout.style.display="block";
+    window.scrollTo({ top: checkout.offsetTop, behavior:"smooth" });
+  });
+
+  const method=document.getElementById("payment-method");
+  const cardFields=document.getElementById("card-fields");
+  method.addEventListener("change",()=>{ cardFields.style.display=method.value==="card"?"block":"none"; });
+
+  orderForm.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    orderForm.style.display="none";
+    successMsg.style.display="block";
+
+    setTimeout(()=>{
+      successMsg.style.display="none";
+      orderForm.style.display="block";
+      checkout.style.display="none";
+      window.scrollTo({ top:0, behavior:"smooth" });
+    },3000); // ⏱️ المدة = 3 ثواني
+  });
 </script>
 
 </body>
