@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌸 كوين شوب - مستحضرات التجميل الأصلية 🌸</title>
   <style>
-    body { font-family: Tahoma, sans-serif; background:#fff0f5; margin:0; padding:0; color:#333; }
+    body { font-family: Tahoma, sans-serif; background:#fff0f5; margin:0; padding:0; color:#333; overflow-x:hidden; }
 
     /* ✅ الهيدر */
     header {
@@ -13,7 +13,7 @@
       display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
     }
     header h1 { margin:0; font-size:22px; text-align:center; flex:1; }
-    .menu-btn { font-size:26px; cursor:pointer; background:none; border:none; color:#fff; }
+    .menu-btn { font-size:26px; cursor:pointer; background:none; border:none; color:#fff; transition:transform 0.3s; }
     .icons { display:flex; gap:15px; align-items:center; }
     .icons a { color:#fff; text-decoration:none; font-size:18px; cursor:pointer; }
 
@@ -26,40 +26,54 @@
 
     /* ✅ القائمة الجانبية */
     .sidebar {
-      width:280px; background:#ffe6f0; padding:15px; border-left:3px solid #e60073;
-      min-height:100vh; position:fixed; top:0; right:-300px; transition:right 0.3s ease;
-      z-index:999; overflow-y:auto;
+      position:fixed; top:0; right:-320px; width:280px; height:100%;
+      background:#ffe6f0; border-left:3px solid #e60073;
+      transition: all 0.5s ease; padding:15px; z-index:1000; overflow-y:auto;
+      opacity:0;
     }
-    .sidebar.active { right:0; }
+    .sidebar.active { right:0; opacity:1; }
     .accordion { background:#fff; color:#e60073; cursor:pointer; padding:12px; margin:8px 0;
       border:none; font-size:16px; font-weight:bold; border-radius:10px;
-      display:flex; justify-content:space-between; align-items:center; }
+      display:flex; justify-content:space-between; align-items:center;
+    }
     .accordion:hover { background:#ffd6eb; }
     .panel { max-height:0; overflow:hidden; transition:max-height 0.4s ease; background:#fff; border-radius:0 0 10px 10px; padding:0 10px; }
 
     /* ✅ السلة */
     .cart {
-      width:300px; background:#fff; border-left:3px solid #e60073;
-      position:fixed; top:0; left:-320px; height:100%; padding:15px;
-      transition:left 0.3s ease; z-index:1000; overflow-y:auto;
+      position:fixed; top:0; left:-340px; width:300px; height:100%;
+      background:#fff; border-right:3px solid #e60073;
+      transition: all 0.5s ease; padding:15px; z-index:1000; overflow-y:auto;
+      opacity:0;
     }
-    .cart.active { left:0; }
-    .cart h2 { margin-top:0; color:#e60073; display:flex; justify-content:space-between; align-items:center; }
+    .cart.active { left:0; opacity:1; }
     .cart-item { display:flex; justify-content:space-between; align-items:center; background:#ffe6f0; padding:8px; border-radius:8px; margin-bottom:8px; }
-    .cart-item span { cursor:pointer; color:red; font-weight:bold; }
-    .checkout { margin-top:10px; background:#e60073; color:#fff; padding:10px; text-align:center; border-radius:20px; cursor:pointer; }
 
     /* ✅ الرئيسية */
     main { padding:20px; text-align:center; }
     .hero img { max-width:320px; border-radius:15px; border:3px solid #e60073; }
     .products { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:20px; }
-    .product { background:#fff; border:2px solid #e60073; padding:10px; border-radius:10px; }
+    .product { background:#fff; border:2px solid #e60073; padding:10px; border-radius:10px; transition:transform 0.3s; }
+    .product:hover { transform:scale(1.05); }
     .product img { width:150px; height:150px; object-fit:cover; border-radius:10px; }
     .product button { margin-top:5px; padding:5px 12px; background:#e60073; color:#fff; border:none; border-radius:20px; cursor:pointer; }
 
-    /* ✅ حسابي */
-    .account { margin-top:20px; background:#fff; padding:15px; border:2px solid #e60073; border-radius:10px; max-width:400px; margin:auto; }
-    .account input, .account select { width:100%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:8px; }
+    /* ✅ آراء العملاء مع Slide + أزرار */
+    .reviews { margin-top:30px; position:relative; height:150px; }
+    .review {
+      opacity:0; transform:translateX(100%); transition: all 1s ease;
+      position:absolute; width:90%; left:5%; top:0;
+      background:#fff; padding:15px; border-radius:10px; border:2px solid #e60073;
+    }
+    .review.active { opacity:1; transform:translateX(0); position:relative; }
+    .stars { color:gold; margin-top:5px; }
+    .nav-btn {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:#e60073; color:#fff; border:none; font-size:22px;
+      padding:5px 10px; cursor:pointer; border-radius:50%;
+    }
+    .prev { left:10px; }
+    .next { right:10px; }
 
     /* ✅ الفوتر */
     footer { background:#e60073; color:#fff; padding:25px; text-align:right; line-height:1.8; margin-top:30px; }
@@ -71,7 +85,6 @@
 </head>
 <body>
 
-<!-- ✅ الهيدر -->
 <header>
   <button class="menu-btn">☰</button>
   <h1>🌸 كوين شوب 🌸</h1>
@@ -84,47 +97,36 @@
 </header>
 
 <!-- ✅ القائمة -->
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
+  <h2>📂 الأقسام <span id="closeSidebar" style="cursor:pointer;float:left;">❌</span></h2>
   <button class="accordion">💄 المكياج</button><div class="panel"><p>أحمر شفاه – مستحضرات الوجه – ظلال العيون</p></div>
   <button class="accordion">🧴 العناية</button><div class="panel"><p>شعر – بشرة – وجه – جسم – منطقة حساسة</p></div>
-  <button class="accordion">💨 الأجهزة</button><div class="panel"><p>مجفف شعر – أدوات تجميل</p></div>
-  <button class="accordion">🌿 الأعشاب</button><div class="panel"><p>منتجات طبيعية</p></div>
-  <button class="accordion">🛢️ الزيوت</button><div class="panel"><p>زيوت متنوعة</p></div>
-  <button class="accordion">💊 المكملات</button><div class="panel"><p>فيتامينات</p></div>
-  <button class="accordion">⚖️ التخسيس</button><div class="panel"><p>منتجات التنحيف</p></div>
-  <button class="accordion">👗 ملابس البنات</button><div class="panel"><p>فساتين - أزياء</p></div>
 </div>
 
 <!-- ✅ السلة -->
 <div class="cart" id="cart">
-  <h2>🛒 سلة التسوق <span id="closeCart">❌</span></h2>
+  <h2>🛒 سلة التسوق <span id="closeCart" style="cursor:pointer;float:left;">❌</span></h2>
   <div id="cartItems"></div>
   <p><strong>المجموع:</strong> <span id="total">0</span> ريال</p>
-  <div>
-    <label><input type="radio" name="payment" value="Visa"> 💳 دفع بفيزا</label><br>
-    <label><input type="radio" name="payment" value="COD" checked> 💵 عند الاستلام</label>
-  </div>
-  <div class="checkout" id="checkout">✅ إتمام الطلب</div>
 </div>
 
 <main>
   <h2>✨ مرحبًا بكم في كوين شوب ✨</h2>
-  <p>كل ما تحتاجينه من منتجات التجميل والعناية الأصلية في مكان واحد.</p>
-  <div class="hero"><img src="https://i.ibb.co/fQ7PKbN/girls-fashion.jpg" alt="بنات يهتمون بأنفسهم"></div>
-
+  <div class="hero"><img src="https://i.ibb.co/fQ7PKbN/girls-fashion.jpg"></div>
   <h3>🛍️ منتجاتنا المميزة</h3>
   <div class="products">
     <div class="product"><img src="https://i.ibb.co/VxvNwT1/shampoo.jpg"><p>شامبو - 3.5 ريال</p><button onclick="addToCart('شامبو',3.5)">➕ أضف</button></div>
     <div class="product"><img src="https://i.ibb.co/6yZczZt/cream.jpg"><p>كريم - 2.8 ريال</p><button onclick="addToCart('كريم',2.8)">➕ أضف</button></div>
-    <div class="product"><img src="https://i.ibb.co/3fH4q7h/serum.jpg"><p>سيروم - 4.0 ريال</p><button onclick="addToCart('سيروم',4.0)">➕ أضف</button></div>
   </div>
 
-  <!-- حسابي -->
-  <div class="account" id="accountSection" style="display:none;">
-    <h3>👤 حسابي</h3>
-    <input type="text" id="name" placeholder="الاسم الكامل">
-    <input type="text" id="phone" placeholder="رقم الهاتف">
-    <input type="text" id="address" placeholder="العنوان">
+  <!-- ⭐ آراء العملاء -->
+  <h3>⭐ آراء عملائنا</h3>
+  <div class="reviews">
+    <div class="review active">💬 "المنتجات رائعة جدًا واصل أصلية" <div class="stars">⭐⭐⭐⭐⭐</div></div>
+    <div class="review">💬 "التوصيل سريع والخدمة ممتازة" <div class="stars">⭐⭐⭐⭐⭐</div></div>
+    <div class="review">💬 "أفضل متجر جربته 👌" <div class="stars">⭐⭐⭐⭐⭐</div></div>
+    <button class="nav-btn prev" onclick="prevReview()">‹</button>
+    <button class="nav-btn next" onclick="nextReview()">›</button>
   </div>
 </main>
 
@@ -132,73 +134,36 @@
   <h3>📩 تواصل معنا</h3>
   <p>📱 WhatsApp: 96036550</p>
   <p>📸 Instagram: queen sh00p</p>
-  <h3>📑 روابط مهمة</h3>
-  <ul><li>من نحن</li><li>الشروط والأحكام</li><li>سياسة الخصوصية</li><li>الشحن والتوصيل</li><li>سياسة الاستبدال والاسترجاع</li><li>الأسئلة الشائعة</li><li>اهتماماتنا بكم</li><li>المدونة</li></ul>
-  <h3>💳 طرق الدفع</h3><p>Mastercard | Visa | الدفع عند الاستلام</p>
-  <h3>✅ مميزاتنا</h3><p>🚚 توصيل سريع (عُمان ودول الخليج)<br>💵 الدفع عند الاستلام<br>🛡️ منتجات أصلية 100% موثوقة</p>
   <div class="rights">© 2025 كوين عمان · كل الحقوق محفوظة</div>
 </footer>
 
-<a href="https://wa.me/96896036550" class="whatsapp-btn">💬 تواصل عبر واتساب</a>
-
 <script>
-  // القائمة
-  const sidebar=document.querySelector(".sidebar");
-  document.querySelector(".menu-btn").addEventListener("click",()=> sidebar.classList.toggle("active"));
-  document.querySelectorAll(".accordion").forEach(btn=>{
-    btn.addEventListener("click",function(){
-      const panel=this.nextElementSibling;
-      panel.style.maxHeight? panel.style.maxHeight=null: panel.style.maxHeight=panel.scrollHeight+"px";
-    });
-  });
+  // فتح وإغلاق القائمة
+  const sidebar=document.getElementById("sidebar");
+  document.querySelector(".menu-btn").addEventListener("click",()=> sidebar.classList.add("active"));
+  document.getElementById("closeSidebar").addEventListener("click",()=> sidebar.classList.remove("active"));
 
-  // السلة
+  // فتح وإغلاق السلة
   const cart=document.getElementById("cart");
-  document.getElementById("cartBtn").addEventListener("click",()=> cart.classList.toggle("active"));
+  document.getElementById("cartBtn").addEventListener("click",()=> cart.classList.add("active"));
   document.getElementById("closeCart").addEventListener("click",()=> cart.classList.remove("active"));
 
+  // سلة
   let items=[];
-
-  function addToCart(name,price){
-    items.push({name,price});
-    renderCart();
-  }
-
-  function removeItem(index){
-    items.splice(index,1);
-    renderCart();
-  }
-
+  function addToCart(name,price){ items.push({name,price}); renderCart(); }
   function renderCart(){
-    const cartItems=document.getElementById("cartItems");
-    const total=document.getElementById("total");
-    cartItems.innerHTML="";
-    let sum=0;
-    items.forEach((item,i)=>{
-      sum+=item.price;
-      cartItems.innerHTML+=`<div class="cart-item"><span onclick="removeItem(${i})">❌</span> ${item.name} - ${item.price} ريال</div>`;
-    });
-    total.innerText=sum.toFixed(2);
+    const cartItems=document.getElementById("cartItems"); let sum=0;
+    cartItems.innerHTML=""; 
+    items.forEach((item)=>{ sum+=item.price; cartItems.innerHTML+=`<div class="cart-item">${item.name} - ${item.price} ريال</div>`; });
+    document.getElementById("total").innerText=sum.toFixed(2);
   }
 
-  // حسابي
-  const accountBtn=document.getElementById("accountBtn");
-  const accountSection=document.getElementById("accountSection");
-  accountBtn.addEventListener("click",()=> accountSection.style.display=accountSection.style.display==="none"?"block":"none");
-
-  // إتمام الطلب
-  document.getElementById("checkout").addEventListener("click",()=>{
-    const name=document.getElementById("name").value;
-    const phone=document.getElementById("phone").value;
-    const address=document.getElementById("address").value;
-    const payment=document.querySelector("input[name='payment']:checked").value;
-    if(items.length===0){ alert("🛒 السلة فارغة"); return; }
-    let order="طلب جديد من "+name+"%0A📱: "+phone+"%0A📍: "+address+"%0A";
-    items.forEach(i=> order+=`- ${i.name}: ${i.price} ريال%0A`);
-    order+=`المجموع: ${document.getElementById("total").innerText} ريال%0A`;
-    order+=`طريقة الدفع: ${payment}`;
-    window.open("https://wa.me/96896036550?text="+order,"_blank");
-  });
+  // ⭐ آراء العملاء مع أزرار
+  let index=0; const reviews=document.querySelectorAll(".review");
+  function showReview(i){ reviews.forEach(r=>r.classList.remove("active")); reviews[i].classList.add("active"); }
+  function nextReview(){ index=(index+1)%reviews.length; showReview(index); }
+  function prevReview(){ index=(index-1+reviews.length)%reviews.length; showReview(index); }
+  setInterval(nextReview,4000);
 </script>
 
 </body>
