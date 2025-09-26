@@ -3,96 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>كوين شوب - مستحضرات التجميل</title>
+  <title>كوين شوب - مستحضرات التجميل الأصلية</title>
   <style>
     body {
-      margin: 0;
       font-family: Tahoma, sans-serif;
       background: #fff0f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
     }
 
     header {
-      background: #e60073;
-      color: #fff;
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background:#e60073;
+      color:#fff;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    header h1 {
-      font-size: 20px;
-      margin: 0;
-    }
+    header h1 { margin:0; font-size:20px; }
     .menu-btn {
-      font-size: 26px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: #fff;
+      font-size:26px;
+      cursor:pointer;
+      background:none;
+      border:none;
+      color:#fff;
     }
 
     /* ✅ القائمة الجانبية */
     .sidebar {
-      width: 250px;
+      width: 280px;
       background: #ffe6f0;
+      padding: 15px;
       border-left: 3px solid #e60073;
-      padding: 10px;
-      height: 100vh;
+      min-height: 100vh;
       position: fixed;
       top: 0;
-      right: -260px; /* مخفية */
+      right: -300px; /* مخفية أول ما تفتح الصفحة */
       transition: right 0.3s ease;
-      overflow-y: auto;
       z-index: 999;
     }
-    .sidebar.active {
-      right: 0;
-    }
+    .sidebar.active { right: 0; }
 
     .accordion {
-      width: 100%;
       background: #fff;
-      border-radius: 8px;
-      margin: 6px 0;
-      padding: 12px;
-      font-size: 15px;
       color: #e60073;
+      cursor: pointer;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      outline: none;
+      font-size: 16px;
       font-weight: bold;
+      text-align: right;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.3s, transform 0.2s;
       display: flex;
       justify-content: space-between;
-      cursor: pointer;
-      transition: 0.3s;
-      border: none;
+      align-items: center;
+      position: relative;
     }
-    .accordion:hover { background: #ffd6eb; }
-    .accordion .arrow { transition: transform 0.3s; }
-    .accordion.active .arrow { transform: rotate(180deg); }
+
+    .accordion:hover {
+      background: #ffd6eb;
+      transform: scale(1.02);
+    }
+
+    .accordion .arrow {
+      font-size: 14px;
+      transition: transform 0.3s;
+    }
+
+    .accordion.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    /* ✨ الأيقونة */
+    .accordion .active-icon {
+      position: absolute;
+      left: 10px;
+      font-size: 16px;
+      color: gold;
+      opacity: 0;
+      animation: sparkle 1s infinite alternate;
+    }
+
+    .accordion.active .active-icon {
+      opacity: 1;
+    }
+
+    @keyframes sparkle {
+      from { transform: scale(1); color: #e60073; }
+      to { transform: scale(1.3); color: gold; }
+    }
 
     .panel {
       max-height: 0;
       overflow: hidden;
       background: #fff;
-      border-radius: 0 0 8px 8px;
-      transition: max-height 0.4s ease;
-      margin-bottom: 8px;
-    }
-    .panel ul { list-style: none; padding: 10px; margin: 0; }
-    .panel ul li { font-size: 14px; margin: 5px 0; color: #333; }
-
-    /* ✅ زر إغلاق */
-    .close-btn {
-      font-size: 22px;
-      background: none;
-      border: none;
-      color: #e60073;
-      float: left;
-      margin: 5px;
-      cursor: pointer;
+      margin-top: -5px;
+      border-radius: 0 0 10px 10px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+      transition: max-height 0.5s ease-in-out;
     }
 
-    /* ✅ المحتوى */
-    .content {
-      padding: 20px;
+    .panel.open {
+      padding: 10px 15px;
+    }
+
+    .panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .panel ul li {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #444;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeSlide 0.5s forwards;
+    }
+
+    @keyframes fadeSlide {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -103,49 +142,108 @@
   <button class="menu-btn">☰</button>
 </header>
 
-<!-- ✅ القائمة الجانبية -->
-<div class="sidebar" id="sidebar">
-  <button class="close-btn" onclick="toggleMenu()">✖</button>
+<!-- 🎶 أصوات ناعمة -->
+<audio id="openSound" src="https://www.soundjay.com/button/sounds/button-20.mp3" preload="auto"></audio>
+<audio id="closeSound" src="https://www.soundjay.com/button/sounds/button-21.mp3" preload="auto"></audio>
 
-  <button class="accordion">💄 المكياج <span class="arrow">▼</span></button>
-  <div class="panel"><ul><li>أحمر شفاه</li><li>مستحضرات الوجه</li><li>ظلال العيون</li></ul></div>
+<div class="sidebar">
+  <button class="accordion">💄 المكياج <span class="arrow">🔽</span> <span class="active-icon">✨</span></button>
+  <div class="panel">
+    <ul>
+      <li style="animation-delay:0.1s">أحمر شفاه</li>
+      <li style="animation-delay:0.2s">مستحضرات الوجه</li>
+      <li style="animation-delay:0.3s">ظلال العيون</li>
+    </ul>
+  </div>
 
-  <button class="accordion">🧴 العناية <span class="arrow">▼</span></button>
-  <div class="panel"><ul><li>العناية بالشعر</li><li>العناية بالبشرة</li><li>العناية بالوجه</li><li>العناية بالجسم</li></ul></div>
+  <button class="accordion">🧴 العناية <span class="arrow">🔽</span> <span class="active-icon">✨</span></button>
+  <div class="panel">
+    <ul>
+      <li style="animation-delay:0.1s">العناية بالشعر</li>
+      <li style="animation-delay:0.2s">العناية بالبشرة</li>
+      <li style="animation-delay:0.3s">العناية بالوجه</li>
+      <li style="animation-delay:0.4s">العناية بالجسم</li>
+      <li style="animation-delay:0.5s">العناية بالشفاه</li>
+      <li style="animation-delay:0.6s">العناية بالمنطقة الحساسة</li>
+      <li style="animation-delay:0.7s">العناية بالفم والأسنان</li>
+      <li style="animation-delay:0.8s">العناية باليدين</li>
+      <li style="animation-delay:0.9s">العناية بالقدمين</li>
+    </ul>
+  </div>
 
-  <button class="accordion">🌸 العطور <span class="arrow">▼</span></button>
-  <div class="panel"><ul><li>مسك</li><li>عطور فرنسية</li></ul></div>
-</div>
+  <button class="accordion">💨 الأجهزة <span class="arrow">🔽</span> <span class="active-icon">✨</span></button>
+  <div class="panel">
+    <ul>
+      <li style="animation-delay:0.1s">مجفف الشعر</li>
+      <li style="animation-delay:0.2s">أدوات التجميل</li>
+    </ul>
+  </div>
 
-<!-- ✅ المحتوى -->
-<div class="content">
-  <h2>مرحبًا بكم في كوين شوب 💖</h2>
-  <p>كل ما تحتاجينه من منتجات العناية والمكياج الأصلية في مكان واحد.</p>
+  <button class="accordion">🌿 الأعشاب <span class="arrow">🔽</span> <span class="active-icon">✨</span></button>
+  <div class="panel"><p>منتجات الأعشاب</p></div>
+
+  <button class="accordion">🛢️ الزيوت <span class="arrow">🔽</span> <span class="active-icon">✨</span></button>
+  <div class="panel"><p>أنواع الزيوت</p></div>
+
+  <button class="accordion">💊 المكملات الغذائية <span class="arrow">🔽</span> <span class="active-icon">✨</span></button>
+  <div class="panel"><p>فيتامينات ومكملات</p></div>
+
+  <button class="accordion">⚖️ منتجات التخسيس <span class="arrow">🔽</span> <span class="active-icon">✨</span></button>
+  <div class="panel"><p>أعشاب وأدوات للتنحيف</p></div>
+
+  <button class="accordion">👗 ملابس البنات <span class="arrow">🔽</span> <span class="active-icon">✨</span></button>
+  <div class="panel"><p>فساتين - عبايات - أزياء</p></div>
 </div>
 
 <script>
-  // ✅ فتح وإغلاق القائمة
-  const sidebar = document.getElementById("sidebar");
+  // ✅ فتح وإغلاق القائمة كاملة
+  const sidebar = document.querySelector(".sidebar");
   const menuBtn = document.querySelector(".menu-btn");
-  function toggleMenu(){
+  menuBtn.addEventListener("click", function(){
     sidebar.classList.toggle("active");
-  }
-  menuBtn.addEventListener("click", toggleMenu);
+  });
 
-  // ✅ Accordion
+  // ✅ فتح وإغلاق الأقسام داخل القائمة
   const acc = document.querySelectorAll(".accordion");
-  acc.forEach(btn=>{
-    btn.addEventListener("click", function(){
+  const openSound = document.getElementById("openSound");
+  const closeSound = document.getElementById("closeSound");
+
+  acc.forEach(button => {
+    button.addEventListener("click", function() {
       const panel = this.nextElementSibling;
-      document.querySelectorAll(".panel").forEach(p=>{
-        if(p!==panel){ p.style.maxHeight=null; p.previousElementSibling.classList.remove("active"); }
+
+      // إغلاق باقي الأقسام
+      document.querySelectorAll(".panel").forEach(p => {
+        if (p !== panel) {
+          p.style.maxHeight = null;
+          p.classList.remove("open");
+          p.previousElementSibling.classList.remove("active");
+        }
       });
-      if(panel.style.maxHeight){
-        panel.style.maxHeight=null;
+
+      // تبديل القسم الحالي
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+        panel.classList.remove("open");
         this.classList.remove("active");
+        closeSound.currentTime = 0;
+        closeSound.play();
       } else {
-        panel.style.maxHeight=panel.scrollHeight+"px";
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        panel.classList.add("open");
         this.classList.add("active");
+        openSound.currentTime = 0;
+        openSound.play();
+
+        // ✨ إعادة تشغيل الأنيميشن
+        panel.querySelectorAll("li").forEach(li => {
+          li.style.opacity = "0";
+          li.style.transform = "translateY(10px)";
+          li.style.animation = "none";
+          li.offsetHeight; // reflow
+          li.style.animation = "";
+          li.style.animation = `fadeSlide 0.5s forwards ${li.style.animationDelay}`;
+        });
       }
     });
   });
