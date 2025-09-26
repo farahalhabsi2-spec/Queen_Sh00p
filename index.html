@@ -15,13 +15,13 @@
     header h1 { margin:0; font-size:22px; text-align:center; flex:1; }
     .menu-btn { font-size:26px; cursor:pointer; background:none; border:none; color:#fff; }
     .icons { display:flex; gap:15px; align-items:center; }
-    .icons a { color:#fff; text-decoration:none; font-size:18px; }
+    .icons a { color:#fff; text-decoration:none; font-size:18px; cursor:pointer; }
 
     /* ✅ البحث */
     .search-box { width:100%; margin-top:10px; display:flex; justify-content:center; }
     .search-box input {
-      width:90%; max-width:400px; padding:8px;
-      border:2px solid #fff; border-radius:20px; font-size:14px; text-align:center;
+      width:90%; max-width:400px; padding:8px; border:2px solid #fff;
+      border-radius:20px; font-size:14px; text-align:center;
     }
 
     /* ✅ القائمة الجانبية */
@@ -31,65 +31,38 @@
       z-index:999; overflow-y:auto;
     }
     .sidebar.active { right:0; }
-    .accordion {
-      background:#fff; color:#e60073; cursor:pointer; padding:12px; margin:8px 0;
+    .accordion { background:#fff; color:#e60073; cursor:pointer; padding:12px; margin:8px 0;
       border:none; font-size:16px; font-weight:bold; border-radius:10px;
-      display:flex; justify-content:space-between; align-items:center;
-    }
+      display:flex; justify-content:space-between; align-items:center; }
     .accordion:hover { background:#ffd6eb; }
-    .panel { max-height:0; overflow:hidden; transition:max-height 0.4s ease;
-      background:#fff; border-radius:0 0 10px 10px; padding:0 10px; }
+    .panel { max-height:0; overflow:hidden; transition:max-height 0.4s ease; background:#fff; border-radius:0 0 10px 10px; padding:0 10px; }
 
-    /* ✅ المنتجات */
+    /* ✅ السلة */
+    .cart {
+      width:300px; background:#fff; border-left:3px solid #e60073;
+      position:fixed; top:0; left:-320px; height:100%; padding:15px;
+      transition:left 0.3s ease; z-index:1000; overflow-y:auto;
+    }
+    .cart.active { left:0; }
+    .cart h2 { margin-top:0; color:#e60073; display:flex; justify-content:space-between; align-items:center; }
+    .cart-item { display:flex; justify-content:space-between; align-items:center; background:#ffe6f0; padding:8px; border-radius:8px; margin-bottom:8px; }
+    .cart-item span { cursor:pointer; color:red; font-weight:bold; }
+    .checkout { margin-top:10px; background:#e60073; color:#fff; padding:10px; text-align:center; border-radius:20px; cursor:pointer; }
+
+    /* ✅ الرئيسية */
     main { padding:20px; text-align:center; }
     .hero img { max-width:320px; border-radius:15px; border:3px solid #e60073; }
     .products { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:20px; }
-    .product {
-      width:150px; background:#fff; padding:10px; border-radius:10px;
-      border:2px solid #e60073; text-align:center;
-    }
-    .product img { width:100%; height:120px; object-fit:cover; border-radius:8px; }
-    .product button {
-      margin-top:8px; background:#e60073; color:#fff;
-      border:none; padding:6px 10px; border-radius:20px; cursor:pointer; font-size:13px;
-    }
-    .more-btn {
-      display:inline-block; margin-top:20px; padding:10px 20px;
-      background:#e60073; color:#fff; border-radius:20px; text-decoration:none;
-    }
+    .product { background:#fff; border:2px solid #e60073; padding:10px; border-radius:10px; }
+    .product img { width:150px; height:150px; object-fit:cover; border-radius:10px; }
+    .product button { margin-top:5px; padding:5px 12px; background:#e60073; color:#fff; border:none; border-radius:20px; cursor:pointer; }
 
-    /* ✅ السلة */
-    .cart-sidebar {
-      width:280px; background:#fff; padding:15px; border-left:3px solid #e60073;
-      min-height:100vh; position:fixed; top:0; left:-300px; transition:left 0.3s ease;
-      z-index:1000; overflow-y:auto;
-    }
-    .cart-sidebar.active { left:0; }
-    .cart-item { display:flex; justify-content:space-between; margin:10px 0; font-size:14px; }
-    .cart-item button { background:#e60073; color:#fff; border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; }
-    .cart-total { font-weight:bold; margin-top:15px; }
-
-    /* ✅ سلايدر آراء العملاء */
-    .reviews { margin-top:30px; position:relative; overflow:hidden; }
-    .review {
-      display:none; font-size:15px; background:#fff; padding:15px; border-radius:10px;
-      border:2px solid #e60073;
-    }
-    .review.active { display:block; }
-    .stars { color:gold; margin-top:5px; }
-
-    /* ✅ زر واتساب ثابت */
-    .whatsapp-btn {
-      position:fixed; bottom:20px; left:20px; background:#25D366; color:#fff;
-      padding:12px 20px; border-radius:30px; text-decoration:none; font-weight:bold;
-      box-shadow:0 3px 6px rgba(0,0,0,0.2); z-index:1000;
-    }
+    /* ✅ حسابي */
+    .account { margin-top:20px; background:#fff; padding:15px; border:2px solid #e60073; border-radius:10px; max-width:400px; margin:auto; }
+    .account input, .account select { width:100%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:8px; }
 
     /* ✅ الفوتر */
-    footer {
-      background:#e60073; color:#fff; padding:25px; text-align:right;
-      line-height:1.8; margin-top:30px;
-    }
+    footer { background:#e60073; color:#fff; padding:25px; text-align:right; line-height:1.8; margin-top:30px; }
     footer h3 {margin-top:0; color:#ffd6eb;}
     footer ul { list-style:none; padding:0; margin:10px 0; }
     footer ul li {margin:6px 0;}
@@ -98,13 +71,14 @@
 </head>
 <body>
 
+<!-- ✅ الهيدر -->
 <header>
   <button class="menu-btn">☰</button>
   <h1>🌸 كوين شوب 🌸</h1>
   <div class="icons">
     <a href="https://www.instagram.com/queen_sh00p" target="_blank">📸</a>
-    <a href="#">👤</a>
-    <a href="#" id="cartBtn">🛒</a>
+    <a id="accountBtn">👤</a>
+    <a id="cartBtn">🛒</a>
   </div>
   <div class="search-box"><input type="text" placeholder="🔍 ابحث عن منتج..."></div>
 </header>
@@ -122,14 +96,17 @@
 </div>
 
 <!-- ✅ السلة -->
-<div class="cart-sidebar" id="cartSidebar">
-  <h3>🛒 سلة المشتريات</h3>
+<div class="cart" id="cart">
+  <h2>🛒 سلة التسوق <span id="closeCart">❌</span></h2>
   <div id="cartItems"></div>
-  <p class="cart-total">الإجمالي: <span id="cartTotal">0</span> ريال</p>
-  <button onclick="checkout()">إتمام الطلب ✅</button>
+  <p><strong>المجموع:</strong> <span id="total">0</span> ريال</p>
+  <div>
+    <label><input type="radio" name="payment" value="Visa"> 💳 دفع بفيزا</label><br>
+    <label><input type="radio" name="payment" value="COD" checked> 💵 عند الاستلام</label>
+  </div>
+  <div class="checkout" id="checkout">✅ إتمام الطلب</div>
 </div>
 
-<!-- ✅ محتوى -->
 <main>
   <h2>✨ مرحبًا بكم في كوين شوب ✨</h2>
   <p>كل ما تحتاجينه من منتجات التجميل والعناية الأصلية في مكان واحد.</p>
@@ -137,19 +114,17 @@
 
   <h3>🛍️ منتجاتنا المميزة</h3>
   <div class="products">
-    <div class="product"><img src="https://i.ibb.co/VxvNwT1/shampoo.jpg"><p>شامبو</p><button onclick="addToCart('شامبو',3.5)">➕ أضف</button></div>
-    <div class="product"><img src="https://i.ibb.co/6yZczZt/cream.jpg"><p>كريم</p><button onclick="addToCart('كريم',2.0)">➕ أضف</button></div>
-    <div class="product"><img src="https://i.ibb.co/3fH4q7h/serum.jpg"><p>سيروم</p><button onclick="addToCart('سيروم',4.0)">➕ أضف</button></div>
-    <div class="product"><img src="https://i.ibb.co/VJscbzF/lipstick.jpg"><p>أحمر شفاه</p><button onclick="addToCart('أحمر شفاه',1.5)">➕ أضف</button></div>
-    <div class="product"><img src="https://i.ibb.co/8YhV5dS/mask.jpg"><p>ماسك</p><button onclick="addToCart('ماسك',2.5)">➕ أضف</button></div>
+    <div class="product"><img src="https://i.ibb.co/VxvNwT1/shampoo.jpg"><p>شامبو - 3.5 ريال</p><button onclick="addToCart('شامبو',3.5)">➕ أضف</button></div>
+    <div class="product"><img src="https://i.ibb.co/6yZczZt/cream.jpg"><p>كريم - 2.8 ريال</p><button onclick="addToCart('كريم',2.8)">➕ أضف</button></div>
+    <div class="product"><img src="https://i.ibb.co/3fH4q7h/serum.jpg"><p>سيروم - 4.0 ريال</p><button onclick="addToCart('سيروم',4.0)">➕ أضف</button></div>
   </div>
-  <a href="products.html" class="more-btn">عرض المزيد ➡️</a>
 
-  <h3>⭐ آراء عملائنا</h3>
-  <div class="reviews">
-    <div class="review active">💬 "المنتجات رائعة جدًا واصل أصلية" <div class="stars">⭐⭐⭐⭐⭐</div></div>
-    <div class="review">💬 "التوصيل سريع والخدمة ممتازة" <div class="stars">⭐⭐⭐⭐⭐</div></div>
-    <div class="review">💬 "أفضل متجر جربته 👌" <div class="stars">⭐⭐⭐⭐⭐</div></div>
+  <!-- حسابي -->
+  <div class="account" id="accountSection" style="display:none;">
+    <h3>👤 حسابي</h3>
+    <input type="text" id="name" placeholder="الاسم الكامل">
+    <input type="text" id="phone" placeholder="رقم الهاتف">
+    <input type="text" id="address" placeholder="العنوان">
   </div>
 </main>
 
@@ -158,13 +133,9 @@
   <p>📱 WhatsApp: 96036550</p>
   <p>📸 Instagram: queen sh00p</p>
   <h3>📑 روابط مهمة</h3>
-  <ul>
-    <li>من نحن</li><li>الشروط والأحكام</li><li>سياسة الخصوصية</li><li>الشحن والتوصيل</li>
-    <li>سياسة الاستبدال والاسترجاع</li><li>الأسئلة الشائعة</li><li>اهتماماتنا بكم</li><li>المدونة</li>
-  </ul>
+  <ul><li>من نحن</li><li>الشروط والأحكام</li><li>سياسة الخصوصية</li><li>الشحن والتوصيل</li><li>سياسة الاستبدال والاسترجاع</li><li>الأسئلة الشائعة</li><li>اهتماماتنا بكم</li><li>المدونة</li></ul>
   <h3>💳 طرق الدفع</h3><p>Mastercard | Visa | الدفع عند الاستلام</p>
-  <h3>✅ مميزاتنا</h3>
-  <p>🚚 توصيل سريع (عُمان ودول الخليج)<br>💵 الدفع عند الاستلام<br>🛡️ منتجات أصلية 100% موثوقة</p>
+  <h3>✅ مميزاتنا</h3><p>🚚 توصيل سريع (عُمان ودول الخليج)<br>💵 الدفع عند الاستلام<br>🛡️ منتجات أصلية 100% موثوقة</p>
   <div class="rights">© 2025 كوين عمان · كل الحقوق محفوظة</div>
 </footer>
 
@@ -173,31 +144,61 @@
 <script>
   // القائمة
   const sidebar=document.querySelector(".sidebar");
-  const menuBtn=document.querySelector(".menu-btn");
-  menuBtn.addEventListener("click",()=> sidebar.classList.toggle("active"));
-
-  // أكورديون
+  document.querySelector(".menu-btn").addEventListener("click",()=> sidebar.classList.toggle("active"));
   document.querySelectorAll(".accordion").forEach(btn=>{
     btn.addEventListener("click",function(){
-      this.classList.toggle("active");
       const panel=this.nextElementSibling;
       panel.style.maxHeight? panel.style.maxHeight=null: panel.style.maxHeight=panel.scrollHeight+"px";
     });
   });
 
-  // سلايدر آراء
-  let index=0; const reviews=document.querySelectorAll(".review");
-  setInterval(()=>{reviews[index].classList.remove("active"); index=(index+1)%reviews.length; reviews[index].classList.add("active");},3000);
-
   // السلة
-  let cart=[]; const cartSidebar=document.getElementById("cartSidebar");
-  const cartBtn=document.getElementById("cartBtn"); const cartItems=document.getElementById("cartItems"); const cartTotal=document.getElementById("cartTotal");
-  cartBtn.addEventListener("click",()=> cartSidebar.classList.toggle("active"));
+  const cart=document.getElementById("cart");
+  document.getElementById("cartBtn").addEventListener("click",()=> cart.classList.toggle("active"));
+  document.getElementById("closeCart").addEventListener("click",()=> cart.classList.remove("active"));
 
-  function addToCart(name,price){ let item=cart.find(p=>p.name===name); if(item){item.qty++;} else {cart.push({name,price,qty:1});} renderCart(); }
-  function removeFromCart(name){ let item=cart.find(p=>p.name===name); if(item.qty>1){item.qty--;} else {cart=cart.filter(p=>p.name!==name);} renderCart(); }
-  function renderCart(){ cartItems.innerHTML=""; let total=0; cart.forEach(p=>{ total+=p.price*p.qty; cartItems.innerHTML+=`<div class="cart-item"><span>${p.name} x${p.qty}</span><span>${(p.price*p.qty).toFixed(2)} ر.ع</span><button onclick="removeFromCart('${p.name}')">➖</button></div>`; }); cartTotal.innerText=total.toFixed(2); }
-  function checkout(){ if(cart.length===0){alert("السلة فارغة"); return;} let msg="طلب جديد:\n"; cart.forEach(p=> msg+=`${p.name} x${p.qty} = ${(p.price*p.qty).toFixed(2)} ر.ع\n`); msg+=`الإجمالي: ${cartTotal.innerText} ر.ع`; window.open(`https://wa.me/96896036550?text=${encodeURIComponent(msg)}`,"_blank"); }
+  let items=[];
+
+  function addToCart(name,price){
+    items.push({name,price});
+    renderCart();
+  }
+
+  function removeItem(index){
+    items.splice(index,1);
+    renderCart();
+  }
+
+  function renderCart(){
+    const cartItems=document.getElementById("cartItems");
+    const total=document.getElementById("total");
+    cartItems.innerHTML="";
+    let sum=0;
+    items.forEach((item,i)=>{
+      sum+=item.price;
+      cartItems.innerHTML+=`<div class="cart-item"><span onclick="removeItem(${i})">❌</span> ${item.name} - ${item.price} ريال</div>`;
+    });
+    total.innerText=sum.toFixed(2);
+  }
+
+  // حسابي
+  const accountBtn=document.getElementById("accountBtn");
+  const accountSection=document.getElementById("accountSection");
+  accountBtn.addEventListener("click",()=> accountSection.style.display=accountSection.style.display==="none"?"block":"none");
+
+  // إتمام الطلب
+  document.getElementById("checkout").addEventListener("click",()=>{
+    const name=document.getElementById("name").value;
+    const phone=document.getElementById("phone").value;
+    const address=document.getElementById("address").value;
+    const payment=document.querySelector("input[name='payment']:checked").value;
+    if(items.length===0){ alert("🛒 السلة فارغة"); return; }
+    let order="طلب جديد من "+name+"%0A📱: "+phone+"%0A📍: "+address+"%0A";
+    items.forEach(i=> order+=`- ${i.name}: ${i.price} ريال%0A`);
+    order+=`المجموع: ${document.getElementById("total").innerText} ريال%0A`;
+    order+=`طريقة الدفع: ${payment}`;
+    window.open("https://wa.me/96896036550?text="+order,"_blank");
+  });
 </script>
 
 </body>
