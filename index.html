@@ -41,7 +41,6 @@
     input, select { width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px; }
     .pay-btn { background:#e60073; color:#fff; padding:12px; border:none; border-radius:5px; cursor:pointer; width:100%; }
     .pay-btn:hover { background:#c2005c; }
-
     .success-message { display:none; text-align:center; font-size:18px; color:#25D366; font-weight:bold; padding:20px; }
 
     .whatsapp-btn { position:fixed; bottom:20px; left:20px; background:#25D366; color:#fff; padding:12px 20px; border-radius:30px; text-decoration:none; font-weight:bold; box-shadow:0 3px 6px rgba(0,0,0,0.2); z-index:1100; }
@@ -127,8 +126,6 @@
   <div class="rights">© 2025 كوين عمان · كل الحقوق محفوظة</div>
 </footer>
 
-<a href="https://wa.me/96896036550" class="whatsapp-btn">💬 تواصل عبر واتساب</a>
-
 <script>
   const sidebar=document.querySelector(".sidebar");
   const cart=document.querySelector(".cart");
@@ -137,16 +134,23 @@
   const orderForm=document.getElementById("order-form");
   const successMsg=document.querySelector(".success-message");
 
+  // الأقسام
   document.querySelector(".menu-btn").addEventListener("click",()=>{ sidebar.classList.add("active"); overlay.classList.add("active"); });
   document.querySelector(".close-sidebar").addEventListener("click",()=>{ sidebar.classList.remove("active"); overlay.classList.remove("active"); });
+
+  // السلة
   document.querySelector(".cart-btn").addEventListener("click",()=>{ cart.classList.add("active"); overlay.classList.add("active"); });
   document.querySelector(".close-cart").addEventListener("click",()=>{ cart.classList.remove("active"); overlay.classList.remove("active"); });
+
+  // Overlay
   overlay.addEventListener("click",()=>{ sidebar.classList.remove("active"); cart.classList.remove("active"); overlay.classList.remove("active"); });
 
+  // أكورديون
   document.querySelectorAll(".accordion").forEach(btn=>{
     btn.addEventListener("click",function(){ this.classList.toggle("active"); const panel=this.nextElementSibling; panel.style.maxHeight? panel.style.maxHeight=null: panel.style.maxHeight=panel.scrollHeight+"px"; });
   });
 
+  // الذهاب لصفحة الدفع
   document.querySelector(".checkout-btn").addEventListener("click",()=>{
     cart.classList.remove("active");
     overlay.classList.remove("active");
@@ -154,21 +158,17 @@
     window.scrollTo({ top: checkout.offsetTop, behavior:"smooth" });
   });
 
+  // إظهار حقول البطاقة عند اختيار الدفع بالبطاقة
   const method=document.getElementById("payment-method");
   const cardFields=document.getElementById("card-fields");
   method.addEventListener("change",()=>{ cardFields.style.display=method.value==="card"?"block":"none"; });
 
+  // إرسال الطلب
   orderForm.addEventListener("submit",(e)=>{
     e.preventDefault();
     orderForm.style.display="none";
     successMsg.style.display="block";
-
-    setTimeout(()=>{
-      successMsg.style.display="none";
-      orderForm.style.display="block";
-      checkout.style.display="none";
-      window.scrollTo({ top:0, behavior:"smooth" });
-    },3000); // ⏱️ المدة = 3 ثواني
+    setTimeout(()=>{ successMsg.style.display="none"; orderForm.style.display="block"; checkout.style.display="none"; window.scrollTo({ top:0, behavior:"smooth" }); },3000);
   });
 </script>
 
