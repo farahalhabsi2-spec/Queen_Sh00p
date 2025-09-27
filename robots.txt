@@ -1,3 +1,4 @@
-agent: *
+User-agent: *
 Allow: /
-Sitemap: https://farahalhabsi2-spec.github.io/Queen_Sh00p/sitemap.xml
+
+Sitemap: https://queensh00p.netlify.app/sitemap.xml
