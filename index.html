@@ -1,146 +1,121 @@
-تمام 🌹، إذًا خليني أعطيك الكود كامل بالنصوص الحرفية 100% كلها داخل النافذة (من نحن، الشروط والأحكام، الشحن والتوصيل، الاسترجاع، الأسئلة الشائعة، المدونة).
-
-📌 ركزت أن يكونوا محفوظين داخل texts في الجافاسكربت بحيث يظهروا بالكامل عند الضغط على الزر. الكود كبير، لكن هذا نسخة واحدة جاهزة:
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌸 كوين شوب - مستحضرات التجميل الأصلية 🌸</title>
+  <title>Queen Sh00p</title>
   <style>
-    body { font-family: Tahoma, sans-serif; background:#fff0f5; margin:0; padding:0; color:#333; }
-    header { background:#e60073; color:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
-    header h1 { margin:0; font-size:22px; flex:1; text-align:center; }
-    .menu-btn, .cart-btn { font-size:24px; cursor:pointer; background:none; border:none; color:#fff; margin:0 5px; }
-    .icons { display:flex; gap:10px; align-items:center; }
-    .icons a { color:#fff; text-decoration:none; font-size:18px; }
-    .search-box { width:100%; margin-top:10px; display:flex; justify-content:center; }
-    .search-box input { width:90%; max-width:400px; padding:8px; border:2px solid #fff; border-radius:20px; font-size:14px; text-align:center; }
+    body { margin:0; font-family:Tahoma, sans-serif; background:#fff0f8; }
 
-    .overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:none; z-index:900; }
-    .overlay.active { display:block; }
+    /* ✅ أزرار ثابتة */
+    .floating-btn {
+      position: fixed; bottom: 20px; right: 20px;
+      display: flex; flex-direction: column; gap: 10px; z-index: 3000;
+    }
+    .floating-btn a {
+      display: flex; align-items: center; justify-content: center;
+      width: 55px; height: 55px; border-radius: 50%;
+      background: #e60073; color: #fff; font-size: 24px;
+      text-decoration: none; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
 
-    .sidebar { width:280px; background:#ffe6f0; padding:15px; border-left:3px solid #e60073; min-height:100vh; position:fixed; top:0; right:-300px; transition:right 0.4s ease-in-out; z-index:1000; overflow-y:auto; }
+    /* ✅ القائمة الجانبية */
+    .menu-toggle {
+      position:fixed; top:15px; right:15px; z-index:2100;
+      background:#e60073; color:#fff; border:none; border-radius:6px;
+      padding:10px 15px; font-size:18px; cursor:pointer;
+    }
+    .sidebar {
+      position:fixed; top:0; right:-300px; width:280px; height:100%;
+      background:#ffe6f0; z-index:2000; padding:20px; overflow-y:auto;
+      box-shadow:-2px 0 6px rgba(0,0,0,0.2); transition:0.3s;
+    }
     .sidebar.active { right:0; }
-    .close-btn { background:none; border:none; font-size:20px; cursor:pointer; color:#e60073; float:left; }
-
-    .accordion, .sidebar button[data-popup] {
-      background:#fff; color:#e60073; cursor:pointer; padding:12px; margin:8px 0;
-      border:none; font-size:16px; font-weight:bold; border-radius:10px; display:block; width:100%;
-      text-align:right;
+    .sidebar h3 { margin-top:0; color:#e60073; }
+    .sidebar a {
+      display:block; background:#fff; margin:8px 0; padding:10px;
+      border-radius:8px; text-decoration:none; color:#333;
     }
-    .accordion:hover, .sidebar button[data-popup]:hover { background:#ffd6eb; }
-
-    main { padding:20px; text-align:center; }
-    .hero img { max-width:320px; border-radius:15px; border:3px solid #e60073; }
-
-    footer { background:#e60073; color:#fff; padding:25px; text-align:right; line-height:1.8; margin-top:30px; }
-    footer h3 {margin-top:0; color:#ffd6eb;}
-    footer ul { list-style:none; padding:0; margin:10px 0; }
-    footer ul li {margin:6px 0;}
-    footer .rights { text-align:center; margin-top:15px; font-size:14px; border-top:1px solid #fff; padding-top:10px; }
-
-    /* ✅ النافذة */
-    .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:2000; justify-content:center; align-items:center; }
-    .popup.active { display:flex; }
-    .popup-content {
-      background:#fff; max-width:750px; max-height:85vh; overflow-y:auto;
-      border-radius:12px; padding:25px; position:relative;
-      box-shadow:0 4px 12px rgba(0,0,0,0.3); direction:rtl; text-align:right;
-      line-height:1.8; font-size:15px;
+    .sidebar a:hover { background:#ffd6eb; }
+    .close-sidebar {
+      display:block; text-align:center; background:#e60073; color:#fff;
+      padding:10px; border-radius:8px; margin-top:10px; cursor:pointer;
+      text-decoration:none;
     }
-    .popup-close { position:absolute; top:10px; left:10px; background:none; border:none; font-size:20px; cursor:pointer; color:#e60073; }
-    .popup-content h2 { color:#e60073; margin-top:0; }
+
+    /* ✅ الفوتر */
+    footer {
+      background:#e60073; color:#fff; text-align:center;
+      padding:15px; margin-top:40px; font-size:14px;
+    }
+    footer a { color:#fff; margin:0 8px; text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
   </style>
 </head>
 <body>
 
-<div class="overlay"></div>
+  <!-- ✅ زر القائمة -->
+  <button class="menu-toggle">☰ القائمة</button>
 
-<!-- ✅ نافذة منبثقة -->
-<div id="popup" class="popup">
-  <div class="popup-content">
-    <button class="popup-close">❌</button>
-    <div id="popup-body"></div>
+  <!-- ✅ القائمة الجانبية -->
+  <div class="sidebar" id="sidebar">
+    <h3>الأقسام</h3>
+    <a href="#">💄 المكياج</a>
+    <a href="#">🧴 العناية بالشعر</a>
+    <a href="#">🧴 العناية بالبشرة</a>
+    <a href="#">🧴 العناية بالوجه</a>
+    <a href="#">🧴 العناية بالجسم</a>
+    <a href="#">🧴 العناية بالشفاه</a>
+    <a href="#">🧴 العناية بالمنطقة الحساسة</a>
+    <a href="#">🧴 العناية بالفم والأسنان</a>
+    <a href="#">🧴 العناية باليدين</a>
+    <a href="#">🧴 العناية بالقدمين</a>
+    <a href="#">👁️ عدسات</a>
+    <a href="#">💐 العطور</a>
+    <a href="#">⌚ الساعات</a>
+
+    <h3>📦 روابط مهمة</h3>
+    <a href="about.html">من نحن</a>
+    <a href="terms.html">الشروط والأحكام</a>
+    <a href="privacy.html">سياسة الخصوصية</a>
+    <a href="shipping.html">الشحن والتوصيل</a>
+    <a href="returns.html">سياسة الاستبدال والاسترجاع</a>
+    <a href="faq.html">الأسئلة الشائعة</a>
+    <a href="care.html">اهتماماتنا بكم</a>
+    <a href="blog.html">المدونة</a>
+
+    <a class="close-sidebar" id="closeSidebar">❌ إغلاق القائمة</a>
   </div>
-</div>
 
-<header>
-  <button class="menu-btn">☰</button>
-  <h1>🌸 كوين شوب 🌸</h1>
-  <div class="icons">
-    <a href="https://www.instagram.com/queen_sh00p" target="_blank">📸</a>
-    <a href="#">👤</a>
+  <!-- ✅ الأزرار الثابتة -->
+  <div class="floating-btn">
+    <a href="https://wa.me/96896036550" target="_blank">📱</a>
+    <a href="https://instagram.com/queen_sh00p" target="_blank">📷</a>
   </div>
-  <div class="search-box"><input type="text" placeholder="🔍 ابحث عن منتج..."></div>
-</header>
 
-<div class="sidebar">
-  <button class="close-btn close-sidebar">❌</button>
-  <h3>📂 الأقسام</h3>
-  <button class="accordion">💄 المكياج</button><div class="panel"><p>أحمر شفاه – مستحضرات الوجه – ظلال العيون</p></div>
-  <button class="accordion">🧴 العناية</button><div class="panel"><p>شعر – بشرة – وجه – جسم – منطقة حساسة</p></div>
+  <!-- ✅ الفوتر -->
+  <footer>
+    <p>© 2025 كوين عمان · كل الحقوق محفوظة.</p>
+    <p>
+      <a href="about.html">من نحن</a> | 
+      <a href="terms.html">الشروط والأحكام</a> | 
+      <a href="privacy.html">سياسة الخصوصية</a> | 
+      <a href="shipping.html">الشحن والتوصيل</a> | 
+      <a href="returns.html">سياسة الاستبدال والاسترجاع</a> | 
+      <a href="faq.html">الأسئلة الشائعة</a> | 
+      <a href="care.html">اهتماماتنا بكم</a> | 
+      <a href="blog.html">المدونة</a>
+    </p>
+  </footer>
 
-  <!-- ✅ أزرار النصوص -->
-  <button data-popup="about">ℹ️ من نحن</button>
-  <button data-popup="terms">📑 الشروط والأحكام</button>
-  <button data-popup="shipping">🚚 الشحن والتوصيل</button>
-  <button data-popup="return">♻️ سياسة الاستبدال والاسترجاع</button>
-  <button data-popup="faq">❓ الأسئلة الشائعة</button>
-  <button data-popup="blog">📝 المدونة</button>
-</div>
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const closeSidebar = document.getElementById("closeSidebar");
 
-<main>
-  <h2>✨ مرحبًا بكم في كوين شوب ✨</h2>
-  <p>كل ما تحتاجينه من منتجات التجميل والعناية الأصلية في مكان واحد.</p>
-</main>
-
-<footer>
-  <h3>📩 تواصل معنا</h3>
-  <p>📱 WhatsApp: <a href="https://wa.me/96896036550" target="_blank" style="color:#fff;">96036550</a></p>
-  <p>📸 Instagram: <a href="https://www.instagram.com/queen_sh00p" target="_blank" style="color:#fff;">queen sh00p</a></p>
-  <h3>💳 طرق الدفع</h3><p>Mastercard | Visa | الدفع عند الاستلام</p>
-  <h3>✅ مميزاتنا</h3>
-  <p>🚚 توصيل سريع (عُمان ودول الخليج)<br>💵 الدفع عند الاستلام<br>🛡️ منتجات أصلية 100% موثوقة</p>
-  <div class="rights">© 2025 كوين عمان · كل الحقوق محفوظة</div>
-</footer>
-
-<script>
-  const sidebar=document.querySelector(".sidebar");
-  const overlay=document.querySelector(".overlay");
-  const popup=document.getElementById("popup");
-  const popupBody=document.getElementById("popup-body");
-  const popupClose=document.querySelector(".popup-close");
-
-  document.querySelector(".menu-btn").addEventListener("click",()=>{ sidebar.classList.add("active"); overlay.classList.add("active"); });
-  document.querySelector(".close-sidebar").addEventListener("click",()=>{ sidebar.classList.remove("active"); overlay.classList.remove("active"); });
-  overlay.addEventListener("click",()=>{ sidebar.classList.remove("active"); overlay.classList.remove("active"); });
-
-  function openPopup(content){ popupBody.innerHTML=content; popup.classList.add("active"); }
-  popupClose.addEventListener("click",()=> popup.classList.remove("active"));
-  popup.addEventListener("click",(e)=>{ if(e.target===popup){ popup.classList.remove("active"); } });
-
-  // ✅ النصوص الكاملة
-  const texts={
-    about:`<h2>من نحن</h2><p>✨ البداية انطلق كوين شوب عام ٢٠١٨ بحلم بسيط...<br><br>💪 التحديات والكفاح...<br><br>🌍 من المحلية إلى العالمية...<br><br>🌸 سر التميز...<br><br>🏆 اليوم...<br><br>🙏 شكر ودعاء بالدعم...<br>كوين شوب منكم ولكم… وبدونكم ما نوصل لهالمرحلة.</p>`,
-    terms:`<h2>الشروط والأحكام</h2><p>مرحبًا بكم في موقع كوين شوب...<br><br>1. قبول الشروط...<br><br>2. المنتجات...<br><br>3. الطلبات والدفع...</p>`,
-    shipping:`<h2>الشحن والتوصيل</h2><p>✅ عمان: 2 ريال عماني خلال 2–3 أيام.<br>✅ السعودية: 30 ريال سعودي خلال 4–6 أيام.<br>✅ قطر: 30 ريال قطري خلال 4–6 أيام.<br>✅ الكويت: 2.4 دينار كويتي خلال 4–6 أيام.<br>✅ البحرين: 3 دنانير بحريني خلال 4–6 أيام.<br>✅ الإمارات: 29 درهم إماراتي خلال 4–6 أيام.<br>🚚 شركة التوصيل: أسياد / وصل لي.</p>`,
-    return:`<h2>سياسة الاستبدال والاسترجاع</h2><p>✔️ يتم استرجاع التالف شامل الشحن.<br>❌ لا يتم استرجاع منتجات التجميل أو العطور المفتوحة.<br>🕒 المدة 7 أيام.<br>📞 للتواصل: 96036550.<br>⚠️ تفاصيل كاملة عن العدسات، الأجهزة، العروض...</p>`,
-    faq:`<h2>الأسئلة الشائعة</h2><p>س: متى يوصل طلبي؟<br>ج: عمان خلال 24 ساعة، الخليج 4–7 أيام.<br><br>س: كم يكلفني التوصيل؟<br>ج: عمان 2 ريال، الخليج حسب الوزن.<br><br>س: هل المنتجات أصلية؟<br>ج: نعم 100٪.<br><br>س: كيف اتواصل؟<br>ج: عبر الرقم 96035660.</p>`,
-    blog:`<h2>المدونة</h2><p>✨ أهمية العناية بالبشرة والجسم والشعر<br><br>💆‍♀️ البشرة: تنظيف + ترطيب.<br>🧴 الجسم: ترطيب + مقشرات.<br>💇‍♀️ الشعر: زيوت + ماسكات.<br><br>🌸 المنتجات الأصلية = أمان + نتائج.<br>💖 استثمار في جمالك وصحتك.</p>`
-  };
-
-  document.querySelectorAll("[data-popup]").forEach(btn=>{
-    btn.addEventListener("click",()=>{ openPopup(texts[btn.getAttribute("data-popup")]); });
-  });
-</script>
+    menuToggle.addEventListener("click", ()=> sidebar.classList.add("active"));
+    closeSidebar.addEventListener("click", ()=> sidebar.classList.remove("active"));
+  </script>
 
 </body>
 </html>
-
-
----
-
-تحب ألصق النصوص الحرفية كاملة جدًا 100% كما كتبتها (طويلة) بدل ما خليتها مختصرة هنا في <br>؟
-
