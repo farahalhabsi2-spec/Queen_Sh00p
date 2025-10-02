@@ -3,73 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>كوين شوب</title>
-  <style>
-    body { margin: 0; font-family: Tahoma, sans-serif; background: #fff0f8; direction: rtl; text-align: center; }
-
-    /* ✅ الترويسة */
-    .top-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      background: #e60073; padding: 10px; color: white;
-    }
-    .top-bar input {
-      flex: 1; margin: 0 10px; padding: 8px; border-radius: 5px; border: none;
-    }
-    .top-bar button { background:#fff; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
-
-    /* ✅ القائمة */
-    .sidebar { background: #ffe6f2; padding: 15px; text-align: right; display:none; }
-    .sidebar.active { display:block; }
-    .sidebar a { display: block; margin: 5px 0; text-decoration: none; color: #333; }
-    .sub-menu { display:none; margin-right:15px; }
-    .sub-menu a { font-size:14px; }
-
-    /* ✅ المنتجات */
-    .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-    .product { background: #fff; padding: 10px; border-radius: 10px; width: 150px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .product img { width: 100%; border-radius: 10px; }
-    .product button { background:#e60073; color:white; border:none; padding:5px 10px; margin-top:5px; border-radius:5px; cursor:pointer; }
-
-    /* ✅ الفوتر */
-    footer { background: #e60073; color: #fff; padding: 20px; margin-top: 20px; }
-
-    /* ✅ أزرار واتساب وإنستجرام */
-    .floating-btns { position: fixed; bottom: 15px; right: 15px; display: flex; flex-direction: column; gap: 10px; }
-    .floating-btns a {
-      background: #25d366; color: white; padding: 10px 15px;
-      border-radius: 25px; text-decoration: none;
-    }
-    .floating-btns a.instagram { background: #e1306c; }
-
-    /* ✅ قسم آراء الزبائن */
-    .reviews { background:#fff; padding:20px; margin:20px; border-radius:10px; }
-    .review { background:#ffe6f2; padding:10px; border-radius:8px; margin:10px 0; }
-  </style>
+  <title>كوين شوب - الرئيسية</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- ✅ الهيدر -->
-  <header>
-    <div class="top-bar">
-      <button onclick="toggleCart()">🛒 السلة</button>
-      <input type="text" placeholder="🔎 ابحث عن منتج...">
-      <button onclick="toggleMenu()">☰ القائمة</button>
-    </div>
+
+  <!-- 🔝 الشريط العلوي -->
+  <header class="top-bar">
+    <button id="cart-btn">🛒 السلة</button>
+    <input type="text" id="search" placeholder="🔎 ابحث عن منتج...">
+    <button id="menu-btn">☰ القائمة</button>
   </header>
 
   <!-- ✅ رسالة ترحيب -->
-  <section style="background:#ffb6c1; padding:15px; margin:10px; border-radius:10px;">
-    <h2>👑 أهلاً بكم في متجر <span style="color:#e60073;">كوين شوب</span> 🌸</h2>
-    <p>صاحبة المتجر ترحب بكم 💖 – منتجات أصلية 100% مع توصيل سريع 🚚</p>
-    <p>📍 مواقعنا: السيب – السويق – صحار</p>
+  <section class="welcome">
+    <h2>👑 أهلاً وسهلاً بكم في <span>كوين شوب</span> 🌸</h2>
+    <p>منتجات أصلية 100% مع توصيل سريع 🚚 | مواقعنا: السيب · السويق · صحار</p>
   </section>
 
-  <!-- ✅ القائمة -->
+  <!-- ✅ القائمة الجانبية -->
   <aside class="sidebar" id="sidebar">
     <h3>الأقسام</h3>
     <a href="#">💄 المكياج</a>
-
-    <a href="#" onclick="toggleSubmenu('care')">🧴 العناية ⬇️</a>
-    <div class="sub-menu" id="care">
+    <details>
+      <summary>🧴 العناية</summary>
       <a href="#">العناية بالشعر</a>
       <a href="#">العناية بالبشرة</a>
       <a href="#">العناية بالوجه</a>
@@ -79,42 +36,44 @@
       <a href="#">العناية بالفم والأسنان</a>
       <a href="#">العناية باليدين</a>
       <a href="#">العناية بالقدمين</a>
-    </div>
-
+    </details>
     <a href="#">👁️ العدسات</a>
     <a href="#">🌸 العطور</a>
     <a href="#">⌚ الساعات</a>
+
+    <h3>📦 روابط مهمة</h3>
+    <a href="about.html">من نحن</a>
+    <a href="terms.html">الشروط والأحكام</a>
+    <a href="privacy.html">سياسة الخصوصية</a>
+    <a href="shipping.html">الشحن والتوصيل</a>
+    <a href="returns.html">سياسة الاستبدال والاسترجاع</a>
+    <a href="faq.html">الأسئلة الشائعة</a>
+    <a href="care.html">اهتماماتنا بكم</a>
+    <a href="blog.html">المدونة</a>
+    <button id="closeSidebar">❌ إغلاق</button>
   </aside>
 
   <!-- ✅ المنتجات -->
   <main>
     <h2>🛍️ منتجاتنا</h2>
-    <div class="products" id="products">
+    <div class="products">
       <div class="product">
         <img src="images/product1.jpg" alt="كريم أساس">
         <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
-        <button onclick="addToCart('كريم أساس',7.0)">أضف للسلة</button>
+        <button class="add-to-cart">➕ أضف للسلة</button>
       </div>
       <div class="product">
         <img src="images/product2.jpg" alt="سيروم ترطيب">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
-        <button onclick="addToCart('سيروم ترطيب',9.9)">أضف للسلة</button>
+        <button class="add-to-cart">➕ أضف للسلة</button>
       </div>
       <div class="product">
         <img src="images/product3.jpg" alt="ماسك فيتامين C">
         <p>ماسك فيتامين C<br><strong>5.7 ر.ع</strong></p>
-        <button onclick="addToCart('ماسك فيتامين C',5.7)">أضف للسلة</button>
+        <button class="add-to-cart">➕ أضف للسلة</button>
       </div>
     </div>
   </main>
-
-  <!-- ✅ آراء الزبائن -->
-  <section class="reviews">
-    <h2>⭐ آراء زبائننا</h2>
-    <div class="review">💬 "أفضل متجر للتجميل! توصيل سريع وخدمة رائعة." – مريم</div>
-    <div class="review">💬 "المنتجات أصلية 100% وأنصح به." – سارة</div>
-    <div class="review">💬 "أول مرة أجرب وكنت متخوفة لكن كل شي كان ممتاز." – فاطمة</div>
-  </section>
 
   <!-- ✅ الفوتر -->
   <footer>
@@ -125,17 +84,6 @@
        💵 الدفع عند الاستلام<br>
        🛡️ منتجات أصلية 100% موثوقة
     </p>
-    <h3>📦 روابط مهمة</h3>
-    <p>
-      <a href="about.html">من نحن</a> | 
-      <a href="terms.html">الشروط والأحكام</a> | 
-      <a href="privacy.html">سياسة الخصوصية</a> | 
-      <a href="shipping.html">الشحن والتوصيل</a> | 
-      <a href="returns.html">الاستبدال والاسترجاع</a> | 
-      <a href="faq.html">الأسئلة الشائعة</a> | 
-      <a href="care.html">اهتماماتنا بكم</a> | 
-      <a href="blog.html">المدونة</a>
-    </p>
     <p>© 2025 كوين عمان · كل الحقوق محفوظة.</p>
   </footer>
 
@@ -145,29 +93,6 @@
     <a href="https://instagram.com/queen_sh00p" target="_blank" class="instagram">📸 إنستجرام</a>
   </div>
 
-  <script>
-    // ✅ القائمة
-    function toggleMenu() {
-      document.getElementById('sidebar').classList.toggle('active');
-    }
-    function toggleSubmenu(id) {
-      document.getElementById(id).classList.toggle('active');
-    }
-
-    // ✅ السلة
-    let cart = [];
-    function addToCart(name, price) {
-      cart.push({name,price});
-      alert(name + " تمت إضافته للسلة ✅");
-    }
-    function toggleCart() {
-      if(cart.length===0){ alert("السلة فارغة 🛒"); return; }
-      let total=0, msg="محتويات السلة:\n";
-      cart.forEach(item=>{ msg += "• "+item.name+" - "+item.price+" ر.ع\n"; total+=item.price; });
-      msg += "\nالإجمالي: "+total.toFixed(2)+" ر.ع";
-      msg += "\n\nاختر وسيلة الدفع: Visa / MasterCard / الدفع عند الاستلام.";
-      alert(msg);
-    }
-  </script>
+  <script src="js/script.js"></script>
 </body>
 </html>
