@@ -1,4 +1,1 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://queensh00p.netlify.app/sitemap.xml
+https://queensh00p.com/sitemap.xml
