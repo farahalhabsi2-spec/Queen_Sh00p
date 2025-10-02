@@ -12,78 +12,67 @@
       display: flex; justify-content: center; align-items: center;
       min-height: 100vh;
     }
-    .checkout-box {
-      background: #fff;
-      padding: 25px;
-      border-radius: 12px;
+    .form-box {
+      background: #fff; padding: 25px; border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      width: 350px;
-      text-align: right;
+      width: 100%; max-width: 450px;
     }
-    .checkout-box h2 {
-      color: #e60073;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: bold;
-    }
+    h2 { color: #e60073; text-align: center; }
+    label { display: block; margin: 10px 0 5px; font-weight: bold; }
     input, select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      width: 100%; padding: 10px; margin-bottom: 15px;
+      border: 1px solid #ddd; border-radius: 6px;
     }
     button {
-      width: 100%;
-      padding: 12px;
-      background: #e60073;
-      border: none;
-      color: #fff;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
+      width: 100%; padding: 12px; background: #e60073;
+      border: none; border-radius: 6px; color: #fff; font-weight: bold;
+      cursor: pointer; font-size: 16px;
     }
-    button:hover {
-      background: #c7005f;
-    }
+    button:hover { background: #c7005c; }
   </style>
 </head>
 <body>
-
-  <div class="checkout-box">
+  <div class="form-box">
     <h2>🛒 إتمام الطلب</h2>
-    <form action="#" method="post">
-      <!-- بيانات الزبون -->
+    <form id="orderForm">
       <label>👤 الاسم الكامل</label>
-      <input type="text" name="name" placeholder="ادخل اسمك" required>
+      <input type="text" id="name" required>
 
       <label>📍 العنوان</label>
-      <input type="text" name="address" placeholder="ادخل عنوانك" required>
+      <input type="text" id="address" required>
 
       <label>🏙️ الولاية / المدينة</label>
-      <input type="text" name="city" placeholder="مثال: مسقط" required>
+      <input type="text" id="city" required>
 
       <label>📞 رقم الهاتف</label>
-      <input type="tel" name="phone" placeholder="9xxxxxxxx" required>
+      <input type="tel" id="phone" required>
 
-      <!-- اختيار الدفع -->
       <label>💳 طريقة الدفع</label>
-      <select name="payment" required>
-        <option value="">اختر طريقة الدفع</option>
-        <option value="visa">Visa 💳</option>
-        <option value="mastercard">Mastercard 💳</option>
-        <option value="cod">الدفع عند الاستلام 💵</option>
+      <select id="payment" required>
+        <option value="Visa">Visa 💳</option>
+        <option value="Mastercard">Mastercard 💳</option>
+        <option value="COD">الدفع عند الاستلام 💵</option>
       </select>
 
-      <!-- زر إرسال -->
       <button type="submit">✅ تأكيد الطلب</button>
     </form>
   </div>
 
+  <script>
+    const form = document.getElementById("orderForm");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // جلب البيانات
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const city = document.getElementById("city").value;
+      const payment = document.getElementById("payment").value;
+
+      // تحويل للصفحة success مع البيانات
+      const url = `success.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&city=${encodeURIComponent(city)}&payment=${encodeURIComponent(payment)}`;
+      window.location.href = url;
+    });
+  </script>
 </body>
 </html>
