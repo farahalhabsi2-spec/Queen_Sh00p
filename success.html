@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تم الطلب بنجاح - كوين شوب</title>
+  <title>تم تأكيد الطلب - كوين شوب</title>
   <style>
     body {
       font-family: Tahoma, sans-serif;
@@ -11,59 +11,83 @@
       margin: 0; padding: 0;
       display: flex; justify-content: center; align-items: center;
       min-height: 100vh;
-      text-align: center;
     }
     .success-box {
       background: #fff;
-      padding: 30px;
+      padding: 25px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      max-width: 450px;
+      max-width: 480px;
       width: 100%;
+      text-align: center;
     }
-    h2 {
-      color: #25d366;
-      font-size: 22px;
-    }
-    p {
+    h2 { color: #e60073; }
+    p { color: #333; line-height: 1.6; }
+    .order-id {
+      background: #ffe4f2;
+      padding: 10px;
       margin: 15px 0;
-      color: #333;
-      line-height: 1.6;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #e60073;
     }
-    a {
+    .whatsapp-btn {
       display: inline-block;
-      margin-top: 15px;
+      background: #25d366;
+      color: #fff;
       padding: 12px 18px;
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
-      transition: 0.3s;
-    }
-    .home {
-      background: #e60073;
-      color: #fff;
-    }
-    .whatsapp {
-      background: #25d366;
-      color: #fff;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
 
   <div class="success-box">
-    <h2>✅ شكراً لطلبك!</h2>
-    <p>💖 نحن في <strong>كوين شوب</strong> نشكرك من القلب على دعمك وثقتك.  
-       ✨ طلبك وصل بنجاح، وسيتم التواصل معك قريباً لتأكيد التفاصيل.  
-       بفضلكم نكبر ونستمر 🌸</p>
+    <h2>✅ شكراً لك على طلبك!</h2>
+    <p>نحن سعداء جداً لأنك اخترت <strong>كوين شوب</strong> 🛍️<br>
+       دعمكم المستمر هو سر نجاحنا 💖</p>
 
-    <!-- زر العودة للرئيسية -->
-    <a href="index.html" class="home">🏠 العودة للصفحة الرئيسية</a>
+    <div class="order-id" id="orderId">رقم الطلب: -</div>
 
-    <!-- زر واتساب برسالة جاهزة -->
-    <a href="https://wa.me/96896036550?text=شكراً+لكم+على+خدمتكم،+سعيد+بالشراء+من+كوين+شوب+💖" 
-       target="_blank" class="whatsapp">💬 تواصل عبر واتساب</a>
+    <h3>📋 تفاصيل طلبك</h3>
+    <p id="orderDetails">جارٍ تحميل التفاصيل...</p>
+
+    <a id="whatsappLink" href="#" target="_blank" class="whatsapp-btn">📩 تواصل معنا عبر واتساب</a>
   </div>
+
+  <script>
+    // قراءة بيانات النموذج من checkout
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name") || "الزبون";
+    const address = params.get("address") || "-";
+    const city = params.get("city") || "-";
+    const phone = params.get("phone") || "-";
+    const payment = params.get("payment") || "-";
+
+    // توليد رقم طلب عشوائي
+    const orderId = "QS-" + new Date().getFullYear() + "-" + Math.floor(10000 + Math.random() * 90000);
+
+    // عرض رقم الطلب
+    document.getElementById("orderId").innerText = "📦 رقم الطلب: " + orderId;
+
+    // عرض التفاصيل
+    document.getElementById("orderDetails").innerHTML = `
+      👤 الاسم: ${name} <br>
+      📍 العنوان: ${address} <br>
+      🏙️ الولاية / المدينة: ${city} <br>
+      📞 الهاتف: ${phone} <br>
+      💳 طريقة الدفع: ${payment}
+    `;
+
+    // رابط واتساب مع البيانات
+    const whatsappNumber = "96896036550"; // رقمك
+    const msg = `مرحباً كوين شوب 👑\nلقد أكملت الطلب\n${orderId}\n👤 الاسم: ${name}\n📞 ${phone}\n🏙️ ${city}`;
+    document.getElementById("whatsappLink").href =
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+  </script>
 
 </body>
 </html>
