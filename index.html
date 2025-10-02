@@ -5,52 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>كوين شوب</title>
   <style>
-    body {
-      margin: 0; font-family: Tahoma, sans-serif; background: #fff0f8;
-    }
+    body { margin: 0; font-family: Tahoma, sans-serif; background: #fff0f8; }
     header {
       display: flex; justify-content: space-between; align-items: center;
       background: #e60073; padding: 10px 20px; color: #fff; flex-wrap: wrap;
     }
     header img { height: 50px; }
-    header input {
-      flex: 1; margin: 5px; padding: 8px; border-radius: 5px; border: none;
-    }
+    header input { flex: 1; margin: 5px; padding: 8px; border-radius: 5px; border: none; }
     header button {
       background: #fff; color: #e60073; border: none; padding: 8px 15px;
       border-radius: 6px; cursor: pointer;
     }
-    header .contact-top {
-      background: #25d366; color: #fff; border: none;
-      padding: 8px 15px; border-radius: 6px; cursor: pointer;
-      text-decoration: none; font-weight: bold;
-    }
-
-    /* ✅ رسالة الترحيب */
     .welcome {
       background-color: #ffe4f2; text-align: center; padding: 25px 10px;
       margin: 15px; border-radius: 12px;
     }
-
     /* ✅ الأقسام */
-    .categories {
-      background: #fff; margin: 15px; padding: 15px;
-      border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+    .categories { background: #fff; margin: 15px; padding: 15px;
+      border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
     .categories h3 { color: #e60073; }
     .categories ul { list-style: none; padding: 0; }
     .categories ul li {
       padding: 8px; border-bottom: 1px solid #ddd; cursor: pointer;
     }
     .categories ul li:hover { background: #ffe6f0; }
+    /* ✅ Dropdown */
+    .dropdown ul { display: none; padding-right: 15px; background: #fff8fb; }
+    .dropdown.active ul { display: block; }
 
     /* ✅ المنتجات */
     .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-    .product {
-      background: #fff; padding: 10px; border-radius: 10px;
-      width: 160px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;
-    }
+    .product { background: #fff; padding: 10px; border-radius: 10px;
+      width: 160px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
     .product img { width: 100%; border-radius: 10px; }
+    .product button { margin-top: 5px; background: #e60073; color: #fff; border: none;
+      padding: 6px 10px; border-radius: 6px; cursor: pointer; }
 
     /* ✅ السلة */
     .cart {
@@ -60,9 +49,8 @@
     }
     .cart.active { right: 0; }
     .cart h3 { margin-top: 0; color: #e60073; }
-    .cart-buttons {
-      margin-top: 15px; display: flex; flex-direction: column; gap: 10px;
-    }
+    .cart ul { padding: 0; list-style: none; }
+    .cart-buttons { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; }
     .cart-buttons a {
       text-align: center; padding: 10px; border-radius: 6px;
       text-decoration: none; font-weight: bold; cursor: pointer;
@@ -71,27 +59,11 @@
     .checkout { background: #25d366; color: #fff; }
 
     /* ✅ الفوتر */
-    footer {
-      background: #e60073; color: #fff; padding: 20px; margin-top: 20px; text-align: center;
-    }
-    footer a {
-      display: inline-block; margin: 8px; padding: 10px 15px;
-      border-radius: 25px; text-decoration: none; color: #fff; font-weight: bold;
-    }
+    footer { background: #e60073; color: #fff; padding: 20px; margin-top: 20px; text-align: center; }
+    footer a { display: inline-block; margin: 8px; padding: 10px 15px;
+      border-radius: 25px; text-decoration: none; color: #fff; font-weight: bold; }
     footer .whatsapp { background: #25d366; }
     footer .instagram { background: #e1306c; }
-    footer .contact-footer { background: #007bff; }
-
-    /* ✅ أزرار واتساب + إنستجرام أسفل */
-    .floating-btns {
-      position: fixed; bottom: 15px; right: 15px;
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .floating-btns a {
-      background: #25d366; color: white; padding: 10px 15px;
-      border-radius: 25px; text-decoration: none;
-    }
-    .floating-btns a.instagram { background: #e1306c; }
   </style>
 </head>
 <body>
@@ -101,7 +73,6 @@
     <button id="cartBtn">🛒 السلة</button>
     <input type="text" placeholder="🔎 ابحث عن منتج...">
     <img src="images/logo.png" alt="لوجو الملكة">
-    <a href="https://wa.me/96896036550" target="_blank" class="contact-top">📩 تواصل معنا</a>
   </header>
 
   <!-- ✅ رسالة ترحيب -->
@@ -116,9 +87,10 @@
     <h3>الأقسام الرئيسية</h3>
     <ul>
       <li>💄 المكياج</li>
-      <li>🧴 العناية بالبشرة
+      <li class="dropdown">🧴 العناية
         <ul>
           <li>العناية بالشعر</li>
+          <li>العناية بالبشرة</li>
           <li>العناية بالوجه</li>
           <li>العناية بالجسم</li>
           <li>العناية بالشفاه</li>
@@ -146,14 +118,17 @@
       <div class="product">
         <img src="images/product1.jpg" alt="كريم أساس">
         <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
+        <button onclick="addToCart('كريم أساس')">➕ أضف للسلة</button>
       </div>
       <div class="product">
         <img src="images/product2.jpg" alt="سيروم ترطيب">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
+        <button onclick="addToCart('سيروم ترطيب')">➕ أضف للسلة</button>
       </div>
       <div class="product">
         <img src="images/product3.jpg" alt="ماسك فيتامين C">
         <p>ماسك فيتامين C<br><strong>5.7 ر.ع</strong></p>
+        <button onclick="addToCart('ماسك فيتامين C')">➕ أضف للسلة</button>
       </div>
     </div>
   </main>
@@ -163,43 +138,55 @@
     <h3>طرق الدفع</h3>
     <p>Visa | Mastercard | الدفع عند الاستلام</p>
     <h3>مميزاتنا</h3>
-    <p>🚚 توصيل سريع (عمان ودول الخليج)<br>
-       💵 الدفع عند الاستلام<br>
-       🛡️ منتجات أصلية 100% موثوقة</p>
+    <p>🚚 توصيل سريع (عمان ودول الخليج)<br> 💵 الدفع عند الاستلام<br> 🛡️ منتجات أصلية 100% موثوقة</p>
     <a href="https://wa.me/96896036550" target="_blank" class="whatsapp">💬 واتساب</a>
     <a href="https://instagram.com/queen_sh00p" target="_blank" class="instagram">📸 إنستجرام</a>
-    <a href="https://wa.me/96896036550" target="_blank" class="contact-footer">📩 تواصل معنا</a>
     <p>© 2025 كوين عمان · كل الحقوق محفوظة.</p>
   </footer>
 
   <!-- ✅ السلة -->
   <div class="cart" id="cart">
     <h3>🛒 سلة التسوق</h3>
-    <p>السلة فارغة حالياً.</p>
+    <ul id="cartItems"><li>السلة فارغة حالياً.</li></ul>
     <div class="cart-buttons">
       <a class="close-cart" id="closeCart">❌ إغلاق السلة</a>
-      <a class="checkout" href="#">✅ إتمام الطلب</a>
+      <a class="checkout" href="checkout.html">✅ إتمام الطلب</a>
+      <a class="close-cart" id="clearCart">🗑️ تفريغ السلة</a>
     </div>
   </div>
 
-  <!-- ✅ أزرار واتساب + إنستجرام أسفل -->
-  <div class="floating-btns">
-    <a href="https://wa.me/96896036550" target="_blank">💬 واتساب</a>
-    <a href="https://instagram.com/queen_sh00p" target="_blank" class="instagram">📸 إنستجرام</a>
-  </div>
-
   <script>
-    // ✅ فتح/إغلاق السلة
+    // ✅ السلة
     const cart = document.getElementById("cart");
     const cartBtn = document.getElementById("cartBtn");
     const closeCart = document.getElementById("closeCart");
+    const clearCart = document.getElementById("clearCart");
+    const cartItems = document.getElementById("cartItems");
 
-    cartBtn.addEventListener("click", () => {
-      cart.classList.add("active");
+    cartBtn.addEventListener("click", () => cart.classList.add("active"));
+    closeCart.addEventListener("click", () => cart.classList.remove("active"));
+    clearCart.addEventListener("click", () => cartItems.innerHTML = "<li>السلة فارغة حالياً.</li>");
+
+    function addToCart(item) {
+      if (cartItems.innerText.includes("فارغة")) cartItems.innerHTML = "";
+      const li = document.createElement("li");
+      li.textContent = item;
+      cartItems.appendChild(li);
+    }
+
+    // ✅ الأقسام Dropdown
+    document.querySelectorAll(".dropdown").forEach(drop => {
+      drop.addEventListener("click", (e) => {
+        e.stopPropagation();
+        drop.classList.toggle("active");
+        document.querySelectorAll(".dropdown").forEach(other => {
+          if (other !== drop) other.classList.remove("active");
+        });
+      });
     });
 
-    closeCart.addEventListener("click", () => {
-      cart.classList.remove("active");
+    window.addEventListener("click", () => {
+      document.querySelectorAll(".dropdown").forEach(drop => drop.classList.remove("active"));
     });
   </script>
 
