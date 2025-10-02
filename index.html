@@ -1,94 +1,311 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>كوين شوب</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>كوين شوب | Queen Sh0op</title>
+
+<style>
+/* ========== أساسيات ========== */
+:root{
+  --pink:#e60073;
+  --soft:#ffe6f2;
+  --bg:#fff0f8;
+  --text:#222;
+  --muted:#666;
+  --card:#fff;
+  --shadow:0 6px 18px rgba(0,0,0,.08);
+  --radius:16px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tajawal,Segoe UI,Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text)}
+a{color:inherit;text-decoration:none}
+
+/* ========== الشريط العلوي ========== */
+.top-bar{
+  position:sticky;top:0;z-index:50;
+  display:flex;gap:10px;align-items:center;
+  padding:10px; background:var(--pink); color:#fff;
+}
+.top-bar .menu, .top-bar .cart{background:#fff;color:var(--pink);border:none;border-radius:10px;padding:8px 12px}
+.top-bar input{
+  flex:1; border:none; outline:none; padding:10px 12px; border-radius:12px;
+}
+
+/* ========== الترحيب ========== */
+.welcome{
+  margin:12px; padding:14px; border-radius:var(--radius);
+  background:#ffc9dc; box-shadow:var(--shadow); text-align:center
+}
+.welcome h2{margin:0 0 6px}
+.welcome span{color:var(--pink);font-weight:700}
+
+/* ========== القائمة الجانبية ========== */
+.sidebar{
+  position:fixed; inset:0 auto 0 0; width:280px;
+  background:var(--soft); padding:14px; overflow:auto;
+  transform:translateX(110%); transition:.28s; box-shadow:var(--shadow); z-index:60;
+}
+.sidebar.active{transform:translateX(0)}
+.sidebar h3{margin:6px 0 10px}
+.sidebar .close{display:block;margin-top:8px;background:#fff;border:1px solid #ddd;border-radius:10px;padding:8px}
+.sidebar .links a{display:block;padding:8px 10px;border-radius:10px;margin:4px 0;background:#fff}
+details{background:#fff;border-radius:12px;margin:6px 0;padding:6px 8px}
+summary{cursor:pointer;font-weight:600}
+
+/* ========== المنتجات ========== */
+main{padding:8px 12px 80px}
+.section-title{display:flex;align-items:center;gap:8px;margin:18px 6px 10px}
+.products{
+  display:grid; grid-template-columns:repeat( auto-fill, minmax(150px,1fr) );
+  gap:12px;
+}
+.product{
+  background:var(--card); border-radius:16px; box-shadow:var(--shadow);
+  padding:10px; text-align:center;
+}
+.product img{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:12px; background:#f7f7f7}
+.product .name{margin:8px 0 4px;font-weight:700}
+.product .price{color:var(--pink);font-weight:700}
+.product button{
+  margin-top:6px; width:100%; border:none; background:var(--pink);
+  color:#fff; padding:8px 10px; border-radius:12px; cursor:pointer;
+}
+
+/* ========== السلة ========== */
+.cart-drawer{
+  position:fixed; inset:0 0 0 auto; width:90%; max-width:380px; background:#fff; box-shadow:var(--shadow);
+  transform:translateX(110%); transition:.28s; z-index:70; display:flex; flex-direction:column;
+}
+.cart-drawer.active{transform:translateX(0)}
+.cart-header{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid #eee}
+.cart-list{flex:1; overflow:auto; padding:10px}
+.cart-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed #eee}
+.cart-item img{width:52px;height:52px;border-radius:10px;object-fit:cover;background:#f5f5f5}
+.cart-item .remove{margin-inline-start:auto;background:#ffe9ef;color:#d00;border:none;border-radius:8px;padding:6px 10px}
+.cart-footer{border-top:1px solid #eee;padding:12px}
+.cart-footer .total{display:flex;justify-content:space-between;margin-bottom:10px}
+.cart-footer button{width:100%;background:var(--pink);color:#fff;border:none;border-radius:12px;padding:10px 12px}
+
+/* ========== آراء الزبائن ========== */
+.reviews{margin:24px 10px}
+.review{
+  background:#fff; border-radius:16px; box-shadow:var(--shadow); padding:12px; margin:10px 0
+}
+.review .stars{color:#ffaa00}
+
+/* ========== الفوتر + الأزرار العائمة ========== */
+footer{background:var(--pink); color:#fff; text-align:center; padding:20px; margin-top:18px}
+.fab{position:fixed; right:14px; bottom:14px; display:flex; flex-direction:column; gap:10px; z-index:55}
+.fab a{display:block;background:#25d366;color:#fff;padding:10px 14px;border-radius:24px}
+.fab a.ig{background:#e1306c}
+</style>
 </head>
 <body>
 
-  <!-- ✅ الهيدر -->
-  <header class="top-bar">
-    <button id="cart-btn">🛒 السلة</button>
-    <input type="text" id="search-box" placeholder="🔎 ابحث عن منتج...">
-    <button id="menu-btn">☰ القائمة</button>
-  </header>
+<!-- الشريط العلوي -->
+<header class="top-bar">
+  <button class="menu" id="menuBtn">☰ القائمة</button>
+  <input id="search" type="search" placeholder="ابحث عن منتج… 🔎">
+  <button class="cart" id="openCart">🛒 السلة</button>
+</header>
 
-  <!-- ✅ القائمة الجانبية -->
-  <aside class="sidebar" id="sidebar">
-    <h3>الأقسام</h3>
-    <a href="#">💄 المكياج</a>
-    <a href="#">🧴 العناية بالشعر</a>
-    <a href="#">🧴 العناية بالبشرة</a>
-    <a href="#">🧴 العناية بالوجه</a>
-    <a href="#">🧴 العناية بالجسم</a>
-    <a href="#">🧴 العناية بالشفاه</a>
-    <a href="#">🧴 المنطقة الحساسة</a>
-    <a href="#">🦷 العناية بالفم والأسنان</a>
-    <a href="#">✋ العناية باليدين</a>
-    <a href="#">🦶 العناية بالقدمين</a>
-    <a href="#">👁️ العدسات</a>
-    <a href="#">🌸 العطور</a>
-    <a href="#">⌚ الساعات</a>
+<!-- الترحيب -->
+<section class="welcome">
+  <h2>👑 أهلاً وسهلاً بكم في <span>كوين شوب</span></h2>
+  <p>منتجات أصلية 100% مع توصيل سريع 🚚 — مواقعنا: السيب • السويق • صحار</p>
+</section>
 
-    <h3>📦 روابط مهمة</h3>
+<!-- القائمة الجانبية -->
+<aside class="sidebar" id="sidebar">
+  <h3>الأقسام</h3>
+  <div class="links">
+    <a href="#" data-cat="makeup">💄 المكياج</a>
+    <details open>
+      <summary>🧴 العناية</summary>
+      <a href="#" data-cat="hair">العناية بالشعر</a>
+      <a href="#" data-cat="skin">العناية بالبشرة</a>
+      <a href="#" data-cat="face">العناية بالوجه</a>
+      <a href="#" data-cat="body">العناية بالجسم</a>
+      <a href="#" data-cat="lips">العناية بالشفاه</a>
+      <a href="#" data-cat="oral">العناية بالفم والأسنان</a>
+      <a href="#" data-cat="hands">العناية باليدين</a>
+      <a href="#" data-cat="feet">العناية بالقدمين</a>
+      <a href="#" data-cat="intimate">العناية بالمنطقة الحساسة</a>
+    </details>
+    <a href="#" data-cat="lenses">👁️ العدسات</a>
+    <a href="#" data-cat="perfume">🌸 العطور</a>
+    <a href="#" data-cat="watches">⌚ الساعات</a>
+  </div>
+
+  <h3>روابط مهمة</h3>
+  <div class="links">
     <a href="about.html">من نحن</a>
     <a href="terms.html">الشروط والأحكام</a>
     <a href="privacy.html">سياسة الخصوصية</a>
     <a href="shipping.html">الشحن والتوصيل</a>
-    <a href="returns.html">الاستبدال والاسترجاع</a>
+    <a href="returns.html">سياسة الاستبدال والاسترجاع</a>
     <a href="faq.html">الأسئلة الشائعة</a>
     <a href="care.html">اهتماماتنا بكم</a>
     <a href="blog.html">المدونة</a>
-  </aside>
+  </div>
+  <button class="close" id="closeSidebar">إغلاق ✖️</button>
+</aside>
 
-  <!-- ✅ رسالة ترحيب -->
-  <section class="welcome">
-    <h2>👑 أهلاً بكم في كوين شوب 🌸</h2>
-    <p>صاحبة المتجر ترحب بكم 💖 – منتجات أصلية 100% مع توصيل سريع داخل عمان والخليج 🚚</p>
-    <p>📍 موقعنا: السيب – السويق – صحار</p>
-  </section>
+<!-- المنتجات -->
+<main>
+  <div class="section-title"><h2>🛍️ منتجاتنا</h2></div>
 
-  <!-- ✅ المنتجات -->
-  <main>
-    <h2>🛍️ منتجاتنا</h2>
-    <div class="products">
-      <div class="product">
-        <img src="images/product1.jpg" alt="كريم أساس">
-        <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
-        <button onclick="addToCart('كريم أساس')">أضف للسلة</button>
-      </div>
-      <div class="product">
-        <img src="images/product2.jpg" alt="سيروم ترطيب">
-        <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
-        <button onclick="addToCart('سيروم ترطيب')">أضف للسلة</button>
-      </div>
-      <div class="product">
-        <img src="images/product3.jpg" alt="ماسك فيتامين C">
-        <p>ماسك فيتامين C<br><strong>5.7 ر.ع</strong></p>
-        <button onclick="addToCart('ماسك فيتامين C')">أضف للسلة</button>
-      </div>
+  <div id="products" class="products">
+
+    <!-- مثال 1 -->
+    <div class="product" data-name="كريم أساس" data-cat="makeup" data-price="7.0">
+      <img src="images/product1.jpg" alt="كريم أساس">
+      <div class="name">كريم أساس</div>
+      <div class="price">7.0 ر.ع</div>
+      <button class="add">➕ أضف للسلة</button>
     </div>
-  </main>
 
-  <!-- ✅ الفوتر -->
-  <footer>
-    <h3>طرق الدفع</h3>
-    <p>Visa | Mastercard | الدفع عند الاستلام</p>
-    <h3>مميزاتنا</h3>
-    <p>🚚 توصيل سريع (عمان ودول الخليج)<br>
-       💵 الدفع عند الاستلام<br>
-       🛡️ منتجات أصلية 100% موثوقة</p>
-    <p>© 2025 كوين عمان · كل الحقوق محفوظة.</p>
-  </footer>
+    <!-- مثال 2 -->
+    <div class="product" data-name="سيروم ترطيب" data-cat="skin" data-price="9.9">
+      <img src="images/product2.jpg" alt="سيروم ترطيب">
+      <div class="name">سيروم ترطيب</div>
+      <div class="price">9.9 ر.ع</div>
+      <button class="add">➕ أضف للسلة</button>
+    </div>
 
-  <!-- ✅ أزرار واتساب + إنستجرام -->
-  <div class="floating-btns">
-    <a href="https://wa.me/96896036550" target="_blank">💬 واتساب</a>
-    <a href="https://instagram.com/queen_sh00p" target="_blank" class="instagram">📸 إنستجرام</a>
+    <!-- مثال 3 -->
+    <div class="product" data-name="ماسك فيتامين C" data-cat="face" data-price="5.7">
+      <img src="images/product3.jpg" alt="ماسك فيتامين C">
+      <div class="name">ماسك فيتامين C</div>
+      <div class="price">5.7 ر.ع</div>
+      <button class="add">➕ أضف للسلة</button>
+    </div>
+
+    <!-- أضف منتجاتك بنفس التنسيق ↑ وغير القيم -->
   </div>
 
-  <script src="js/script.js"></script>
+  <!-- آراء الزبائن -->
+  <section class="reviews">
+    <h3>آراء زبائننا 💬</h3>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      وصلت الطلبية بسرعة وجودة ممتازة، شكرًا كوين شوب! — نسرين
+    </div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      أسعار حلوة وخدمة رائعة خصوصًا في السويق 👌 — منى
+    </div>
+  </section>
+</main>
+
+<!-- السلة -->
+<aside class="cart-drawer" id="cart">
+  <div class="cart-header">
+    <strong>سلة التسوق</strong>
+    <button id="closeCart">✖️</button>
+  </div>
+  <div class="cart-list" id="cartList"></div>
+  <div class="cart-footer">
+    <div class="total"><span>الإجمالي:</span><strong id="cartTotal">0.0 ر.ع</strong></div>
+    <button id="checkout">إتمام الطلب</button>
+  </div>
+</aside>
+
+<!-- الأزرار العائمة -->
+<div class="fab">
+  <a href="https://wa.me/96896036550" target="_blank">واتساب 💬</a>
+  <a class="ig" href="https://instagram.com/queen_sh00p" target="_blank">إنستجرام 📸</a>
+</div>
+
+<script>
+/* ======= فتح/إغلاق القائمة ======= */
+const sidebar = document.getElementById('sidebar');
+document.getElementById('menuBtn').onclick = ()=> sidebar.classList.add('active');
+document.getElementById('closeSidebar').onclick = ()=> sidebar.classList.remove('active');
+
+/* ======= فتح/إغلاق السلة ======= */
+const cartDrawer = document.getElementById('cart');
+document.getElementById('openCart').onclick = ()=> cartDrawer.classList.add('active');
+document.getElementById('closeCart').onclick = ()=> cartDrawer.classList.remove('active');
+
+/* ======= السلة البسيطة ======= */
+let cart = [];
+const listEl = document.getElementById('cartList');
+const totalEl = document.getElementById('cartTotal');
+
+function renderCart(){
+  listEl.innerHTML = '';
+  let total = 0;
+  cart.forEach((item,idx)=>{
+    total += item.price;
+    const row = document.createElement('div');
+    row.className = 'cart-item';
+    row.innerHTML = `
+      <img src="${item.img}" alt="">
+      <div>
+        <div><strong>${item.name}</strong></div>
+        <div class="muted">${item.price.toFixed(2)} ر.ع</div>
+      </div>
+      <button class="remove" data-i="${idx}">حذف</button>
+    `;
+    listEl.appendChild(row);
+  });
+  totalEl.textContent = total.toFixed(2) + ' ر.ع';
+}
+
+document.querySelectorAll('.add').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const card = btn.closest('.product');
+    cart.push({
+      name: card.dataset.name,
+      price: +card.dataset.price,
+      img: card.querySelector('img').getAttribute('src')
+    });
+    renderCart();
+    cartDrawer.classList.add('active');
+  });
+});
+listEl.addEventListener('click', e=>{
+  if(e.target.classList.contains('remove')){
+    cart.splice(+e.target.dataset.i,1);
+    renderCart();
+  }
+});
+
+/* ======= البحث وفلترة الأقسام ======= */
+const search = document.getElementById('search');
+const products = [...document.querySelectorAll('.product')];
+
+function applyFilters(){
+  const q = search.value.trim();
+  const currentCat = window.currentCat || null;
+  products.forEach(p=>{
+    const byText = p.dataset.name.includes(q);
+    const byCat = currentCat ? (p.dataset.cat===currentCat) : true;
+    p.style.display = (byText && byCat) ? '' : 'none';
+  });
+}
+search.addEventListener('input', applyFilters);
+
+document.querySelectorAll('[data-cat]').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    e.preventDefault();
+    window.currentCat = a.dataset.cat; // احفظ الفئة الحالية
+    sidebar.classList.remove('active');
+    applyFilters();
+  });
+});
+
+/* ======= إتمام الطلب (واتساب) ======= */
+/* دفع الفيزا يحتاج بوابة دفع— حالياً نرسل الطلب إلى واتساب */
+document.getElementById('checkout').addEventListener('click', ()=>{
+  if(!cart.length){ alert('السلة فارغة'); return; }
+  const lines = cart.map(i=>`• ${i.name} — ${i.price.toFixed(2)} ر.ع`).join('%0A');
+  const total = totalEl.textContent;
+  const msg = `طلب جديد من موقع كوين شوب:%0A${lines}%0A—%0Aالإجمالي: ${total}`;
+  location.href = `https://wa.me/96896036550?text=${msg}`;
+});
+</script>
 </body>
 </html>
