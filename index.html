@@ -14,10 +14,10 @@
     }
     header img { height:40px; }
     header input { padding:6px; border-radius:5px; border:none; width:40%; }
-    header button { cursor:pointer; }
+    header button { cursor:pointer; background:none; border:none; color:white; font-size:18px; }
 
     /* ✅ زر القائمة */
-    #menuBtn { font-size:22px; background:none; border:none; color:white; cursor:pointer; }
+    #menuBtn { font-size:22px; }
 
     /* ✅ رسالة الترحيب */
     .welcome {
@@ -42,6 +42,7 @@
     .sidebar ul { list-style:none; padding:0; }
     .sidebar ul li { padding:8px; border-bottom:1px solid #ddd; cursor:pointer; }
     .sidebar ul li:hover { background:#ffe6f0; }
+    .sidebar a { display:block; margin-bottom:10px; text-decoration:none; color:#e60073; font-weight:bold; }
 
     /* Dropdown */
     .dropdown ul { display:none; padding-right:15px; background:#fff8fb; }
@@ -67,6 +68,22 @@
     .cart-buttons a { text-align:center; padding:10px; border-radius:6px; text-decoration:none; font-weight:bold; cursor:pointer; }
     .close-cart { background:#e60073; color:#fff; }
     .checkout { background:#25d366; color:#fff; }
+
+    /* ✅ عداد السلة */
+    #cartCount {
+      background:#fff; color:#e60073; border-radius:50%; padding:2px 6px; font-size:14px; margin-right:3px;
+    }
+
+    /* ✅ إشعار منبثق */
+    .popup {
+      position: fixed; top: 20px; right: 20px;
+      background: #28a745; color: #fff;
+      padding: 10px 20px; border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      opacity: 0; transform: translateY(-20px);
+      transition: 0.3s; z-index:4000;
+    }
+    .popup.show { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -76,7 +93,7 @@
     <button id="menuBtn">☰</button>
     <input type="text" placeholder="🔎 ابحث عن منتج...">
     <img src="images/logo.png" alt="لوجو كوين شوب">
-    <button id="cartBtn">🛒</button>
+    <button id="cartBtn">🛒 <span id="cartCount">0</span></button>
   </header>
 
   <!-- ✅ رسالة الترحيب -->
@@ -88,6 +105,7 @@
 
   <!-- ✅ القائمة الجانبية -->
   <div class="sidebar" id="sidebar">
+    <a href="#" id="closeMenu">❌ إغلاق</a>
     <h3>📂 الأقسام الرئيسية</h3>
     <ul>
       <li>💄 المكياج</li>
@@ -143,11 +161,16 @@
     </div>
   </div>
 
+  <!-- ✅ إشعار منبثق -->
+  <div class="popup" id="popup">✅ تمت الإضافة للسلة</div>
+
   <script>
     // ✅ القائمة
     const sidebar = document.getElementById("sidebar");
     const menuBtn = document.getElementById("menuBtn");
-    menuBtn.addEventListener("click", ()=> sidebar.classList.toggle("active"));
+    const closeMenu = document.getElementById("closeMenu");
+    menuBtn.addEventListener("click", ()=> sidebar.classList.add("active"));
+    closeMenu.addEventListener("click", ()=> sidebar.classList.remove("active"));
 
     // ✅ Dropdown
     document.querySelectorAll(".dropdown").forEach(drop=>{
@@ -163,6 +186,8 @@
     const closeCart = document.getElementById("closeCart");
     const cartItems = document.getElementById("cartItems");
     const cartTotal = document.getElementById("cartTotal");
+    const cartCount = document.getElementById("cartCount");
+    const popup = document.getElementById("popup");
 
     let items = JSON.parse(localStorage.getItem("cartItems")) || [];
     let total = parseFloat(localStorage.getItem("cartTotal")) || 0;
@@ -180,6 +205,7 @@
         total += price;
         saveCart();
         updateCart();
+        showPopup();
       });
     });
 
@@ -193,6 +219,7 @@
         cartItems.appendChild(div);
       });
       cartTotal.innerText = "الإجمالي: " + total.toFixed(2) + " ر.ع";
+      cartCount.innerText = items.length; // ✅ تحديث العداد
     }
 
     function removeItem(index){
@@ -205,6 +232,12 @@
     function saveCart(){
       localStorage.setItem("cartItems", JSON.stringify(items));
       localStorage.setItem("cartTotal", total.toFixed(2));
+    }
+
+    // ✅ إشعار منبثق
+    function showPopup(){
+      popup.classList.add("show");
+      setTimeout(()=> popup.classList.remove("show"), 2000);
     }
 
     updateCart();
