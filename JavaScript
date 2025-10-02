@@ -1,0 +1,25 @@
+function updateCart(){
+  cartItems.innerHTML = "";
+  items.forEach((item,index)=>{
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `<span>${item.name} - ${item.price} ر.ع</span>
+                     <button onclick="removeItem(${index})">❌</button>`;
+    cartItems.appendChild(div);
+  });
+
+  cartTotal.innerText = "إجمالي المنتجات: " + total.toFixed(2) + " ر.ع";
+
+  // ✅ حساب رسوم التوصيل
+  let delivery = document.querySelector('input[name="delivery"]:checked');
+  let deliveryCost = delivery ? parseFloat(delivery.value) : 0;
+  let finalTotal = total + deliveryCost;
+
+  document.getElementById("cartFinal").innerText =
+    "الإجمالي مع التوصيل: " + finalTotal.toFixed(2) + " ر.ع";
+}
+
+// ✅ لو غير الزبون خيار التوصيل
+document.querySelectorAll('input[name="delivery"]').forEach(radio=>{
+  radio.addEventListener("change", updateCart);
+});
