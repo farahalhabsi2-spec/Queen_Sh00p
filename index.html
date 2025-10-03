@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>كوين شوب</title>
+  <title>كوين شوب | Queen Sh0op</title>
+
+  <!-- ✅ أيقونة الموقع -->
+  <link rel="icon" href="https://i.ibb.co/GfL87zPq/logo.png" type="image/png">
+
+  <!-- ✅ تحسين السيو -->
+  <meta name="description" content="كوين شوب 👑 متجر يقدم أجود منتجات العناية بالبشرة والشعر والمكياج والعطور الأصلية 🛍️ مع توصيل سريع داخل سلطنة عمان ودول الخليج.">
+
   <style>
     body { font-family: Tahoma, sans-serif; background:#fff0f8; margin:0; }
 
@@ -11,13 +18,31 @@
     header {
       background:#e60073; color:#fff; padding:10px 20px;
       display:flex; justify-content:space-between; align-items:center;
+      position:relative;
     }
-    header img { height:40px; }
-    header input { padding:6px; border-radius:5px; border:none; width:40%; }
-    header button { cursor:pointer; }
-
-    /* ✅ زر القائمة */
     #menuBtn { font-size:22px; background:none; border:none; color:white; cursor:pointer; }
+    #cartBtn { position:relative; cursor:pointer; }
+    #cartCount {
+      position:absolute; top:-5px; left:-5px;
+      background:#fff; color:#e60073; font-size:12px;
+      border-radius:50%; width:18px; height:18px;
+      display:flex; align-items:center; justify-content:center; font-weight:bold;
+    }
+
+    /* ✅ اللوجو بالنص مع النبض */
+    header .logo-center {
+      position:absolute; left:50%; transform:translateX(-50%);
+    }
+    header .logo-center img {
+      height:60px; width:60px; border-radius:50%;
+      background:#fff; border:3px solid #e60073; padding:5px;
+      animation: wahPulse 0.5s infinite;
+    }
+    @keyframes wahPulse {
+      0% { box-shadow:0 0 10px 3px rgba(230,0,115,0.3); transform:scale(1); }
+      50% { box-shadow:0 0 35px 15px rgba(230,0,115,0.8); transform:scale(1.2); }
+      100% { box-shadow:0 0 10px 3px rgba(230,0,115,0.3); transform:scale(1); }
+    }
 
     /* ✅ رسالة الترحيب */
     .welcome {
@@ -27,37 +52,19 @@
     .welcome h2 { margin:0; color:#e60073; }
     .welcome p { margin-top:10px; font-size:15px; color:#444; }
 
-    /* ✅ القائمة الجانبية */
+    /* ✅ القائمة */
     .sidebar {
       position:fixed; top:0; right:-280px; width:250px; height:100%;
       background:#fff; box-shadow:-2px 0 8px rgba(0,0,0,0.2);
-      transition:0.3s; z-index:3000; overflow-y:auto;
+      transition:0.3s; padding:20px; z-index:3000; overflow-y:auto;
     }
     .sidebar.active { right:0; }
-    .sidebar h3 { color:#e60073; margin-top:50px; padding:10px; }
-    .sidebar ul { list-style:none; padding:0; margin:0; }
-    .sidebar ul li { padding:8px 15px; border-bottom:1px solid #ddd; cursor:pointer; }
+    .sidebar h3 { color:#e60073; margin-top:0; }
+    .sidebar ul { list-style:none; padding:0; }
+    .sidebar ul li { padding:8px; border-bottom:1px solid #ddd; cursor:pointer; }
     .sidebar ul li:hover { background:#ffe6f0; }
     .dropdown ul { display:none; padding-right:15px; background:#fff8fb; }
     .dropdown.active ul { display:block; }
-
-    /* ✅ زر إغلاق ثابت */
-    .close-sidebar {
-      position:sticky;
-      top:0;
-      display:block;
-      width:100%;
-      text-align:center;
-      padding:10px;
-      background:#e60073;
-      color:#fff;
-      font-weight:bold;
-      border:none;
-      border-radius:0;
-      cursor:pointer;
-      z-index:3100;
-    }
-    .close-sidebar:hover { background:#ff4da6; }
 
     /* ✅ المنتجات */
     .products { display:flex; gap:15px; flex-wrap:wrap; justify-content:center; margin:20px; }
@@ -94,15 +101,6 @@
     }
     .close-cart { background:#e60073; color:#fff; }
     .checkout { background:#25d366; color:#fff; }
-
-    /* ✅ عداد السلة */
-    #cartBtn { position:relative; }
-    #cartCount {
-      position:absolute; top:-5px; left:-5px;
-      background:#fff; color:#e60073; font-size:12px;
-      border-radius:50%; width:18px; height:18px; display:flex;
-      align-items:center; justify-content:center; font-weight:bold;
-    }
   </style>
 </head>
 <body>
@@ -110,12 +108,13 @@
   <!-- ✅ الهيدر -->
   <header>
     <button id="menuBtn">☰</button>
-    <input type="text" placeholder="🔎 ابحث عن منتج...">
-    <img src="images/logo.png" alt="لوجو كوين شوب">
+    <div class="logo-center">
+      <img src="https://i.ibb.co/GfL87zPq/logo.png" alt="لوجو كوين شوب">
+    </div>
     <button id="cartBtn">🛒<span id="cartCount">0</span></button>
   </header>
 
-  <!-- ✅ رسالة الترحيب -->
+  <!-- ✅ رسالة ترحيب -->
   <section class="welcome">
     <h2>👑 أهلاً بكم في كوين شوب 🌸</h2>
     <p>أنا صاحبة كوين شوب أشكركم من القلب على دعمكم المستمر 💖  
@@ -124,7 +123,6 @@
 
   <!-- ✅ القائمة الجانبية -->
   <div class="sidebar" id="sidebar">
-    <button id="closeSidebar" class="close-sidebar">❌ إغلاق</button>
     <h3>📂 الأقسام الرئيسية</h3>
     <ul>
       <li>💄 المكياج</li>
@@ -184,10 +182,7 @@
     // ✅ القائمة
     const sidebar = document.getElementById("sidebar");
     const menuBtn = document.getElementById("menuBtn");
-    const closeSidebar = document.getElementById("closeSidebar");
-
-    menuBtn.addEventListener("click", ()=> sidebar.classList.add("active"));
-    closeSidebar.addEventListener("click", ()=> sidebar.classList.remove("active"));
+    menuBtn.addEventListener("click", ()=> sidebar.classList.toggle("active"));
 
     // ✅ Dropdown
     document.querySelectorAll(".dropdown").forEach(drop=>{
