@@ -14,10 +14,10 @@
     }
     header img { height:40px; }
     header input { padding:6px; border-radius:5px; border:none; width:40%; }
-    header button { cursor:pointer; background:none; border:none; color:white; font-size:18px; }
+    header button { cursor:pointer; }
 
     /* ✅ زر القائمة */
-    #menuBtn { font-size:22px; }
+    #menuBtn { font-size:22px; background:none; border:none; color:white; cursor:pointer; }
 
     /* ✅ رسالة الترحيب */
     .welcome {
@@ -42,7 +42,6 @@
     .sidebar ul { list-style:none; padding:0; }
     .sidebar ul li { padding:8px; border-bottom:1px solid #ddd; cursor:pointer; }
     .sidebar ul li:hover { background:#ffe6f0; }
-    .sidebar a { display:block; margin-bottom:10px; text-decoration:none; color:#e60073; font-weight:bold; }
 
     /* Dropdown */
     .dropdown ul { display:none; padding-right:15px; background:#fff8fb; }
@@ -69,21 +68,8 @@
     .close-cart { background:#e60073; color:#fff; }
     .checkout { background:#25d366; color:#fff; }
 
-    /* ✅ عداد السلة */
-    #cartCount {
-      background:#fff; color:#e60073; border-radius:50%; padding:2px 6px; font-size:14px; margin-right:3px;
-    }
-
-    /* ✅ إشعار منبثق */
-    .popup {
-      position: fixed; top: 20px; right: 20px;
-      background: #28a745; color: #fff;
-      padding: 10px 20px; border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      opacity: 0; transform: translateY(-20px);
-      transition: 0.3s; z-index:4000;
-    }
-    .popup.show { opacity: 1; transform: translateY(0); }
+    .delivery { margin-top:15px; font-size:14px; }
+    .delivery label { display:block; margin-bottom:5px; cursor:pointer; }
   </style>
 </head>
 <body>
@@ -105,7 +91,6 @@
 
   <!-- ✅ القائمة الجانبية -->
   <div class="sidebar" id="sidebar">
-    <a href="#" id="closeMenu">❌ إغلاق</a>
     <h3>📂 الأقسام الرئيسية</h3>
     <ul>
       <li>💄 المكياج</li>
@@ -154,23 +139,27 @@
   <div class="cart" id="cart">
     <h3>🛒 سلة التسوق</h3>
     <div id="cartItems"></div>
-    <div class="cart-total" id="cartTotal">الإجمالي: 0 ر.ع</div>
+    <div class="cart-total" id="cartTotal">إجمالي المنتجات: 0 ر.ع</div>
+
+    <!-- ✅ خيارات التوصيل -->
+    <div class="delivery">
+      <label><input type="radio" name="delivery" value="2" checked> 🚚 توصيل للبيت (+2 ر.ع)</label>
+      <label><input type="radio" name="delivery" value="1"> 📦 استلام من المكتب (+1 ر.ع)</label>
+    </div>
+
+    <div class="cart-total" id="cartFinal">الإجمالي مع التوصيل: 0 ر.ع</div>
+
     <div class="cart-buttons">
       <a class="close-cart" id="closeCart">❌ إغلاق</a>
       <a class="checkout" href="checkout.html">✅ إتمام الطلب</a>
     </div>
   </div>
 
-  <!-- ✅ إشعار منبثق -->
-  <div class="popup" id="popup">✅ تمت الإضافة للسلة</div>
-
   <script>
     // ✅ القائمة
     const sidebar = document.getElementById("sidebar");
     const menuBtn = document.getElementById("menuBtn");
-    const closeMenu = document.getElementById("closeMenu");
-    menuBtn.addEventListener("click", ()=> sidebar.classList.add("active"));
-    closeMenu.addEventListener("click", ()=> sidebar.classList.remove("active"));
+    menuBtn.addEventListener("click", ()=> sidebar.classList.toggle("active"));
 
     // ✅ Dropdown
     document.querySelectorAll(".dropdown").forEach(drop=>{
@@ -186,8 +175,8 @@
     const closeCart = document.getElementById("closeCart");
     const cartItems = document.getElementById("cartItems");
     const cartTotal = document.getElementById("cartTotal");
+    const cartFinal = document.getElementById("cartFinal");
     const cartCount = document.getElementById("cartCount");
-    const popup = document.getElementById("popup");
 
     let items = JSON.parse(localStorage.getItem("cartItems")) || [];
     let total = parseFloat(localStorage.getItem("cartTotal")) || 0;
@@ -205,7 +194,6 @@
         total += price;
         saveCart();
         updateCart();
-        showPopup();
       });
     });
 
@@ -218,8 +206,16 @@
                          <button onclick="removeItem(${index})">❌</button>`;
         cartItems.appendChild(div);
       });
-      cartTotal.innerText = "الإجمالي: " + total.toFixed(2) + " ر.ع";
-      cartCount.innerText = items.length; // ✅ تحديث العداد
+      cartTotal.innerText = "إجمالي المنتجات: " + total.toFixed(2) + " ر.ع";
+
+      // ✅ حساب رسوم التوصيل
+      let delivery = document.querySelector('input[name="delivery"]:checked');
+      let deliveryCost = delivery ? parseFloat(delivery.value) : 0;
+      let finalTotal = total + deliveryCost;
+      cartFinal.innerText = "الإجمالي مع التوصيل: " + finalTotal.toFixed(2) + " ر.ع";
+
+      // ✅ تحديث عدد المنتجات فوق
+      cartCount.innerText = items.length;
     }
 
     function removeItem(index){
@@ -234,15 +230,15 @@
       localStorage.setItem("cartTotal", total.toFixed(2));
     }
 
-    // ✅ إشعار منبثق
-    function showPopup(){
-      popup.classList.add("show");
-      setTimeout(()=> popup.classList.remove("show"), 2000);
-    }
-
+    // ✅ تحديث أول ما تفتح الصفحة
     updateCart();
+
+    // ✅ تغيير رسوم التوصيل عند الاختيار
+    document.querySelectorAll('input[name="delivery"]').forEach(radio=>{
+      radio.addEventListener("change", updateCart);
+    });
+
     window.removeItem = removeItem;
   </script>
 </body>
 </html>
-    
