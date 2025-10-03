@@ -5,45 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تم الطلب - كوين شوب</title>
   <style>
-    body {
-      font-family: Tahoma, sans-serif;
-      background: #fff0f8;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-    .box {
-      background: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      max-width: 420px;
-      width: 100%;
-    }
-    h2 { color: #e60073; margin-bottom: 15px; }
-    p { margin: 10px 0; color: #444; }
-    ul { text-align: right; padding: 0; list-style: none; margin: 15px 0; }
-    ul li { background: #ffe6f0; margin: 5px 0; padding: 6px; border-radius: 6px; font-size: 14px; }
-    strong { color: #e60073; }
-    a {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      color: #fff;
-    }
-    .home { background: #e60073; }
-    .whatsapp { background: #25d366; }
+    body{font-family:Tahoma,sans-serif;background:#fff0f8;margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center;padding:20px}
+    .box{background:#fff;padding:30px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.2);max-width:420px;width:100%}
+    h2{color:#e60073;margin-bottom:15px}
+    p{margin:10px 0;color:#444}
+    h3{color:#e60073;margin-top:20px}
+    ul{text-align:right;padding:0;list-style:none;margin:15px 0}
+    ul li{background:#ffe6f0;margin:5px 0;padding:6px;border-radius:6px;font-size:14px}
+    strong{color:#e60073}
+    a{display:inline-block;margin:10px 5px;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;color:#fff}
+    .home{background:#e60073}
+    .whatsapp{background:#25d366}
   </style>
 </head>
 <body>
-
   <div class="box">
     <h2>🎉 شكراً لطلبك من كوين شوب!</h2>
     <p>نقدّر ثقتك ودعمك المستمر لنا 💖</p>
@@ -73,13 +48,14 @@
     const address = localStorage.getItem("customerAddress") || "";
     const payment = localStorage.getItem("paymentMethod") || "";
 
-    // ✅ توليد رقم طلب
+    // ✅ رقم طلب عشوائي
     const orderId = "Q" + Date.now().toString().slice(-6);
     document.getElementById("orderId").textContent = `🆔 رقم الطلب: ${orderId}`;
 
-    // ✅ عرض تفاصيل الطلب
+    // ✅ تفاصيل الطلب
     const orderSummary = document.getElementById("orderSummary");
     let msg = `🆔 رقم الطلب: ${orderId}\n🛍️ طلب جديد من كوين شوب:\n\n`;
+
     items.forEach(item => {
       const li = document.createElement("li");
       li.textContent = `${item.name} - ${item.price} ر.ع`;
@@ -90,11 +66,11 @@
     const finalTotal = (total + delivery).toFixed(2);
     document.getElementById("orderTotal").textContent = `الإجمالي مع التوصيل: ${finalTotal} ر.ع`;
 
-    msg += `\n🚚 التوصيل: ${delivery.toFixed(2)} ر.ع\n`;
-    msg += `💵 الإجمالي: ${finalTotal} ر.ع\n`;
+    msg += `\n🚚 التوصيل: ${delivery.toFixed(2)} ر.ع\n💵 الإجمالي: ${finalTotal} ر.ع\n`;
     msg += `\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📍 العنوان: ${address}\n💳 الدفع: ${payment}\n`;
     msg += `\nمرحباً 🌸، لقد أنهيت طلبي وأرغب بمتابعة كل جديد كوين شوب 💖 شكراً على دعمكم المستمر 🌹`;
 
+    // ✅ عرض بيانات الزبون
     document.getElementById("customerDetails").innerHTML =
       `👤 <strong>${name}</strong><br>📞 ${phone}<br>📍 ${address}<br>💳 ${payment}`;
 
@@ -102,7 +78,7 @@
     document.getElementById("whatsappBtn").href =
       `https://wa.me/96896036550?text=${encodeURIComponent(msg)}`;
 
-    // ✅ حفظ الطلب في سجل الطلبات
+    // ✅ حفظ الطلب في سجل جميع الطلبات
     let orders = JSON.parse(localStorage.getItem("allOrders")) || [];
     orders.push({
       orderId,
@@ -122,6 +98,5 @@
     localStorage.removeItem("cartTotal");
     localStorage.removeItem("deliveryCost");
   </script>
-
 </body>
 </html>
