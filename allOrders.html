@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جميع الطلبات - كوين شوب</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #fff0f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      color: #e60073;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .search-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      width: 60%;
+      padding: 8px 12px;
+      border: 2px solid #e60073;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background: #e60073;
+      color: #fff;
+    }
+    tr:hover { background: #ffe6f0; }
+    .btn {
+      display: inline-block;
+      margin: 15px 5px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+    }
+    .home { background: #e60073; }
+    .clear { background: #ff4d4d; }
+    .delete-btn {
+      background: #ff4d4d;
+      border: none;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📋 جميع الطلبات - كوين شوب</h2>
+
+  <!-- ✅ مربع البحث -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="🔎 ابحث باسم الزبون أو رقم الطلب أو الهاتف...">
+  </div>
+
+  <table id="ordersTable">
+    <thead>
+      <tr>
+        <th>رقم الطلب</th>
+        <th>التفاصيل</th>
+        <th>الإجمالي</th>
+        <th>الاسم</th>
+        <th>الهاتف</th>
+        <th>العنوان</th>
+        <th>الدفع</th>
+        <th>التاريخ</th>
+        <th>إجراء</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div style="text-align:center;">
+    <a href="index.html" class="btn home">⬅️ العودة للرئيسية</a>
+    <button id="clearAll" class="btn clear">🗑️ مسح جميع الطلبات</button>
+  </div>
+
+  <script>
+    let orders = JSON.parse(localStorage.getItem("allOrders")) || [];
+    const tbody = document.querySelector("#ordersTable tbody");
+    const searchInput = document.getElementById("searchInput");
+
+    function renderOrders(filter="") {
+      tbody.innerHTML = "";
+      let filteredOrders = orders.filter(order =>
+        order.orderId.toLowerCase().includes(filter.toLowerCase()) ||
+        order.name.toLowerCase().includes(filter.toLowerCase()) ||
+        order.phone.includes(filter)
+      );
+
+      if (filteredOrders.length === 0) {
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 9;
+        cell.textContent = "لا توجد طلبات مطابقة.";
+        row.appendChild(cell);
+        tbody.appendChild(row);
+      } else {
+        filteredOrders.forEach((order, index) => {
+          const row = document.createElement("tr");
+          const itemsDetails = order.items.map(it => `${it.name} (${it.price} ر.ع)`).join("، ");
+          row.innerHTML = `
+            <td>${order.orderId}</td>
+            <td>${itemsDetails}</td>
+            <td>${order.total} ر.ع</td>
+            <td>${order.name}</td>
+            <td>${order.phone}</td>
+            <td>${order.address}</td>
+            <td>${order.payment}</td>
+            <td>${order.date}</td>
+            <td><button class="delete-btn" onclick="deleteOrder(${index})">❌ حذف</button></td>
+          `;
+          tbody.appendChild(row);
+        });
+      }
+    }
+
+    function deleteOrder(index) {
+      if (confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
+        orders.splice(index, 1);
+        localStorage.setItem("allOrders", JSON.stringify(orders));
+        renderOrders(searchInput.value);
+      }
+    }
+
+    document.getElementById("clearAll").addEventListener("click", () => {
+      if (confirm("⚠️ هل تريد مسح جميع الطلبات؟")) {
+        orders = [];
+        localStorage.removeItem("allOrders");
+        renderOrders();
+      }
+    });
+
+    // ✅ البحث الفوري
+    searchInput.addEventListener("input", () => {
+      renderOrders(searchInput.value);
+    });
+
+    renderOrders();
+    window.deleteOrder = deleteOrder;
+  </script>
+
+</body>
+</html>
