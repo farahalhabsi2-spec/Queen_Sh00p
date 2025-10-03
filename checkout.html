@@ -7,57 +7,60 @@
   <style>
     body {
       font-family: Tahoma, sans-serif;
-      background: #fff0f8;
-      margin: 0; padding: 0;
-      display: flex; justify-content: center; align-items: center;
-      min-height: 100vh;
+      background:#fff0f8;
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
     }
-    .checkout-box {
-      background: #fff;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      max-width: 420px;
-      width: 100%;
+    .form-box {
+      background:#fff;
+      padding:25px;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+      width:90%; max-width:400px;
     }
-    h2 { color: #e60073; text-align: center; }
-    label { display: block; margin: 10px 0 5px; color: #333; }
+    h2 { text-align:center; color:#e60073; }
+    label { display:block; margin-top:10px; color:#444; font-weight:bold; }
     input, select {
-      width: 100%; padding: 10px; margin-bottom: 15px;
-      border: 1px solid #ddd; border-radius: 6px;
+      width:100%; padding:10px; margin-top:5px;
+      border:1px solid #ccc; border-radius:6px;
     }
     button {
-      width: 100%; padding: 12px;
-      background: #e60073; color: #fff;
-      border: none; border-radius: 6px;
-      font-size: 16px; font-weight: bold;
-      cursor: pointer;
+      width:100%; padding:12px; margin-top:15px;
+      border:none; border-radius:6px;
+      background:#e60073; color:#fff;
+      font-size:16px; font-weight:bold; cursor:pointer;
     }
-    button:hover { background: #c2005e; }
+    button:hover { background:#c60060; }
   </style>
 </head>
 <body>
 
-  <div class="checkout-box">
-    <h2>🛒 إتمام الطلب</h2>
+  <div class="form-box">
+    <h2>📝 إتمام الطلب</h2>
     <form id="checkoutForm">
       <label>👤 الاسم الكامل</label>
-      <input type="text" name="name" required>
-
-      <label>📍 العنوان</label>
-      <input type="text" name="address" required>
-
-      <label>🏙️ الولاية / المدينة</label>
-      <input type="text" name="city" required>
+      <input type="text" id="customerName" required>
 
       <label>📞 رقم الهاتف</label>
-      <input type="tel" name="phone" required>
+      <input type="tel" id="customerPhone" required>
+
+      <label>📍 العنوان</label>
+      <input type="text" id="customerAddress" required>
+
+      <label>🚚 طريقة التوصيل</label>
+      <select id="delivery">
+        <option value="2">توصيل للبيت (2 ر.ع)</option>
+        <option value="1">إستلام من المكتب (1 ر.ع)</option>
+      </select>
 
       <label>💳 طريقة الدفع</label>
-      <select name="payment" required>
-        <option value="Visa">Visa 💳</option>
-        <option value="Mastercard">Mastercard 💳</option>
-        <option value="الدفع عند الاستلام">💵 الدفع عند الاستلام</option>
+      <select id="payment">
+        <option>Visa</option>
+        <option>Mastercard</option>
+        <option>الدفع عند الاستلام</option>
       </select>
 
       <button type="submit">✅ تأكيد الطلب</button>
@@ -65,11 +68,15 @@
   </div>
 
   <script>
-    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+    document.getElementById("checkoutForm").addEventListener("submit", function(e){
       e.preventDefault();
-      const form = e.target;
-      const params = new URLSearchParams(new FormData(form)).toString();
-      window.location.href = "success.html?" + params;
+      localStorage.setItem("customerName", document.getElementById("customerName").value);
+      localStorage.setItem("customerPhone", document.getElementById("customerPhone").value);
+      localStorage.setItem("customerAddress", document.getElementById("customerAddress").value);
+      localStorage.setItem("deliveryCost", document.getElementById("delivery").value);
+      localStorage.setItem("paymentMethod", document.getElementById("payment").value);
+
+      window.location.href = "success.html";
     });
   </script>
 
