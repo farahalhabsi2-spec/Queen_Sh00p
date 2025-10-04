@@ -145,4 +145,129 @@
       <li>⚖️ منتجات التخسيس</li>
       <li>👁️ العدسات</li>
       <li>🌸 العطور</li>
-      <
+      <li>👕 ملابس الأطفال</li>
+    </ul>
+  </div>
+
+  <main>
+    <h2 style="text-align:center; color:#e60073;">🛍️ منتجاتنا</h2>
+    <div class="products">
+      <div class="product" data-name="كريم أساس" data-price="7.0">
+        <img src="images/product1.jpg" alt="كريم أساس">
+        <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
+        <button class="add-to-cart">➕ أضف إلى السلة</button>
+      </div>
+      <div class="product" data-name="سيروم ترطيب" data-price="9.9">
+        <img src="images/product2.jpg" alt="سيروم ترطيب">
+        <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
+        <button class="add-to-cart">➕ أضف إلى السلة</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ✅ روابط مهمة (الفوتر) -->
+  <section id="footer-links">
+    <h3>📑 روابط مهمة</h3>
+    <p><a href="about.html">من نحن</a></p>
+    <p><a href="shipping.html">الشحن والتوصيل</a></p>
+    <p><a href="privacy.html">سياسة الخصوصية</a></p>
+    <p><a href="terms.html">الشروط والأحكام</a></p>
+    <p><a href="return.html">سياسة الاستبدال والاسترجاع</a></p>
+    <p><a href="faq.html">الأسئلة الشائعة</a></p>
+    <small>© 2025 كوين شوب · جميع الحقوق محفوظة 👑</small>
+  </section>
+
+  <div class="cart" id="cart">
+    <h3>🛒 سلة التسوق</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal">الإجمالي: 0 ر.ع</div>
+    <div class="cart-buttons">
+      <a class="close-cart" id="closeCart">❌ إغلاق</a>
+      <a class="checkout" href="checkout.html">✅ إتمام الطلب</a>
+    </div>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeSidebar = document.getElementById("closeSidebar");
+    const overlay = document.getElementById("overlay");
+
+    menuBtn.addEventListener("click", ()=> {
+      sidebar.classList.add("active");
+      overlay.classList.add("active");
+    });
+
+    closeSidebar.addEventListener("click", ()=> {
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", ()=> {
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    document.querySelectorAll(".dropdown").forEach(drop=>{
+      drop.addEventListener("click", e=>{
+        e.stopPropagation();
+        drop.classList.toggle("active");
+      });
+    });
+
+    const cart = document.getElementById("cart");
+    const cartBtn = document.getElementById("cartBtn");
+    const closeCart = document.getElementById("closeCart");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const cartCount = document.getElementById("cartCount");
+
+    let items = JSON.parse(localStorage.getItem("cartItems")) || [];
+    let total = parseFloat(localStorage.getItem("cartTotal")) || 0;
+
+    cartBtn.addEventListener("click", ()=> cart.classList.add("active"));
+    closeCart.addEventListener("click", ()=> cart.classList.remove("active"));
+
+    document.querySelectorAll(".add-to-cart").forEach(btn=>{
+      btn.addEventListener("click", e=>{
+        const product = e.target.closest(".product");
+        const name = product.dataset.name;
+        const price = parseFloat(product.dataset.price);
+
+        items.push({name, price});
+        total += price;
+        saveCart();
+        updateCart();
+      });
+    });
+
+    function updateCart(){
+      cartItems.innerHTML = "";
+      items.forEach((item,index)=>{
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `<span>${item.name} - ${item.price} ر.ع</span>
+                         <button onclick="removeItem(${index})">❌</button>`;
+        cartItems.appendChild(div);
+      });
+      cartTotal.innerText = "الإجمالي: " + total.toFixed(2) + " ر.ع";
+      cartCount.innerText = items.length;
+    }
+
+    function removeItem(index){
+      total -= items[index].price;
+      items.splice(index,1);
+      saveCart();
+      updateCart();
+    }
+
+    function saveCart(){
+      localStorage.setItem("cartItems", JSON.stringify(items));
+      localStorage.setItem("cartTotal", total.toFixed(2));
+    }
+
+    updateCart();
+    window.removeItem = removeItem;
+  </script>
+</body>
+</html>
