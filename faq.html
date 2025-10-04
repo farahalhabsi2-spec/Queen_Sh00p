@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الأسئلة الشائعة | كوين شوب</title>
+  <link rel="icon" href="https://i.ibb.co/GfL87zPq/logo.png" type="image/png">
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #fff0f8;
+      margin: 0;
+      text-align: center;
+    }
+    h2 {
+      color: #e60073;
+      margin: 20px 0;
+    }
+    .open-btn {
+      background: #e60073;
+      color: #fff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 40px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    /* ✅ النافذة المنبثقة */
+    .faq-modal {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #fff;
+      border-top: 4px solid #e60073;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+      z-index: 5000;
+      animation: slideUp 0.4s ease;
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 14px 14px 0 0;
+    }
+    .faq-content {
+      padding: 20px;
+      position: relative;
+      text-align: right;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #e60073;
+      background: #ffe6f0;
+      border-radius: 50%;
+      padding: 5px 10px;
+      transition: 0.2s;
+    }
+    .close-btn:hover { background: #e60073; color: #fff; }
+    .faq-text p {
+      background: #fff0f8;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      color: #333;
+      line-height: 1.6;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>❓ صفحة الأسئلة الشائعة - كوين شوب</h2>
+  <button class="open-btn" onclick="openFAQ()">عرض الأسئلة</button>
+
+  <!-- ✅ نافذة الأسئلة -->
+  <div id="faqModal" class="faq-modal">
+    <div class="faq-content">
+      <span class="close-btn" onclick="closeFAQ()">✖</span>
+      <h2>الأسئلة الشائعة</h2>
+      <div class="faq-text">
+
+        <p><strong>س/ متى يوصل طلبي أو كم الوقت المستغرق؟</strong><br>
+        ج/ التوصيل داخل سلطنة عمان خلال 24 ساعة، ولدول الخليج بين 4-7 أيام عمل (مع عدم احتساب يوم الجمعة للإجازة).</p>
+
+        <p><strong>س/ كم يكلفني التوصيل؟</strong><br>
+        ج/ رسوم التوصيل لدينا:<br>
+        • داخل سلطنة عمان: 2 ريال عماني (متوفر الدفع عند الاستلام)<br>
+        • أسياد دول الخليج: 3 ريال عماني للكيلو (تتوفر خدمة الدفع عند الاستلام)</p>
+
+        <p><strong>س/ هل المنتجات أصلية ومضمونة؟</strong><br>
+        ج/ جميع معروضاتنا أصلية 100٪ ولا نتعامل بالمنتجات المقلدة أو الرديئة، ونحن مسجلون في معروف كمؤسسة موثوقة الهوية.</p>
+
+        <p><strong>س/ كيف أتواصل معكم؟</strong><br>
+        ج/ للدعم الفني والاستفسارات العامة يرجى التواصل على الرقم الموحد:
+        <strong>📞 96896035660</strong> من الساعة التاسعة صباحًا حتى الثانية عشرة مساءً.</p>
+
+        <p><strong>س/ أريد إلغاء طلبي!</strong><br>
+        ج/ إذا لم يتم شحن الطلب، يمكن إلغاؤه مباشرة.</p>
+
+        <p><strong>س/ ما هي الدول التي يتم الشحن لها؟</strong><br>
+        ج/ سلطنة عمان، الإمارات، الكويت، البحرين، والسعودية.</p>
+
+        <p><strong>س/ هل خدمة الدفع عند الاستلام متوفرة خارج سلطنة عمان؟</strong><br>
+        ج/ نعم، متوفرة في جميع دول الخليج.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openFAQ() {
+      document.getElementById("faqModal").style.display = "block";
+    }
+    function closeFAQ() {
+      document.getElementById("faqModal").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
