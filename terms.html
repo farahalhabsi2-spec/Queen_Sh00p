@@ -1,0 +1,65 @@
+<!-- ✅ زر فتح الشروط -->
+<footer style="text-align:center; padding:20px; background:#ffe4f2; color:#e60073;">
+  <button id="termsBtn" style="background:#e60073; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">
+    📜 الشروط والأحكام
+  </button>
+</footer>
+
+<!-- ✅ نافذة منبثقة للشروط -->
+<div id="termsModal" style="
+  display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.6); z-index:5000; justify-content:center; align-items:center;">
+  <div style="
+    background:white; width:85%; max-width:600px; padding:25px;
+    border-radius:15px; position:relative; max-height:80%; overflow-y:auto;">
+
+    <button id="closeTerms" style="
+      position:absolute; top:10px; left:10px; background:#e60073; color:white;
+      border:none; border-radius:50%; width:30px; height:30px; font-size:18px; cursor:pointer;">×</button>
+
+    <h2 style="text-align:center; color:#e60073;">📜 الشروط والأحكام</h2>
+    <p style="color:#333; line-height:1.8; text-align:right;">
+
+مرحبًا بكم في موقع <strong>كوين شوب</strong>. باستخدام هذا الموقع أو شراء أي منتج من خلاله، فإنك توافق على الالتزام بالشروط والأحكام التالية:
+
+<br><br>
+<strong>1. قبول الشروط</strong><br>
+باستخدامك الموقع فإنك تقر بأنك قرأت هذه الشروط وفهمتها ووافقت عليها.
+
+<br><br>
+<strong>2. المنتجات</strong><br>
+جميع المنتجات المعروضة في الموقع أصلية وفقًا لما هو موضح.<br>
+قد تختلف ألوان أو أشكال المنتجات قليلًا عن الصور المعروضة نتيجة إضاءة التصوير أو إعدادات الشاشة.
+
+<br><br>
+<strong>3. الطلبات والدفع</strong><br>
+عند تقديم طلب عبر الموقع، فإنك تلتزم بدفع المبلغ المحدد شاملاً الضرائب والشحن.<br>
+نوفر خيارات دفع متعددة (فيزا / ماستر كارد / الدفع عند الاستلام – حسب التوفر).<br>
+يحتفظ المتجر بالحق في رفض أو إلغاء أي طلب عند وجود مشكلة في الدفع أو نقص في المخزون.
+
+<br><br>
+شكراً لتفهمكم وثقتكم بـ <strong>كوين شوب 💖</strong>
+
+    </p>
+  </div>
+</div>
+
+<script>
+  // ✅ فتح وإغلاق الشروط
+  const termsBtn = document.getElementById("termsBtn");
+  const termsModal = document.getElementById("termsModal");
+  const closeTerms = document.getElementById("closeTerms");
+
+  termsBtn.addEventListener("click", () => {
+    termsModal.style.display = "flex";
+  });
+
+  closeTerms.addEventListener("click", () => {
+    termsModal.style.display = "none";
+  });
+
+  // إغلاق عند النقر خارج المربع
+  window.addEventListener("click", (e) => {
+    if (e.target === termsModal) termsModal.style.display = "none";
+  });
+</script>
