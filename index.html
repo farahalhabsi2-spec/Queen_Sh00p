@@ -16,26 +16,10 @@
   <meta property="og:url" content="https://queensh00p.com">
   <meta property="og:type" content="website">
 
-  <!-- ✅ تويتر -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="كوين شوب | Queen Sh0op">
   <meta name="twitter:description" content="منتجات أصلية 100% ✨ مكياج، عناية، عطور والمزيد 🛍️">
   <meta name="twitter:image" content="https://i.ibb.co/GfL87zPq/logo.png">
-
-  <!-- ✅ Structured Data: Logo Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "كوين شوب | Queen Sh0op",
-    "url": "https://queensh00p.com",
-    "logo": "https://i.ibb.co/GfL87zPq/logo.png",
-    "sameAs": [
-      "https://www.instagram.com/queen_sh00p",
-      "https://www.facebook.com/queen_sh00p"
-    ]
-  }
-  </script>
 
   <style>
     body { font-family: Tahoma, sans-serif; background:#fff0f8; margin:0; }
@@ -48,20 +32,17 @@
                  font-size:12px; border-radius:50%; width:18px; height:18px;
                  display:flex; align-items:center; justify-content:center; font-weight:bold; }
 
-    /* ✅ رسالة الترحيب */
     .welcome { background:#ffe4f2; text-align:center; padding:25px 10px; margin:15px;
                border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
     .welcome h2 { margin:0; color:#e60073; }
     .welcome p { margin-top:10px; font-size:15px; color:#444; }
 
-    /* ✅ خلفية غامقة عند فتح القائمة */
     .overlay {
       position:fixed; top:0; left:0; width:100%; height:100%;
       background:rgba(0,0,0,0.5); display:none; z-index:2500;
     }
     .overlay.active { display:block; }
 
-    /* ✅ القائمة */
     .sidebar { position:fixed; top:0; right:-280px; width:250px; height:100%;
                background:#fff; box-shadow:-2px 0 8px rgba(0,0,0,0.2);
                transition:0.3s; padding:20px; z-index:3000; overflow-y:auto; }
@@ -73,7 +54,6 @@
     .dropdown ul { display:none; padding-right:15px; background:#fff8fb; }
     .dropdown.active ul { display:block; }
 
-    /* ✅ زر إغلاق وردي */
     .close-sidebar {
       background:#e60073;
       color:#fff;
@@ -87,9 +67,7 @@
       top:10px;
       left:10px;
     }
-    .close-sidebar:hover { background:#c60060; }
 
-    /* ✅ المنتجات */
     .products { display:flex; gap:15px; flex-wrap:wrap; justify-content:center; margin:20px; }
     .product { background:#fff; padding:10px; border-radius:10px;
                box-shadow:0 2px 5px rgba(0,0,0,0.2); width:160px; text-align:center; }
@@ -97,7 +75,6 @@
     .product button { margin-top:5px; background:#e60073; color:#fff; border:none;
                       padding:6px 10px; border-radius:6px; cursor:pointer; }
 
-    /* ✅ السلة */
     .cart { position:fixed; top:0; left:-320px; width:300px; height:100%; background:#fff;
             box-shadow:2px 0 8px rgba(0,0,0,0.2); transition:0.3s; padding:15px;
             z-index:2000; overflow-y:auto; }
@@ -114,28 +91,35 @@
                       text-decoration:none; font-weight:bold; cursor:pointer; }
     .close-cart { background:#e60073; color:#fff; }
     .checkout { background:#25d366; color:#fff; }
+
+    /* ✅ فوتر */
+    #footer-links {
+      background-color:#ff1493; color:white; text-align:center;
+      padding:25px 10px; border-top:3px solid #fff; margin-top:40px;
+    }
+    #footer-links a { color:white; text-decoration:none; font-size:15px; }
+    #footer-links a:hover { text-decoration:underline; }
+    #footer-links h3 { font-weight:bold; font-size:20px; margin-bottom:15px; }
+    #footer-links p { margin:8px 0; }
+    #footer-links small { font-size:13px; opacity:0.8; display:block; margin-top:15px; }
   </style>
 </head>
 <body>
 
-  <!-- ✅ الهيدر -->
   <header>
     <button id="menuBtn">☰</button>
     <img src="https://i.ibb.co/GfL87zPq/logo.png" alt="لوجو كوين شوب">
     <button id="cartBtn">🛒<span id="cartCount">0</span></button>
   </header>
 
-  <!-- ✅ رسالة ترحيب -->
   <section class="welcome">
     <h2>👑 أهلاً بكم في كوين شوب 🌸</h2>
     <p>أنا صاحبة كوين شوب أشكركم من القلب على دعمكم المستمر 💖  
        بفضلكم وصلنا للسيب والسويق وصحار، ونسعى دومًا لتقديم منتجات أصلية 100% 🛍️</p>
   </section>
 
-  <!-- ✅ الخلفية عند فتح القائمة -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- ✅ القائمة الجانبية -->
   <div class="sidebar" id="sidebar">
     <button id="closeSidebar" class="close-sidebar">✖</button>
     <h3>📂 الأقسام الرئيسية</h3>
@@ -161,122 +145,4 @@
       <li>⚖️ منتجات التخسيس</li>
       <li>👁️ العدسات</li>
       <li>🌸 العطور</li>
-      <li>👕 ملابس الأطفال</li>
-    </ul>
-  </div>
-
-  <!-- ✅ المنتجات -->
-  <main>
-    <h2 style="text-align:center; color:#e60073;">🛍️ منتجاتنا</h2>
-    <div class="products">
-      <div class="product" data-name="كريم أساس" data-price="7.0">
-        <img src="images/product1.jpg" alt="كريم أساس">
-        <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
-        <button class="add-to-cart">➕ أضف إلى السلة</button>
-      </div>
-      <div class="product" data-name="سيروم ترطيب" data-price="9.9">
-        <img src="images/product2.jpg" alt="سيروم ترطيب">
-        <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
-        <button class="add-to-cart">➕ أضف إلى السلة</button>
-      </div>
-    </div>
-  </main>
-
-  <!-- ✅ السلة -->
-  <div class="cart" id="cart">
-    <h3>🛒 سلة التسوق</h3>
-    <div id="cartItems"></div>
-    <div class="cart-total" id="cartTotal">الإجمالي: 0 ر.ع</div>
-    <div class="cart-buttons">
-      <a class="close-cart" id="closeCart">❌ إغلاق</a>
-      <a class="checkout" href="checkout.html">✅ إتمام الطلب</a>
-    </div>
-  </div>
-
-  <script>
-    // ✅ القائمة
-    const sidebar = document.getElementById("sidebar");
-    const menuBtn = document.getElementById("menuBtn");
-    const closeSidebar = document.getElementById("closeSidebar");
-    const overlay = document.getElementById("overlay");
-
-    menuBtn.addEventListener("click", ()=> {
-      sidebar.classList.add("active");
-      overlay.classList.add("active");
-    });
-
-    closeSidebar.addEventListener("click", ()=> {
-      sidebar.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-
-    overlay.addEventListener("click", ()=> {
-      sidebar.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-
-    // ✅ Dropdown
-    document.querySelectorAll(".dropdown").forEach(drop=>{
-      drop.addEventListener("click", e=>{
-        e.stopPropagation();
-        drop.classList.toggle("active");
-      });
-    });
-
-    // ✅ السلة
-    const cart = document.getElementById("cart");
-    const cartBtn = document.getElementById("cartBtn");
-    const closeCart = document.getElementById("closeCart");
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const cartCount = document.getElementById("cartCount");
-
-    let items = JSON.parse(localStorage.getItem("cartItems")) || [];
-    let total = parseFloat(localStorage.getItem("cartTotal")) || 0;
-
-    cartBtn.addEventListener("click", ()=> cart.classList.add("active"));
-    closeCart.addEventListener("click", ()=> cart.classList.remove("active"));
-
-    document.querySelectorAll(".add-to-cart").forEach(btn=>{
-      btn.addEventListener("click", e=>{
-        const product = e.target.closest(".product");
-        const name = product.dataset.name;
-        const price = parseFloat(product.dataset.price);
-
-        items.push({name, price});
-        total += price;
-        saveCart();
-        updateCart();
-      });
-    });
-
-    function updateCart(){
-      cartItems.innerHTML = "";
-      items.forEach((item,index)=>{
-        const div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `<span>${item.name} - ${item.price} ر.ع</span>
-                         <button onclick="removeItem(${index})">❌</button>`;
-        cartItems.appendChild(div);
-      });
-      cartTotal.innerText = "الإجمالي: " + total.toFixed(2) + " ر.ع";
-      cartCount.innerText = items.length;
-    }
-
-    function removeItem(index){
-      total -= items[index].price;
-      items.splice(index,1);
-      saveCart();
-      updateCart();
-    }
-
-    function saveCart(){
-      localStorage.setItem("cartItems", JSON.stringify(items));
-      localStorage.setItem("cartTotal", total.toFixed(2));
-    }
-
-    updateCart();
-    window.removeItem = removeItem;
-  </script>
-</body>
-</html>
+      <
