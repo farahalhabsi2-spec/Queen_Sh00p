@@ -1,83 +1,118 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إتمام الطلب - كوين شوب</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>إتمام الطلب | كوين شوب 👑</title>
+
   <style>
-    body {
-      font-family: Tahoma, sans-serif;
-      background:#fff0f8;
-      margin:0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:100vh;
-    }
-    .form-box {
-      background:#fff;
-      padding:25px;
-      border-radius:12px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.2);
-      width:90%; max-width:400px;
-    }
-    h2 { text-align:center; color:#e60073; }
-    label { display:block; margin-top:10px; color:#444; font-weight:bold; }
-    input, select {
-      width:100%; padding:10px; margin-top:5px;
-      border:1px solid #ccc; border-radius:6px;
-    }
-    button {
-      width:100%; padding:12px; margin-top:15px;
-      border:none; border-radius:6px;
-      background:#e60073; color:#fff;
-      font-size:16px; font-weight:bold; cursor:pointer;
-    }
-    button:hover { background:#c60060; }
+    body{font-family:Tahoma,sans-serif;background:#fff0f8;margin:0}
+    header{background:#e60073;color:#fff;text-align:center;padding:15px;font-size:20px;font-weight:bold}
+    form{background:#fff;margin:25px auto;padding:25px;width:90%;max-width:420px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+    label{display:block;margin-top:12px;color:#e60073;font-weight:bold}
+    input,select,textarea{width:100%;padding:10px;margin-top:6px;border:1px solid #ccc;border-radius:6px;font-size:15px}
+    button{background:#e60073;color:#fff;border:none;border-radius:8px;padding:12px 20px;font-size:16px;font-weight:bold;margin-top:20px;cursor:pointer;width:100%}
+    button:hover{background:#c40063}
+    .hint{color:#777;font-size:13px;margin-top:4px}
   </style>
 </head>
 <body>
 
-  <div class="form-box">
-    <h2>📝 إتمام الطلب</h2>
-    <form id="checkoutForm">
-      <label>👤 الاسم الكامل</label>
-      <input type="text" id="customerName" required>
+  <header>💖 إتمام الطلب | كوين شوب 👑</header>
 
-      <label>📞 رقم الهاتف</label>
-      <input type="tel" id="customerPhone" required>
+  <form id="orderForm">
+    <label>👤 الاسم الكامل</label>
+    <input type="text" id="name" placeholder="أدخلي اسمك" required>
 
-      <label>📍 العنوان</label>
-      <input type="text" id="customerAddress" required>
+    <label>📍 العنوان الكامل</label>
+    <textarea id="address" placeholder="الولاية - المنطقة - أقرب معلم" required></textarea>
 
-      <label>🚚 طريقة التوصيل</label>
-      <select id="delivery">
-        <option value="2">توصيل للبيت (2 ر.ع)</option>
-        <option value="1">إستلام من المكتب (1 ر.ع)</option>
-      </select>
+    <label>📱 رقم الواتساب (بدون +)</label>
+    <input type="tel" id="customerNumber" placeholder="مثال: 9689xxxxxxx" required>
+    <div class="hint">أدخلي الرقم بهذا الشكل: 9689xxxxxxx</div>
 
-      <label>💳 طريقة الدفع</label>
-      <select id="payment">
-        <option>Visa</option>
-        <option>Mastercard</option>
-        <option>الدفع عند الاستلام</option>
-      </select>
+    <label>💳 طريقة الدفع</label>
+    <select id="payment">
+      <option value="الدفع عند الاستلام">الدفع عند الاستلام</option>
+      <option value="الدفع عبر الفيزا">الدفع عبر الفيزا</option>
+    </select>
 
-      <button type="submit">✅ تأكيد الطلب</button>
-    </form>
-  </div>
+    <button type="button" onclick="sendOrder()">✅ تأكيد الطلب</button>
+  </form>
 
   <script>
-    document.getElementById("checkoutForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      localStorage.setItem("customerName", document.getElementById("customerName").value);
-      localStorage.setItem("customerPhone", document.getElementById("customerPhone").value);
-      localStorage.setItem("customerAddress", document.getElementById("customerAddress").value);
-      localStorage.setItem("deliveryCost", document.getElementById("delivery").value);
-      localStorage.setItem("paymentMethod", document.getElementById("payment").value);
+    function sendOrder(){
+      const name = document.getElementById("name").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const payment = document.getElementById("payment").value;
+      const customerNumber = document.getElementById("customerNumber").value.trim();
 
-      window.location.href = "success.html";
-    });
+      if(!name || !address || !customerNumber){
+        alert("يرجى تعبئة جميع الحقول قبل الإرسال.");
+        return;
+      }
+
+      const items = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const total = localStorage.getItem("cartTotal") || "0.00";
+
+      if(items.length === 0){
+        alert("سلتك فارغة!");
+        return;
+      }
+
+      const orderId = "Q" + Date.now().toString().slice(-6);
+      const productList = items.map(it => `• ${it.name} - ${it.price} ر.ع`).join('\n');
+
+      const message =
+`🆔 رقم الطلب: ${orderId}
+👑 طلب جديد من: ${name}
+📍 العنوان: ${address}
+💳 طريقة الدفع: ${payment}
+
+📦 المنتجات:
+${productList}
+
+💵 الإجمالي: ${total} ر.ع
+📱 رقم الزبونة: +${customerNumber}`;
+
+      const shopNumbers = ["96896036550", "96894623872"];
+
+      // إرسال للمتجر
+      shopNumbers.forEach((num, i) => {
+        setTimeout(()=>{
+          window.open(`https://wa.me/${num}?text=${encodeURIComponent(message)}`,'_blank');
+        }, i * 700);
+      });
+
+      // إرسال نسخة للزبونة
+      setTimeout(()=>{
+        const reply = `شكراً لطلبك من كوين شوب 👑\n\n${message}\n\nسنقوم بالتواصل معك قريباً ❤️`;
+        window.open(`https://wa.me/${customerNumber}?text=${encodeURIComponent(reply)}`,'_blank');
+      }, 1600);
+
+      try{
+        const orders = JSON.parse(localStorage.getItem("allOrders")||"[]");
+        orders.push({
+          orderId,
+          name, address, payment,
+          items,
+          total,
+          date: new Date().toLocaleString()
+        });
+        localStorage.setItem("allOrders", JSON.stringify(orders));
+      }catch(e){}
+
+      sessionStorage.setItem("lastOrderId", orderId);
+      sessionStorage.setItem("lastOrderTotal", total);
+      sessionStorage.setItem("lastOrderName", name);
+
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("cartTotal");
+
+      setTimeout(()=>{
+        window.location.href = "success.html";
+      }, 2200);
+    }
   </script>
 
 </body>
