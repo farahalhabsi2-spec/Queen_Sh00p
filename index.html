@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>كوين شوب | Queen Sh0op</title>
-
+  <title>كوين شوب | Queen Sh0op 👑</title>
   <link rel="icon" href="https://i.ibb.co/GfL87zPq/logo.png" type="image/png">
-  <meta name="description" content="كوين شوب 👑 متجر يقدم أجود منتجات العناية بالبشرة والشعر والمكياج والعطور الأصلية 🛍️ مع توصيل سريع داخل سلطنة عمان ودول الخليج.">
 
   <style>
     body { font-family: Tahoma, sans-serif; background:#fff0f8; margin:0; }
@@ -14,26 +12,17 @@
              display:flex; justify-content:space-between; align-items:center; }
     header img { height:40px; }
     #menuBtn { font-size:22px; background:none; border:none; color:white; cursor:pointer; }
-    #cartBtn { position:relative; }
+    #cartBtn { position:relative; background:none; border:none; color:white; font-size:20px; cursor:pointer; }
     #cartCount { position:absolute; top:-5px; left:-5px; background:#fff; color:#e60073;
                  font-size:12px; border-radius:50%; width:18px; height:18px;
                  display:flex; align-items:center; justify-content:center; font-weight:bold; }
 
-    .welcome { background:#ffe4f2; text-align:center; padding:25px 10px; margin:15px;
-               border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-    .welcome h2 { margin:0; color:#e60073; }
-    .welcome p { margin-top:10px; font-size:15px; color:#444; }
-
-    /* 🔹 القوائم الجانبية */
-    .overlay { position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.5); display:none; z-index:2500; }
-    .overlay.active { display:block; }
-
+    /* ✅ القائمة الجانبية */
     .sidebar { position:fixed; top:0; right:-280px; width:250px; height:100%;
                background:#fff; box-shadow:-2px 0 8px rgba(0,0,0,0.2);
                transition:0.3s; padding:20px; z-index:3000; overflow-y:auto; }
     .sidebar.active { right:0; }
-    .sidebar h3 { color:#e60073; margin-top:0; text-align:center; }
+    .sidebar h3 { color:#e60073; margin-top:0; }
     .sidebar ul { list-style:none; padding:0; }
     .sidebar ul li { padding:8px; border-bottom:1px solid #ddd; cursor:pointer; }
     .sidebar ul li:hover { background:#ffe6f0; }
@@ -44,7 +33,15 @@
       position:absolute; top:10px; left:10px;
     }
 
-    /* 🔹 المنتجات */
+    .overlay { position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.4); display:none; z-index:2000; }
+    .overlay.active { display:block; }
+
+    /* ✅ المنتجات */
+    .welcome { background:#ffe4f2; text-align:center; padding:20px 10px; margin:15px;
+               border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .welcome h2 { color:#e60073; }
+
     .products { display:flex; gap:15px; flex-wrap:wrap; justify-content:center; margin:20px; }
     .product { background:#fff; padding:10px; border-radius:10px;
                box-shadow:0 2px 5px rgba(0,0,0,0.2); width:160px; text-align:center; }
@@ -52,32 +49,23 @@
     .product button { margin-top:5px; background:#e60073; color:#fff; border:none;
                       padding:6px 10px; border-radius:6px; cursor:pointer; }
 
-    /* 🔹 السلة */
+    /* ✅ السلة */
     .cart { position:fixed; top:0; left:-320px; width:300px; height:100%; background:#fff;
             box-shadow:2px 0 8px rgba(0,0,0,0.2); transition:0.3s; padding:15px;
-            z-index:2000; overflow-y:auto; }
+            z-index:4000; overflow-y:auto; }
     .cart.active { left:0; }
-    .cart h3 { margin:0; color:#e60073; text-align:center; }
-
+    .cart h3 { color:#e60073; text-align:center; margin:0; }
     .cart-item { display:flex; justify-content:space-between; align-items:center;
                  margin:10px 0; border-bottom:1px solid #ddd; padding-bottom:5px; }
-    .cart-item span { font-size:14px; }
-    .cart-item button { background:#ff4d4d; border:none; color:#fff; border-radius:5px;
-                        cursor:pointer; padding:3px 6px; }
-
-    .cart-total { font-weight:bold; margin-top:15px; text-align:center; color:#333; }
-
-    .form-box { margin-top:15px; background:#fff0f8; padding:10px; border-radius:10px; }
-    label { display:block; font-weight:bold; color:#e60073; margin-top:8px; }
+    .cart-total { font-weight:bold; margin-top:10px; text-align:center; }
+    .form-box { margin-top:10px; background:#fff0f8; padding:10px; border-radius:10px; }
+    label { display:block; margin-top:8px; color:#e60073; font-weight:bold; }
     input, textarea, select { width:100%; padding:8px; border-radius:6px; border:1px solid #ccc; }
 
-    .confirm-btn {
-      background:#e60073; color:white; border:none; padding:10px; border-radius:8px;
-      width:100%; margin-top:12px; font-weight:bold; cursor:pointer;
-    }
+    .confirm-btn { background:#e60073; color:white; border:none; padding:10px;
+                   border-radius:8px; width:100%; margin-top:12px; font-weight:bold; cursor:pointer; }
     .confirm-btn:hover { background:#c40063; }
 
-    /* 🔹 الفوتر */
     #footer-links {
       background-color:#ff1493; color:white; text-align:center;
       padding:25px 10px; border-top:3px solid #fff; margin-top:40px;
@@ -86,161 +74,128 @@
     #footer-links a:hover { text-decoration:underline; }
   </style>
 </head>
-<body>
 
+<body>
   <header>
     <button id="menuBtn">☰</button>
-    <img src="https://i.ibb.co/GfL87zPq/logo.png" alt="لوجو كوين شوب">
+    <img src="https://i.ibb.co/GfL87zPq/logo.png" alt="كوين شوب">
     <button id="cartBtn">🛒<span id="cartCount">0</span></button>
   </header>
 
-  <section class="welcome">
-    <h2>👑 أهلاً بكم في كوين شوب 🌸</h2>
-    <p>منتجات أصلية 100% مع خدمة توصيل لجميع مناطق عمان والخليج 💖</p>
-  </section>
-
   <div class="overlay" id="overlay"></div>
 
-  <!-- 🔸 القائمة الجانبية -->
+  <!-- ✅ القائمة -->
   <div class="sidebar" id="sidebar">
-    <button id="closeSidebar" class="close-sidebar">✖</button>
-    <h3>📂 الأقسام الرئيسية</h3>
+    <button class="close-sidebar" id="closeSidebar">✖</button>
+    <h3>📂 الأقسام</h3>
     <ul>
       <li>💄 المكياج</li>
-      <li>🧴 العناية</li>
-      <li>💨 الأجهزة</li>
-      <li>🌿 الأعشاب</li>
-      <li>🛢️ الزيوت</li>
-      <li>💊 المكملات الغذائية</li>
-      <li>⚖️ منتجات التخسيس</li>
-      <li>👁️ العدسات</li>
+      <li>🧴 العناية بالبشرة</li>
+      <li>💇‍♀️ العناية بالشعر</li>
       <li>🌸 العطور</li>
-      <li>👕 ملابس الأطفال</li>
+      <li>💊 المكملات الغذائية</li>
+      <li>🛢️ الزيوت</li>
+      <li>⚖️ منتجات التنحيف</li>
+      <li>👗 ملابس</li>
     </ul>
   </div>
 
-  <!-- 🔸 المنتجات -->
+  <section class="welcome">
+    <h2>👑 مرحبًا بكم في كوين شوب 🌸</h2>
+    <p>منتجات أصلية 100% وتوصيل سريع داخل سلطنة عمان ودول الخليج 💖</p>
+  </section>
+
   <main>
-    <h2 style="text-align:center; color:#e60073;">🛍️ منتجاتنا</h2>
+    <h2 style="text-align:center;color:#e60073;">🛍️ منتجاتنا</h2>
     <div class="products">
-      <div class="product" data-name="كريم أساس" data-price="7.0">
-        <img src="images/product1.jpg" alt="كريم أساس">
-        <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
-        <button class="add-to-cart">➕ أضف إلى السلة</button>
+      <div class="product" data-name="كريم الأساس" data-price="7.0">
+        <img src="images/product1.jpg" alt="كريم الأساس">
+        <p>كريم الأساس<br><strong>7.0 ر.ع</strong></p>
+        <button class="add-to-cart">➕ أضف للسلة</button>
       </div>
       <div class="product" data-name="سيروم ترطيب" data-price="9.9">
         <img src="images/product2.jpg" alt="سيروم ترطيب">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
-        <button class="add-to-cart">➕ أضف إلى السلة</button>
+        <button class="add-to-cart">➕ أضف للسلة</button>
       </div>
     </div>
   </main>
 
-  <!-- 🔸 السلة -->
+  <!-- ✅ الفوتر -->
+  <section id="footer-links">
+    <h3>📞 تواصل معنا</h3>
+    <p><a href="about.html">من نحن</a> · <a href="terms.html">الشروط</a> · <a href="privacy.html">الخصوصية</a></p>
+    <div style="margin-top:10px;">
+      <a href="https://wa.me/96896036550" target="_blank">💬 واتساب</a> ·
+      <a href="https://www.instagram.com/queen_sh00p" target="_blank">📸 إنستغرام</a>
+    </div>
+    <small>© 2025 كوين شوب · جميع الحقوق محفوظة 👑</small>
+  </section>
+
+  <!-- ✅ السلة -->
   <div class="cart" id="cart">
     <h3>🛒 سلة التسوق</h3>
     <div id="cartItems"></div>
     <div class="cart-total" id="cartTotal">الإجمالي: 0 ر.ع</div>
 
     <div class="form-box">
-      <h4 style="text-align:center;color:#e60073;">📝 إتمام الطلب</h4>
-      <label>👤 الاسم الكامل</label>
-      <input type="text" id="customerName" required>
-      <label>📍 العنوان</label>
-      <textarea id="customerAddress" required></textarea>
-      <label>📞 رقم الواتساب (بدون +)</label>
-      <input type="tel" id="customerPhone" placeholder="9689xxxxxxx" required>
-      <label>🚚 طريقة التوصيل</label>
+      <label>👤 الاسم الكامل</label><input id="customerName" type="text">
+      <label>📍 العنوان</label><textarea id="customerAddress"></textarea>
+      <label>📞 رقم الواتساب</label><input id="customerPhone" type="tel" placeholder="9689xxxxxxx">
+      <label>🚚 نوع التوصيل</label>
       <select id="delivery">
-        <option value="للمكتب (+1 ر.ع)">للمكتب (+1 ر.ع)</option>
-        <option value="لمنزل (+2 ر.ع)">لمنزل (+2 ر.ع)</option>
+        <option value="مكتب">توصيل لمكتب (1 ر.ع)</option>
+        <option value="منزل">توصيل للمنزل (2 ر.ع)</option>
       </select>
       <label>💳 طريقة الدفع</label>
       <select id="payment">
         <option value="الدفع عند الاستلام">الدفع عند الاستلام</option>
-        <option value="الدفع عبر الفيزا">الدفع عبر الفيزا</option>
+        <option value="الفيزا">الدفع بالفيزا</option>
       </select>
       <button class="confirm-btn" onclick="confirmOrder()">✅ تأكيد الطلب</button>
+      <button class="confirm-btn" style="background:#ff4d4d" onclick="closeCart()">❌ إغلاق</button>
     </div>
-
-    <button class="confirm-btn" style="background:#ff4d4d" onclick="closeCart()">❌ إغلاق</button>
   </div>
 
-  <!-- 🔸 الفوتر -->
-  <section id="footer-links">
-    <p><a href="about.html">من نحن</a> · <a href="privacy.html">الخصوصية</a> · <a href="terms.html">الشروط</a></p>
-    <div style="margin-top:10px; display:flex; justify-content:center; gap:25px;">
-      <a href="https://wa.me/96896036550" target="_blank">💬</a>
-      <a href="https://www.instagram.com/queen_sh00p" target="_blank">📸</a>
-    </div>
-    <small>© 2025 كوين شوب · جميع الحقوق محفوظة 👑</small>
-  </section>
-
-  <!-- 🔹 سكريبت -->
   <script>
-    const sidebar = document.getElementById("sidebar");
-    const menuBtn = document.getElementById("menuBtn");
-    const closeSidebar = document.getElementById("closeSidebar");
-    const overlay = document.getElementById("overlay");
+    // ✅ القائمة
+    const sidebar=document.getElementById("sidebar");
+    const overlay=document.getElementById("overlay");
+    document.getElementById("menuBtn").onclick=()=>{sidebar.classList.add("active");overlay.classList.add("active");}
+    document.getElementById("closeSidebar").onclick=()=>{sidebar.classList.remove("active");overlay.classList.remove("active");}
+    overlay.onclick=()=>{sidebar.classList.remove("active");overlay.classList.remove("active");}
 
-    // فتح القائمة
-    menuBtn.addEventListener("click", () => {
-      sidebar.classList.add("active");
-      overlay.classList.add("active");
-    });
+    // ✅ السلة
+    const cart=document.getElementById("cart");
+    const cartBtn=document.getElementById("cartBtn");
+    const cartItems=document.getElementById("cartItems");
+    const cartTotal=document.getElementById("cartTotal");
+    const cartCount=document.getElementById("cartCount");
+    let items=JSON.parse(localStorage.getItem("cartItems"))||[];
+    let total=parseFloat(localStorage.getItem("cartTotal"))||0;
 
-    // إغلاق القائمة عند الضغط على ✖ أو الخلفية
-    closeSidebar.addEventListener("click", () => {
-      sidebar.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-    overlay.addEventListener("click", () => {
-      sidebar.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-
-    const cart = document.getElementById("cart");
-    const cartBtn = document.getElementById("cartBtn");
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const cartCount = document.getElementById("cartCount");
-    let items = JSON.parse(localStorage.getItem("cartItems")) || [];
-    let total = parseFloat(localStorage.getItem("cartTotal")) || 0;
-
-    cartBtn.addEventListener("click", ()=> cart.classList.add("active"));
-    function closeCart(){ cart.classList.remove("active"); }
+    cartBtn.onclick=()=>cart.classList.add("active");
+    function closeCart(){cart.classList.remove("active");}
 
     document.querySelectorAll(".add-to-cart").forEach(btn=>{
-      btn.addEventListener("click", e=>{
-        const product = e.target.closest(".product");
-        const name = product.dataset.name;
-        const price = parseFloat(product.dataset.price);
-        items.push({name, price});
-        total += price;
-        saveCart(); updateCart();
-      });
+      btn.onclick=e=>{
+        const p=e.target.closest(".product");
+        const name=p.dataset.name;const price=parseFloat(p.dataset.price);
+        items.push({name,price});total+=price;saveCart();updateCart();
+      };
     });
 
     function updateCart(){
-      cartItems.innerHTML = "";
-      items.forEach((item,index)=>{
-        const div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `<span>${item.name} - ${item.price} ر.ع</span>
-                         <button onclick="removeItem(${index})">❌</button>`;
-        cartItems.appendChild(div);
+      cartItems.innerHTML="";
+      items.forEach((it,i)=>{
+        cartItems.innerHTML+=`<div class='cart-item'><span>${it.name} - ${it.price} ر.ع</span>
+        <button onclick='removeItem(${i})'>❌</button></div>`;
       });
-      cartTotal.innerText = "الإجمالي: " + total.toFixed(2) + " ر.ع";
-      cartCount.innerText = items.length;
+      cartTotal.textContent="الإجمالي: "+total.toFixed(2)+" ر.ع";
+      cartCount.textContent=items.length;
     }
-    function removeItem(index){
-      total -= items[index].price; items.splice(index,1);
-      saveCart(); updateCart();
-    }
-    function saveCart(){
-      localStorage.setItem("cartItems", JSON.stringify(items));
-      localStorage.setItem("cartTotal", total.toFixed(2));
-    }
+    function removeItem(i){total-=items[i].price;items.splice(i,1);saveCart();updateCart();}
+    function saveCart(){localStorage.setItem("cartItems",JSON.stringify(items));localStorage.setItem("cartTotal",total.toFixed(2));}
     updateCart();
 
     function confirmOrder(){
@@ -249,28 +204,18 @@
       const phone=document.getElementById("customerPhone").value.trim();
       const delivery=document.getElementById("delivery").value;
       const payment=document.getElementById("payment").value;
-      if(!name||!address||!phone||items.length===0){
-        alert("يرجى تعبئة البيانات كاملة وإضافة منتجات 🛍️"); return;
-      }
-
-      let deliveryFee = delivery.includes("للمكتب") ? 1 : 2;
-      total += deliveryFee;
-
+      if(!name||!address||!phone||items.length===0){alert("يرجى إدخال جميع البيانات 🛍️");return;}
+      let deliveryCost=delivery==="مكتب"?1:2;
+      const finalTotal=(total+deliveryCost).toFixed(2);
       const orderId="Q"+Date.now().toString().slice(-6);
-      const message=`🆔 رقم الطلب: ${orderId}\n👑 الاسم: ${name}\n📍 العنوان: ${address}\n🚚 التوصيل: ${delivery}\n📞 ${phone}\n💳 الدفع: ${payment}\n\n📦 المنتجات:\n${items.map(it=>`• ${it.name} - ${it.price} ر.ع`).join('\n')}\n\n💵 الإجمالي مع التوصيل: ${total.toFixed(2)} ر.ع`;
-
-      const shopNumbers=["96896036550","96894623872"];
-      shopNumbers.forEach((num,i)=>setTimeout(()=>{window.open(`https://wa.me/${num}?text=${encodeURIComponent(message)}`,'_blank');},i*700));
-      setTimeout(()=>{window.open(`https://wa.me/${phone}?text=${encodeURIComponent("شكراً لطلبك من كوين شوب 👑\n"+message)}`,'_blank');},1600);
-
+      const msg=`🆔 رقم الطلب: ${orderId}\n👑 الاسم: ${name}\n📍 العنوان: ${address}\n🚚 نوع التوصيل: ${delivery}\n💳 الدفع: ${payment}\n📦 المنتجات:\n${items.map(it=>`• ${it.name} - ${it.price} ر.ع`).join('\n')}\n\n💵 الإجمالي مع التوصيل: ${finalTotal} ر.ع\n📞 ${phone}`;
+      ["96896036550","96894623872"].forEach((num,i)=>setTimeout(()=>{window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`,'_blank');},i*600));
       sessionStorage.setItem("lastOrderId",orderId);
-      sessionStorage.setItem("lastOrderTotal",total.toFixed(2));
       sessionStorage.setItem("lastOrderName",name);
-      localStorage.removeItem("cartItems"); localStorage.removeItem("cartTotal");
-      setTimeout(()=>{window.location.href="success.html";},2200);
+      sessionStorage.setItem("lastOrderTotal",finalTotal);
+      localStorage.clear();
+      setTimeout(()=>window.location.href="success.html",1500);
     }
-
-    window.removeItem=removeItem;
   </script>
 </body>
 </html>
