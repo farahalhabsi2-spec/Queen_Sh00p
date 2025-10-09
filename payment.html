@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الدفع عبر فيزا 💳 | كوين شوب 👑</title>
+  <link rel="icon" href="https://i.ibb.co/GfL87zPq/logo.png" type="image/png">
+  <style>
+    body {
+      font-family: "Tahoma", sans-serif;
+      background: #ffb6c1;
+      margin: 0;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #e60073;
+      padding: 30px 25px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      width: 90%;
+      max-width: 420px;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    p {
+      color: #ffe4f2;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background: #fff;
+      color: #e60073;
+      border: none;
+      padding: 12px 18px;
+      font-size: 17px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #ffe4f2;
+    }
+
+    .back {
+      margin-top: 15px;
+      color: #fff;
+      text-decoration: underline;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    small {
+      display: block;
+      margin-top: 25px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>💳 الدفع عبر Tap Visa</h1>
+    <p>يرجى الضغط على الزر أدناه لإتمام الدفع بأمان<br>من خلال بوابة Tap المعتمدة 🔒</p>
+
+    <!-- زر الدفع -->
+    <button id="payBtn">💳 ادفع الآن عبر Tap</button>
+
+    <div class="back" onclick="goBack()">↩️ العودة إلى كوين شوب</div>
+
+    <small>© 2025 كوين شوب · جميع الحقوق محفوظة 👑</small>
+  </div>
+
+  <script src="https://secure.gosell.io/js/sdk/tap.min.js"></script>
+  <script>
+    // مفاتيح Tap الخاصة بك
+    const tap = Tapjsli('pk_test_7qxHF5aA8fgDBWUPROzrZKNh');
+
+    document.getElementById('payBtn').addEventListener('click', () => {
+      alert("🚀 جاري تحويلك إلى صفحة الدفع الآمنة من Tap...");
+      // هنا يمكنك ربط مع API الدفع أو تحويل مباشر إلى Tap Checkout
+      // لمجرد التجربة الآن، سنحاكي نجاح العملية:
+      setTimeout(() => {
+        window.location.href = "success.html"; // بعد الدفع الناجح
+      }, 2000);
+    });
+
+    function goBack(){
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
