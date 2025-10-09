@@ -3,114 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الدفع عبر فيزا 💳 | كوين شوب 👑</title>
+  <title>الدفع | كوين شوب 👑</title>
   <link rel="icon" href="https://i.ibb.co/GfL87zPq/logo.png" type="image/png">
   <style>
     body {
       font-family: "Tahoma", sans-serif;
-      background: #ffb6c1;
+      background: #e60073;
       margin: 0;
-      color: #fff;
+      color: white;
       text-align: center;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
     }
-
     .container {
-      background: #e60073;
-      padding: 30px 25px;
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      background: #b30059;
+      padding: 25px 20px;
+      border-radius: 15px;
       width: 90%;
       max-width: 420px;
-      animation: fadeIn 1s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
     }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: scale(0.9);}
-      to {opacity: 1; transform: scale(1);}
-    }
-
     h1 {
       font-size: 22px;
       margin-bottom: 10px;
-      color: #fff;
     }
-
-    p {
-      color: #ffe4f2;
-      font-size: 15px;
-      margin-bottom: 25px;
-    }
-
-    button {
-      background: #fff;
-      color: #e60073;
-      border: none;
-      padding: 12px 18px;
-      font-size: 17px;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
+    label {
+      display: block;
+      margin-top: 15px;
+      text-align: right;
       font-weight: bold;
-      transition: all 0.3s;
+      color: #ffe4f2;
     }
-
-    button:hover {
-      background: #ffe4f2;
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 5px;
+      font-size: 15px;
     }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      color: #e60073;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #ffe4f2; }
 
     .back {
       margin-top: 15px;
       color: #fff;
       text-decoration: underline;
-      font-size: 15px;
       cursor: pointer;
+      font-size: 15px;
     }
 
-    small {
-      display: block;
-      margin-top: 25px;
-      font-size: 13px;
-      opacity: 0.8;
+    .success {
+      display: none;
+      animation: fade 0.8s ease;
+    }
+
+    @keyframes fade {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>💳 الدفع عبر Tap Visa</h1>
-    <p>يرجى الضغط على الزر أدناه لإتمام الدفع بأمان<br>من خلال بوابة Tap المعتمدة 🔒</p>
+  <div class="container" id="formPage">
+    <h1>🛍️ الدفع من كوين شوب 👑</h1>
+    <p style="color:#ffe4f2;">أكملي بيانات الطلب أدناه بكل حب 💖</p>
 
-    <!-- زر الدفع -->
-    <button id="payBtn">💳 ادفع الآن عبر Tap</button>
+    <label>👤 الاسم الكامل</label>
+    <input type="text" id="name" placeholder="ادخلي اسمك الكامل">
 
-    <div class="back" onclick="goBack()">↩️ العودة إلى كوين شوب</div>
+    <label>📍 الولاية</label>
+    <input type="text" id="city" placeholder="مثال: السيب / صحار / السويق">
 
-    <small>© 2025 كوين شوب · جميع الحقوق محفوظة 👑</small>
+    <label>🚚 طريقة التوصيل</label>
+    <select id="delivery">
+      <option value="بيت">🏠 إلى البيت (+2 ر.ع)</option>
+      <option value="مكتب">🏢 إلى المكتب (+1 ر.ع)</option>
+    </select>
+
+    <label>💳 طريقة الدفع</label>
+    <select id="payment">
+      <option value="عند الاستلام">💵 عند الاستلام</option>
+      <option value="تحويل">💳 تحويل بنكي / فيزا</option>
+    </select>
+
+    <button onclick="submitOrder()">✅ تأكيد الطلب</button>
+    <div class="back" onclick="goBack()">↩️ العودة للرئيسية</div>
   </div>
 
-  <script src="https://secure.gosell.io/js/sdk/tap.min.js"></script>
+  <!-- صفحة النجاح -->
+  <div class="container success" id="successPage">
+    <h1>💖 تم استلام طلبك بنجاح!</h1>
+    <p id="orderInfo"></p>
+    <p style="margin-top:10px;">سيتم التواصل معك عبر واتساب لتأكيد الطلب 👑</p>
+    <button onclick="goBack()">🏠 العودة إلى كوين شوب</button>
+  </div>
+
   <script>
-    // مفاتيح Tap الخاصة بك
-    const tap = Tapjsli('pk_test_7qxHF5aA8fgDBWUPROzrZKNh');
+    function submitOrder() {
+      const name = document.getElementById("name").value.trim();
+      const city = document.getElementById("city").value.trim();
+      const delivery = document.getElementById("delivery").value;
+      const payment = document.getElementById("payment").value;
 
-    document.getElementById('payBtn').addEventListener('click', () => {
-      alert("🚀 جاري تحويلك إلى صفحة الدفع الآمنة من Tap...");
-      // هنا يمكنك ربط مع API الدفع أو تحويل مباشر إلى Tap Checkout
-      // لمجرد التجربة الآن، سنحاكي نجاح العملية:
-      setTimeout(() => {
-        window.location.href = "success.html"; // بعد الدفع الناجح
-      }, 2000);
-    });
+      if (!name || !city) {
+        alert("⚠️ يرجى إدخال الاسم والولاية أولاً");
+        return;
+      }
 
-    function goBack(){
+      // حساب السعر الإضافي حسب التوصيل
+      let deliveryFee = delivery === "بيت" ? 2 : 1;
+      const orderId = "Q" + Date.now().toString().slice(-6);
+
+      // رسالة الطلب للواتساب
+      const msg = `🆔 رقم الطلب: ${orderId}
+👑 الاسم: ${name}
+📍 الولاية: ${city}
+🚚 التوصيل: ${delivery} (${deliveryFee} ر.ع)
+💳 الدفع: ${payment}
+💬 شكراً لطلبك من كوين شوب 💖 سيتم التواصل معك لتأكيد الطلب.`;
+
+      // إرسال تلقائي لرقمي كوين شوب
+      const shopNumbers = ["96896036550", "96894623872"];
+      shopNumbers.forEach((num, i) =>
+        setTimeout(() => window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, "_blank"), i * 800)
+      );
+
+      // عرض صفحة النجاح
+      document.getElementById("formPage").style.display = "none";
+      document.getElementById("successPage").style.display = "block";
+      document.getElementById("orderInfo").innerHTML =
+        `🔢 رقم الطلب: <strong>${orderId}</strong><br>👤 الاسم: ${name}<br>💵 رسوم التوصيل: ${deliveryFee} ر.ع<br>💳 طريقة الدفع: ${payment}`;
+    }
+
+    function goBack() {
       window.location.href = "index.html";
     }
   </script>
-
 </body>
 </html>
