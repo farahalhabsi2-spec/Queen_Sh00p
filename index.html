@@ -6,113 +6,121 @@
   <title>كوين شوب 👑 | Queen Sh00p</title>
   <link rel="icon" href="https://i.ibb.co/GfL87zPq/logo.png" type="image/png">
   <style>
-    body { font-family: Tahoma, sans-serif; background:#fff0f8; margin:0; color:#333; }
+    body {
+      font-family: 'Tahoma', sans-serif;
+      margin: 0; padding: 0;
+      background: #ffe6f2;
+      color: #333;
+    }
     header {
-      background:#b1005c; color:#fff; padding:10px 20px;
-      display:flex; justify-content:space-between; align-items:center;
+      background: #b30059;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
     }
-    header img { height:40px; }
-    #menuBtn, #cartBtn {
-      font-size:22px; background:none; border:none; color:white; cursor:pointer;
-    }
-    #cartCount {
-      background:white; color:#b1005c; border-radius:50%; width:18px; height:18px;
-      display:inline-flex; align-items:center; justify-content:center;
-      font-size:12px; font-weight:bold; margin-right:-10px;
-    }
+    header img { height: 40px; }
+    button { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
 
-    /* Sidebar */
+    /* القائمة الجانبية */
     .sidebar {
-      position:fixed; top:0; right:-300px; width:260px; height:100%;
-      background:white; box-shadow:-2px 0 8px rgba(0,0,0,0.3);
-      transition:0.3s; z-index:1000; padding:20px; overflow-y:auto;
+      position: fixed;
+      top: 0; right: -300px;
+      width: 250px; height: 100%;
+      background: white;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.3);
+      transition: 0.3s;
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
     }
-    .sidebar.active { right:0; }
-    .close-sidebar {
-      background:#b1005c; color:white; border:none; border-radius:6px;
-      padding:5px 10px; cursor:pointer; font-size:16px; margin-bottom:10px;
+    .sidebar.active { right: 0; }
+    .close-btn {
+      background: #b30059; color: white;
+      border: none; border-radius: 5px;
+      padding: 6px 10px; cursor: pointer;
     }
-    .sidebar h3 { color:#b1005c; margin-top:0; }
-    .sidebar ul { list-style:none; padding:0; }
-    .sidebar li { padding:8px 0; border-bottom:1px solid #ddd; cursor:pointer; }
+    .sidebar h3 { color: #b30059; margin-top: 0; }
+    .sidebar ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar li {
+      border-bottom: 1px solid #eee;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+    .sidebar li ul { display: none; padding-right: 15px; }
+    .sidebar li.active ul { display: block; }
 
-    .sublist {
-      display:none; margin-right:15px; background:#fff7fa; border-radius:6px; padding:5px;
-    }
-    .sidebar li.active .sublist { display:block; }
-
-    /* Welcome */
+    /* الترحيب */
     .welcome {
-      text-align:center; background:#ffcce1; margin:20px; border-radius:12px;
-      padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    }
-    .welcome h2 { color:#b1005c; margin:0 0 10px 0; }
-    .welcome p { color:#444; font-size:15px; }
-
-    .alert {
-      background:#ffe4f2; color:#b1005c; padding:10px; text-align:center;
-      font-weight:bold; display:none; margin:10px 20px; border-radius:8px;
+      background: #ffb3d9;
+      margin: 20px;
+      border-radius: 12px;
+      text-align: center;
+      padding: 20px;
+      color: #660033;
     }
 
-    /* Products */
+    /* المنتجات */
     .products {
-      display:flex; flex-wrap:wrap; gap:15px; justify-content:center;
-      padding:10px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
     }
     .product {
-      background:white; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.2);
-      width:160px; padding:10px; text-align:center;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      width: 160px;
+      text-align: center;
+      padding: 10px;
     }
-    .product img { width:100%; border-radius:10px; }
+    .product img { width: 100%; border-radius: 10px; }
     .product button {
-      margin-top:5px; background:#b1005c; color:white; border:none;
-      padding:6px 10px; border-radius:6px; cursor:pointer;
+      margin-top: 5px;
+      background: #b30059;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
     }
 
-    /* Cart */
-    .cart {
-      position:fixed; top:0; left:-320px; width:300px; height:100%;
-      background:white; box-shadow:2px 0 10px rgba(0,0,0,0.3);
-      transition:0.3s; z-index:1200; padding:15px; overflow-y:auto;
+    /* التنبيه */
+    .alert {
+      background: #ff99cc;
+      color: #660033;
+      text-align: center;
+      font-weight: bold;
+      margin: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
     }
-    .cart.active { left:0; }
-    .cart h3 { color:#b1005c; text-align:center; margin-top:0; }
-    .cart-item { display:flex; justify-content:space-between; align-items:center;
-      border-bottom:1px solid #ddd; padding:6px 0; }
-    .cart-total { font-weight:bold; text-align:center; margin-top:10px; color:#333; }
 
-    .form-box {
-      margin-top:10px; background:#fff0f8; padding:10px; border-radius:8px;
-    }
-    label { display:block; color:#b1005c; font-weight:bold; margin-top:8px; }
-    input, textarea, select {
-      width:100%; border:1px solid #ccc; border-radius:6px; padding:8px;
-    }
-    .confirm-btn {
-      background:#b1005c; color:white; border:none; padding:10px;
-      border-radius:8px; width:100%; margin-top:12px; font-weight:bold; cursor:pointer;
-    }
-    .confirm-btn:hover { background:#800045; }
-
-    /* Success Page */
-    .success-box {
-      display:none; background:#fff; padding:30px; border-radius:12px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.2); text-align:center;
-      margin:20px auto; width:90%; max-width:400px;
-    }
-    .emoji { font-size:60px; animation:pulse 1.5s infinite; }
-    @keyframes pulse { 0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);} }
-
-    /* Footer */
+    /* الفوتر */
     footer {
-      background:#b1005c; color:white; text-align:center; padding:25px 10px;
-      margin-top:40px; border-top:3px solid white;
+      background: #b30059;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
     }
-    footer a { color:white; text-decoration:none; display:block; margin:5px 0; }
-    footer a:hover { text-decoration:underline; }
+    footer a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 5px 0;
+    }
+    footer a:hover { text-decoration: underline; }
     footer .social {
-      margin-top:15px; display:flex; justify-content:center; gap:25px;
-      font-size:26px;
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      font-size: 24px;
     }
   </style>
 </head>
@@ -121,27 +129,24 @@
   <header>
     <button id="menuBtn">☰</button>
     <img src="https://i.ibb.co/GfL87zPq/logo.png" alt="كوين شوب">
-    <button id="cartBtn">🛒<span id="cartCount">0</span></button>
+    <button onclick="window.location.href='cart.html'">🛒</button>
   </header>
 
-  <!-- الأقسام -->
+  <!-- القائمة الجانبية -->
   <div class="sidebar" id="sidebar">
-    <button class="close-sidebar" onclick="toggleMenu()">✖</button>
+    <button class="close-btn" onclick="toggleMenu()">✖</button>
     <h3>📂 الأقسام الرئيسية</h3>
     <ul>
       <li>💄 المكياج</li>
-      <li id="careMenu">🧴 العناية</li>
-      <ul class="sublist" id="careSub">
-        <li>العناية بالبشرة</li>
-        <li>العناية بالشعر</li>
-        <li>العناية بالوجه</li>
-        <li>العناية بالجسم</li>
-        <li>العناية بالشفاه</li>
-        <li>العناية بالمنطقة الحساسة</li>
-        <li>العناية بالفم والأسنان</li>
-        <li>العناية باليدين</li>
-        <li>العناية بالقدمين</li>
-      </ul>
+      <li onclick="toggleSub(this)">🧴 العناية
+        <ul>
+          <li>العناية بالشعر</li>
+          <li>العناية بالبشرة</li>
+          <li>العناية بالوجه</li>
+          <li>العناية بالجسم</li>
+          <li>العناية بالشفاه</li>
+        </ul>
+      </li>
       <li>💨 الأجهزة</li>
       <li>🌿 الأعشاب</li>
       <li>🛢️ الزيوت</li>
@@ -153,43 +158,30 @@
     </ul>
   </div>
 
-  <!-- رسالة ترحيب -->
+  <!-- رسالة الترحيب -->
   <section class="welcome">
     <h2>👑 أهلاً بكم في كوين شوب 🌸</h2>
-    <p>أشكركم من القلب على دعمكم المستمر 💖<br>بفضلكم وصلنا للسيب والسويق وصحار، ونسعى دومًا لتقديم منتجات أصلية 100% 🛍️</p>
+    <p>أشكركم من القلب على دعمكم المستمر 💖<br>بفضلكم وصلنا للسيب والسويق وصحار ونسعى لتقديم منتجات أصلية 100% 🛍️</p>
   </section>
 
-  <div class="alert" id="alertBox">✅ تم إضافة المنتج إلى السلة بنجاح!</div>
+  <div class="alert" id="alertBox">✅ تم إضافة المنتج إلى السلة!</div>
 
   <!-- المنتجات -->
-  <main>
-    <h2 style="text-align:center; color:#b1005c;">🛍️ منتجاتنا</h2>
+  <section>
+    <h2 style="text-align:center; color:#b30059;">🛍️ منتجاتنا</h2>
     <div class="products">
-      <div class="product" data-name="كريم أساس" data-price="7.0">
-        <img src="images/product1.jpg" alt="كريم أساس">
+      <div class="product" onclick="addToCart('كريم أساس',7.0)">
+        <img src="https://i.ibb.co/3vxhbWD/foundation.jpg" alt="كريم أساس">
         <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
-        <button class="add-to-cart">➕ أضف إلى السلة</button>
+        <button>➕ أضف للسلة</button>
       </div>
-      <div class="product" data-name="سيروم ترطيب" data-price="9.9">
-        <img src="images/product2.jpg" alt="سيروم ترطيب">
+      <div class="product" onclick="addToCart('سيروم ترطيب',9.9)">
+        <img src="https://i.ibb.co/dKhcd6y/serum.jpg" alt="سيروم ترطيب">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
-        <button class="add-to-cart">➕ أضف إلى السلة</button>
+        <button>➕ أضف للسلة</button>
       </div>
     </div>
-  </main>
-
-  <!-- صفحة النجاح -->
-  <div class="success-box" id="successPage">
-    <div class="emoji">💖</div>
-    <h2>تم استلام طلبك بنجاح!</h2>
-    <p>شكرًا لتسوقك من <strong>كوين شوب 👑</strong></p>
-    <div style="text-align:right;">
-      <p>🔢 رقم الطلب: <span id="orderId">...</span></p>
-      <p>👤 الزبونة: <span id="orderName">...</span></p>
-      <p>💵 الإجمالي: <span id="orderTotal">...</span> ر.ع</p>
-    </div>
-    <button onclick="goHome()">🏠 العودة إلى الصفحة الرئيسية</button>
-  </div>
+  </section>
 
   <!-- الفوتر -->
   <footer>
@@ -202,66 +194,26 @@
     <a href="faq.html">الأسئلة الشائعة</a>
     <div class="social">
       <a href="https://wa.me/96896036550" target="_blank">💬</a>
-      <a href="https://www.instagram.com/queen_sh00p" target="_blank">📸</a>
+      <a href="https://instagram.com/queen_sh00p" target="_blank">📸</a>
     </div>
     <small>© 2025 كوين شوب · جميع الحقوق محفوظة 👑</small>
   </footer>
 
   <script>
-    const sidebar=document.getElementById("sidebar");
-    const careMenu=document.getElementById("careMenu");
-    const careSub=document.getElementById("careSub");
-    const cart=document.getElementById("cart");
-    const cartBtn=document.getElementById("cartBtn");
-    const cartItems=document.getElementById("cartItems");
-    const cartTotal=document.getElementById("cartTotal");
-    const cartCount=document.getElementById("cartCount");
-    const alertBox=document.getElementById("alertBox");
-    const successPage=document.getElementById("successPage");
-    let items=[]; let total=0;
+    const sidebar = document.getElementById("sidebar");
+    const alertBox = document.getElementById("alertBox");
 
     function toggleMenu(){ sidebar.classList.toggle("active"); }
-    document.getElementById("menuBtn").onclick=toggleMenu;
-    careMenu.onclick=()=>careSub.style.display=careSub.style.display==="block"?"none":"block";
+    function toggleSub(el){ el.classList.toggle("active"); }
 
-    function goHome(){ location.reload(); }
-
-    document.querySelectorAll(".add-to-cart").forEach(btn=>{
-      btn.onclick=e=>{
-        const p=e.target.closest(".product");
-        const name=p.dataset.name;
-        const price=parseFloat(p.dataset.price);
-        items.push({name,price});
-        total+=price;
-        updateCart();
-        alertBox.style.display="block";
-        setTimeout(()=>alertBox.style.display="none",1500);
-      };
-    });
-
-    function updateCart(){
-      cartItems.innerHTML=items.map((it,i)=>`<div class="cart-item"><span>${it.name} - ${it.price} ر.ع</span><button onclick="removeItem(${i})">❌</button></div>`).join("");
-      cartTotal.textContent="الإجمالي: "+total.toFixed(2)+" ر.ع";
-      cartCount.textContent=items.length;
-    }
-    function removeItem(i){ total-=items[i].price; items.splice(i,1); updateCart(); }
-
-    function confirmOrder(){
-      const name=prompt("👤 أدخلي اسمك:");
-      const address=prompt("📍 العنوان:");
-      const phone=prompt("📞 رقم الواتساب:");
-      const delivery=confirm("هل التوصيل إلى 🏠 البيت؟ (إلغاء = المكتب)")?"بيت":"مكتب";
-      const fee=delivery==="بيت"?2:1;
-      const totalWithDelivery=total+fee;
-      const orderId="Q"+Date.now().toString().slice(-6);
-      const msg=`🆔 رقم الطلب: ${orderId}\n👑 الاسم: ${name}\n📍 العنوان: ${address}\n🚚 التوصيل: ${delivery} (${fee} ر.ع)\n💳 الدفع: عند الاستلام\n📦 المنتجات:\n${items.map(it=>`• ${it.name} - ${it.price}`).join("\n")}\n💵 الإجمالي: ${totalWithDelivery.toFixed(2)} ر.ع`;
-      ["96896036550","96894623872"].forEach((n,i)=>setTimeout(()=>window.open(`https://wa.me/${n}?text=${encodeURIComponent(msg)}`,'_blank'),i*700));
-      successPage.style.display="block";
-      document.getElementById("orderId").textContent=orderId;
-      document.getElementById("orderName").textContent=name;
-      document.getElementById("orderTotal").textContent=totalWithDelivery.toFixed(2);
-      window.scrollTo({top:0,behavior:"smooth"});
+    function addToCart(name, price){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({name, price});
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alertBox.style.display = "block";
+      setTimeout(()=>alertBox.style.display="none",1500);
     }
   </script>
+
 </body>
 </html>
