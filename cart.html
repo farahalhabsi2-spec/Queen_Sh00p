@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سلة كوين شوب 👑</title>
+  <link rel="icon" href="https://i.ibb.co/GfL87zPq/logo.png" type="image/png">
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background: #ffe6f2;
+      margin: 0; color: #333;
+    }
+    header {
+      background: #b30059;
+      color: white;
+      display: flex; justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+    }
+    header img { height: 40px; }
+    button { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
+
+    .cart-container {
+      background: white;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      padding: 20px;
+    }
+    h2 { text-align: center; color: #b30059; }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+    }
+
+    .cart-total {
+      text-align: center;
+      font-weight: bold;
+      color: #660033;
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      background: #b30059;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .empty {
+      text-align: center;
+      color: #999;
+      padding: 20px;
+    }
+
+    footer {
+      background: #b30059;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button onclick="window.location.href='index.html'">↩️</button>
+    <img src="https://i.ibb.co/GfL87zPq/logo.png" alt="كوين شوب">
+    <span>🛍️ السلة</span>
+  </header>
+
+  <div class="cart-container">
+    <h2>🛒 سلة التسوق</h2>
+    <div id="cartItems"></div>
+    <div id="cartTotal" class="cart-total"></div>
+    <button id="checkoutBtn" class="checkout-btn" onclick="goCheckout()">💳 إتمام الطلب</button>
+  </div>
+
+  <footer>
+    <small>© 2025 كوين شوب · جميع الحقوق محفوظة 👑</small>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+
+    function loadCart(){
+      cartItems.innerHTML = "";
+      if(cart.length === 0){
+        cartItems.innerHTML = '<div class="empty">السلة فارغة 🛍️</div>';
+        document.getElementById("checkoutBtn").style.display = "none";
+        return;
+      }
+      let total = 0;
+      cart.forEach((item, i)=>{
+        total += item.price;
+        cartItems.innerHTML += `
+          <div class="cart-item">
+            <span>${item.name}</span>
+            <span>${item.price.toFixed(2)} ر.ع</span>
+          </div>`;
+      });
+      cartTotal.innerHTML = `الإجمالي: ${total.toFixed(2)} ر.ع`;
+      localStorage.setItem("cartTotal", total.toFixed(2));
+    }
+
+    function goCheckout(){
+      window.location.href = "checkout.html";
+    }
+
+    loadCart();
+  </script>
+</body>
+</html>
