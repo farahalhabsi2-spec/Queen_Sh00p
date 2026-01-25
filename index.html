@@ -32,7 +32,7 @@
     .sidebar {
       position: fixed;
       top: 0; right: -300px;
-      width: 250px; height: 100%;
+      width: 260px; height: 100%;
       background: white;
       box-shadow: -2px 0 8px rgba(0,0,0,0.3);
       transition: 0.3s;
@@ -49,7 +49,7 @@
     }
     .sidebar h3 { color: #b30059; margin-top: 10px; }
 
-    /* خلفية شفافة عند فتح الأدراج */
+    /* خلفية شفافة */
     .overlay{
       position: fixed;
       inset: 0;
@@ -186,12 +186,15 @@
       color:#333;
     }
 
-    /* ✅ خانات الأقسام داخل السايدبار */
+    /* ✅ خانات الأقسام */
     .catGrid{
       display:grid;
       grid-template-columns: 1fr;
       gap:10px;
       margin-top:12px;
+    }
+    .catLink{
+      text-decoration:none;
     }
     .catBox{
       background:#fff;
@@ -208,10 +211,9 @@
       user-select:none;
     }
     .catBox:hover{ background:#ffe6f2; }
-    .hasSub .arrow{
-      color:#b30059;
-      font-weight:900;
-    }
+
+    .hasSub .arrow{ font-weight:900; }
+
     .subGrid{
       display:none;
       margin-top:-4px;
@@ -223,6 +225,7 @@
       gap:10px;
     }
     .subGrid.show{ display:grid; }
+
     .subBox{
       background:#ffe6f2;
       border:1px solid #ffd1e6;
@@ -271,39 +274,38 @@
 
   <div class="overlay" id="overlay"></div>
 
-  <!-- ✅ القائمة الجانبية (خانات) -->
+  <!-- ✅ القائمة الجانبية (خانات منفصلة لكل قسم) -->
   <div class="sidebar" id="sidebar">
     <button class="close-btn" id="closeMenu">✖</button>
-    <h3>📂 الأقسام الرئيسية</h3>
+    <h3>📂 الأقسام</h3>
 
-    <div class="catGrid" id="catGrid">
+    <div class="catGrid">
 
-      <div class="catBox" data-cat="makeup">💄 المكياج</div>
+      <!-- صفحات مستقلة -->
+      <a class="catLink" href="makeup.html"><div class="catBox">💄 المكياج <span>›</span></div></a>
 
-      <div class="catBox hasSub" id="careBox">
-        🧴 العناية <span class="arrow" id="careArrow">▾</span>
-      </div>
-
+      <!-- العناية (فتح/إغلاق للفروع) -->
+      <div class="catBox hasSub" id="careBox">🧴 العناية <span class="arrow" id="careArrow">▾</span></div>
       <div class="subGrid" id="careSub">
-        <div class="subBox" data-cat="hair">💆‍♀️ العناية بالشعر</div>
-        <div class="subBox" data-cat="skin">🧖‍♀️ العناية بالبشرة</div>
-        <div class="subBox" data-cat="face">😊 العناية بالوجه</div>
-        <div class="subBox" data-cat="body">🛁 العناية بالجسم</div>
-        <div class="subBox" data-cat="lips">💋 العناية بالشفاه</div>
-        <div class="subBox" data-cat="sensitive">🌸 المنطقة الحساسة</div>
-        <div class="subBox" data-cat="oral">🦷 الفم والأسنان</div>
-        <div class="subBox" data-cat="hands">🖐 اليدين</div>
-        <div class="subBox" data-cat="feet">🦶 القدمين</div>
+        <a class="catLink" href="care-hair.html"><div class="subBox">💆‍♀️ الشعر</div></a>
+        <a class="catLink" href="care-skin.html"><div class="subBox">🧖‍♀️ البشرة</div></a>
+        <a class="catLink" href="care-face.html"><div class="subBox">😊 الوجه</div></a>
+        <a class="catLink" href="care-body.html"><div class="subBox">🛁 الجسم</div></a>
+        <a class="catLink" href="care-lips.html"><div class="subBox">💋 الشفاه</div></a>
+        <a class="catLink" href="care-sensitive.html"><div class="subBox">🌸 الحساسة</div></a>
+        <a class="catLink" href="care-oral.html"><div class="subBox">🦷 الفم</div></a>
+        <a class="catLink" href="care-hands.html"><div class="subBox">🖐 اليدين</div></a>
+        <a class="catLink" href="care-feet.html"><div class="subBox">🦶 القدمين</div></a>
       </div>
 
-      <div class="catBox" data-cat="devices">💨 الأجهزة (السيشوار – أدوات التجميل)</div>
-      <div class="catBox" data-cat="herbs">🌿 الأعشاب</div>
-      <div class="catBox" data-cat="oils">🛢️ الزيوت</div>
-      <div class="catBox" data-cat="supplements">💊 المكملات الغذائية</div>
-      <div class="catBox" data-cat="slimming">⚖️ منتجات التخسيس</div>
-      <div class="catBox" data-cat="lenses">👁️ العدسات</div>
-      <div class="catBox" data-cat="perfumes">🌸 العطور</div>
-      <div class="catBox" data-cat="kids">👗 ملابس الأطفال</div>
+      <a class="catLink" href="devices.html"><div class="catBox">💨 الأجهزة <span>›</span></div></a>
+      <a class="catLink" href="herbs.html"><div class="catBox">🌿 الأعشاب <span>›</span></div></a>
+      <a class="catLink" href="oils.html"><div class="catBox">🛢️ الزيوت <span>›</span></div></a>
+      <a class="catLink" href="supplements.html"><div class="catBox">💊 المكملات <span>›</span></div></a>
+      <a class="catLink" href="slimming.html"><div class="catBox">⚖️ التخسيس <span>›</span></div></a>
+      <a class="catLink" href="lenses.html"><div class="catBox">👁️ العدسات <span>›</span></div></a>
+      <a class="catLink" href="perfumes.html"><div class="catBox">🌸 العطور <span>›</span></div></a>
+      <a class="catLink" href="kids.html"><div class="catBox">👗 ملابس الأطفال <span>›</span></div></a>
 
     </div>
   </div>
@@ -340,19 +342,18 @@
 
   <div class="alert" id="alertBox">✅ تم إضافة المنتج إلى السلة!</div>
 
-  <!-- المنتجات -->
+  <!-- المنتجات (نفس عندك) -->
   <section>
     <h2 style="text-align:center; color:#b30059;">🛍️ منتجاتنا</h2>
 
     <div class="products" id="products">
-      <!-- ✅ أضفنا data-cat عشان الفلترة -->
-      <div class="product" data-name="كريم أساس" data-cat="makeup" onclick="addToCart('كريم أساس',7.0)">
+      <div class="product" data-name="كريم أساس" onclick="addToCart('كريم أساس',7.0)">
         <img src="https://i.ibb.co/3vxhbWD/foundation.jpg" alt="كريم أساس">
         <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
         <button class="addBtn" type="button">➕ أضف للسلة</button>
       </div>
 
-      <div class="product" data-name="سيروم ترطيب" data-cat="face" onclick="addToCart('سيروم ترطيب',9.9)">
+      <div class="product" data-name="سيروم ترطيب" onclick="addToCart('سيروم ترطيب',9.9)">
         <img src="https://i.ibb.co/dKhcd6y/serum.jpg" alt="سيروم ترطيب">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
         <button class="addBtn" type="button">➕ أضف للسلة</button>
@@ -415,7 +416,7 @@
     }
     overlay.addEventListener("click", closeAll);
 
-    // ✅ فتح/إغلاق خانات العناية
+    // ✅ فتح/إغلاق فروع العناية
     const careBox = document.getElementById("careBox");
     const careSub = document.getElementById("careSub");
     const careArrow = document.getElementById("careArrow");
@@ -424,30 +425,6 @@
       careSub.classList.toggle("show");
       careArrow.textContent = careSub.classList.contains("show") ? "▴" : "▾";
     });
-
-    // ✅ الضغط على خانة قسم = فلترة المنتجات
-    document.addEventListener("click", (e) => {
-      const box = e.target.closest(".catBox, .subBox");
-      if(!box) return;
-
-      // لا نفلتر عند الضغط على "العناية" لأنها فقط تفتح/تغلق
-      if(box.id === "careBox") return;
-
-      const cat = box.getAttribute("data-cat");
-      if(!cat) return;
-
-      filterByCategory(cat);
-      closeAll();
-    });
-
-    function filterByCategory(cat){
-      const items = document.querySelectorAll("#products .product");
-      items.forEach(p => {
-        const pCat = p.getAttribute("data-cat");
-        if(!pCat){ p.style.display = "block"; return; }
-        p.style.display = (pCat === cat) ? "block" : "none";
-      });
-    }
 
     // ✅ إضافة للسلة + رسالة
     function addToCart(name, price){
@@ -503,10 +480,9 @@
     }
     window.removeFromCart = removeFromCart;
 
-    // ✅ بحث المنتجات (يشتغل مع الفلترة)
+    // ✅ بحث المنتجات
     const search = document.getElementById("productSearch");
     const productsWrap = document.getElementById("products");
-
     search.addEventListener("input", () => {
       const q = search.value.trim().toLowerCase();
       const items = productsWrap.querySelectorAll(".product");
