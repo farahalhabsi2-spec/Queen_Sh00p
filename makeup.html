@@ -1,0 +1,67 @@
+<button class="accordion">💄 قسم المكياج</button>
+
+<div class="panel">
+  <div class="product">
+    <img src="image1.jpg">
+    <h4>بودرة غابريني</h4>
+    <p>السعر: 3 ريال</p>
+    <p>تثبيت المكياج – تمتص الدهون</p>
+  </div>
+
+  <div class="product">
+    <img src="image2.jpg">
+    <h4>كريم أساس غابريني</h4>
+    <p>السعر: 4 ريال</p>
+    <p>تغطية عالية – يوحد لون البشرة</p>
+  </div>
+
+  <div class="product">
+    <img src="image3.jpg">
+    <h4>آيلاينر غابريني</h4>
+    <p>السعر: 2.5 ريال</p>
+    <p>مقاوم للماء – لون أسود قوي</p>
+  </div>
+</div>
+
+<style>
+.accordion {
+  background-color: #b30059;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  text-align: right;
+  outline: none;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.panel {
+  display: none;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.product {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.product img {
+  width: 120px;
+  border-radius: 10px;
+}
+</style>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+for (var i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+  }
+}
+</script>
