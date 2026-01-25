@@ -6,61 +6,20 @@
 <title>قسم المكياج | Queen Shoop</title>
 
 <style>
-body{
-  font-family: Tahoma, sans-serif;
-  background:#ffe6f2;
-  margin:0;
-  padding:15px;
-}
-
-/* زر القسم */
-.accordion {
-  background-color: #b30059;
-  color: white;
-  cursor: pointer;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  text-align: right;
-  outline: none;
-  font-size: 16px;
-  border-radius: 8px;
-}
-
-/* الحاوية */
-.panel {
-  display: none;
-  background-color: #fff;
-  padding: 10px;
-  margin-top:8px;
-  border-radius: 10px;
-}
-
-/* المنتج */
-.product {
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-  text-align: center;
-}
-
-.product img {
-  width: 140px;
-  border-radius: 10px;
-}
-
-.price {
-  color:#b30059;
-  font-weight:bold;
-}
+body{font-family:Tahoma,sans-serif;background:#ffe6f2;margin:0;padding:15px;}
+.accordion{background:#b30059;color:#fff;cursor:pointer;padding:12px;width:100%;border:none;text-align:right;font-size:16px;border-radius:8px;}
+.panel{display:none;background:#fff;padding:10px;margin-top:8px;border-radius:10px;}
+.product{border-bottom:1px solid #eee;padding:10px 0;text-align:center;}
+.product img{width:140px;border-radius:10px;}
+.price{color:#b30059;font-weight:bold;}
 </style>
 </head>
 
 <body>
 
-<button class="accordion">💄 قسم المكياج</button>
+<button class="accordion" id="makeupBtn">💄 قسم المكياج</button>
 
-<div class="panel">
-
+<div class="panel" id="makeupPanel">
   <div class="product">
     <img src="image1.jpg" alt="بودرة غابريني">
     <h4>بودرة غابريني</h4>
@@ -81,18 +40,17 @@ body{
     <p class="price">السعر: 2.5 ريال</p>
     <p>مقاوم للماء – لون أسود قوي</p>
   </div>
-
 </div>
 
 <script>
-var acc = document.getElementsByClassName("accordion");
+document.addEventListener("DOMContentLoaded", function () {
+  var btn = document.getElementById("makeupBtn");
+  var panel = document.getElementById("makeupPanel");
 
-for (var i = 0; i < acc.length; i++) {
-  acc[i].onclick = function() {
-    var panel = this.nextElementSibling;
-    panel.style.display = panel.style.display === "block" ? "none" : "block";
-  }
-}
+  btn.addEventListener("click", function () {
+    panel.style.display = (panel.style.display === "block") ? "none" : "block";
+  });
+});
 </script>
 
 </body>
