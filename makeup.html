@@ -2,73 +2,71 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>قسم المكياج</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قسم المكياج</title>
 
 <style>
 body{
-  font-family: Tahoma, sans-serif;
-  background:#ffe6f2;
   margin:0;
+  font-family: Tahoma, Arial, sans-serif;
+  background:#ffe6f2;
+}
+
+h1{
+  text-align:center;
+  color:#b30059;
+  margin:20px 0;
+}
+
+.products{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+  gap:15px;
   padding:15px;
 }
 
-h2{
-  text-align:center;
-  color:#b30059;
-  margin-bottom:15px;
-}
-
-/* شبكة المنتجات */
-.products{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap:12px;
-}
-
-/* كرت المنتج */
 .product{
   background:#fff;
-  border-radius:14px;
+  border-radius:15px;
   padding:10px;
   text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.15);
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
 }
 
 .product img{
   width:100%;
-  border-radius:12px;
+  border-radius:10px;
+  height:180px;
+  object-fit:cover;
 }
 
 .product h4{
-  font-size:14px;
   margin:8px 0 4px;
   color:#333;
 }
 
 .price{
-  color:#e60073;
+  color:#b30059;
   font-weight:bold;
-  margin-bottom:4px;
+  margin:5px 0;
 }
 
-.benefit{
-  font-size:13px;
+.product p{
+  font-size:14px;
   color:#555;
-  margin-bottom:6px;
 }
 
-.btn{
-  background:#ff5fa2;
-  color:#fff;
+.product button{
+  background:#ff4da6;
   border:none;
-  border-radius:10px;
-  padding:6px 10px;
+  color:#fff;
+  padding:7px 12px;
+  border-radius:20px;
   cursor:pointer;
-  font-size:13px;
+  margin-top:5px;
 }
 
-.btn:hover{
+.product button:hover{
   background:#e60073;
 }
 </style>
@@ -76,40 +74,40 @@ h2{
 
 <body>
 
-<h2>💄 قسم المكياج</h2>
+<h1>💄 قسم المكياج</h1>
 
 <div class="products">
 
   <div class="product">
-    <img src="images/powder.jpg" alt="بودرة تثبيت">
-    <h4>بودرة تثبيت</h4>
-    <div class="price">2.63 ر.ع</div>
-    <div class="benefit">تثبت المكياج وتمنع اللمعان</div>
-    <button class="btn">إضافة إلى السلة</button>
-  </div>
-
-  <div class="product">
-    <img src="images/brush.jpg" alt="فرشاة حواجب">
-    <h4>فرشاة حواجب</h4>
-    <div class="price">2.10 ر.ع</div>
-    <div class="benefit">تحديد دقيق وسهل للحواجب</div>
-    <button class="btn">إضافة إلى السلة</button>
-  </div>
-
-  <div class="product">
-    <img src="images/liner.jpg" alt="آيلاينر">
+    <img src="images/eyeliner.jpg" alt="آيلاينر">
     <h4>آيلاينر أسود</h4>
     <div class="price">2.00 ر.ع</div>
-    <div class="benefit">مقاوم للماء ولون قوي</div>
-    <button class="btn">إضافة إلى السلة</button>
+    <p>مقاوم للماء ولون قوي</p>
+    <button>إضافة إلى السلة</button>
   </div>
 
   <div class="product">
-    <img src="images/spray.jpg" alt="بخاخ تثبيت مكياج">
-    <h4>بخاخ تثبيت مكياج</h4>
+    <img src="images/powder.jpg" alt="بودرة">
+    <h4>بودرة تثبيت</h4>
     <div class="price">2.63 ر.ع</div>
-    <div class="benefit">يثبت المكياج لساعات طويلة</div>
-    <button class="btn">إضافة إلى السلة</button>
+    <p>تثبت المكياج وتمنع اللمعان</p>
+    <button>إضافة إلى السلة</button>
+  </div>
+
+  <div class="product">
+    <img src="images/foundation.jpg" alt="فاونديشن">
+    <h4>فاونديشن</h4>
+    <div class="price">2.10 ر.ع</div>
+    <p>تغطية عالية ومظهر طبيعي</p>
+    <button>إضافة إلى السلة</button>
+  </div>
+
+  <div class="product">
+    <img src="images/brow.jpg" alt="حواجب">
+    <h4>فرشاة حواجب</h4>
+    <div class="price">2.10 ر.ع</div>
+    <p>تحديد دقيق وسهل للحواجب</p>
+    <button>إضافة إلى السلة</button>
   </div>
 
 </div>
