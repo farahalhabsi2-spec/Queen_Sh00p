@@ -1,117 +1,239 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>قسم المكياج</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>قسم المكياج | Queen Sh00p</title>
 
 <style>
-body{
-  margin:0;
-  font-family: Tahoma, sans-serif;
-  background:#ffe6f2;
-}
+  body{
+    margin:0;
+    font-family: Tahoma, Arial, sans-serif;
+    background:#ffe6f2;
+    color:#333;
+  }
 
-h1{
-  text-align:center;
-  color:#b30059;
-  margin:20px 0;
-}
+  header{
+    background:#b30059;
+    color:#fff;
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  header a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:16px;
+  }
+  header .title{
+    font-size:18px;
+    font-weight:900;
+  }
+  header button{
+    background:#fff;
+    color:#b30059;
+    border:none;
+    border-radius:10px;
+    padding:8px 12px;
+    font-weight:800;
+    cursor:pointer;
+  }
 
-/* الشبكة */
-.products{
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
-  gap:15px;
-  padding:15px;
-}
+  .pageTitle{
+    text-align:center;
+    margin:18px 0 6px;
+    color:#b30059;
+    font-size:28px;
+    font-weight:900;
+  }
+  .subTitle{
+    text-align:center;
+    margin:0 0 14px;
+    color:#7a0039;
+    opacity:.9;
+    font-size:14px;
+  }
 
-.product{
-  background:#fff;
-  border-radius:15px;
-  padding:10px;
-  text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.2);
-}
+  /* ✅ شبكة مربعات */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:14px;
+    padding:14px;
+    max-width:1100px;
+    margin:0 auto;
+  }
 
-.product img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:10px;
-}
+  .product{
+    background:#fff;
+    border-radius:16px;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    overflow:hidden;
+  }
 
-.product h4{
-  margin:8px 0 4px;
-  color:#333;
-}
+  /* ✅ صورة كاملة بدون قص */
+  .product img{
+    width:100%;
+    height:auto;
+    border-radius:12px;
+    display:block;
+  }
 
-.price{
-  color:#b30059;
-  font-weight:bold;
-  margin:5px 0;
-}
+  .product h4{
+    margin:10px 0 6px;
+    font-size:16px;
+    color:#333;
+    font-weight:900;
+  }
 
-.product p{
-  font-size:14px;
-  color:#555;
-}
+  .price{
+    color:#e60073;
+    font-weight:900;
+    font-size:16px;
+    margin:0 0 6px;
+  }
 
-.product button{
-  background:#ff4da6;
-  border:none;
-  color:#fff;
-  padding:7px 12px;
-  border-radius:20px;
-  cursor:pointer;
-  margin-top:5px;
-}
+  .benefit{
+    font-size:13px;
+    color:#555;
+    margin:0 0 10px;
+    line-height:1.6;
+    min-height:42px;
+  }
 
-.product button:hover{
-  background:#e60073;
-}
+  .btn{
+    background:#ff4da6;
+    border:none;
+    color:#fff;
+    padding:9px 12px;
+    border-radius:22px;
+    font-weight:900;
+    cursor:pointer;
+    width:100%;
+  }
+  .btn:hover{ background:#e60073; }
+
+  /* تنبيه */
+  .toast{
+    position:fixed;
+    bottom:16px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#b30059;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:14px;
+    font-weight:800;
+    display:none;
+    z-index:999;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+  }
+
+  /* 📱 موبايل */
+  @media (max-width:900px){
+    .grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width:650px){
+    .grid{ grid-template-columns: repeat(2, 1fr); }
+    .pageTitle{ font-size:24px; }
+  }
 </style>
 </head>
 
 <body>
 
-<h1>💄 قسم المكياج</h1>
+<header>
+  <a href="index.html">⬅ الرئيسية</a>
+  <div class="title">💄 قسم المكياج</div>
+  <button id="cartCountBtn" type="button">🛒 السلة (0)</button>
+</header>
 
-<div class="products">
+<h1 class="pageTitle">قسم المكياج 💄</h1>
+<p class="subTitle">اختر المنتج واضغط “إضافة إلى السلة”</p>
+
+<div class="grid">
 
   <div class="product">
-    <img src="https://h.top4top.io/m_3677bi9pq0.png" alt="آيلاينر">
+    <img src="https://h.top4top.io/p_3677bi9pq0.png" alt="آيلاينر أسود">
     <h4>آيلاينر أسود</h4>
     <div class="price">2.00 ر.ع</div>
-    <p>مقاوم للماء ولون قوي</p>
-    <button>إضافة إلى السلة</button>
+    <p class="benefit">مقاوم للماء ولون قوي وثبات ممتاز.</p>
+    <button class="btn" onclick="addToCart('آيلاينر أسود', 2.00)">إضافة إلى السلة</button>
   </div>
 
   <div class="product">
-    <img src="https://i.top4top.io/m_367709soi1.png" alt="بودرة تثبيت">
+    <img src="https://i.top4top.io/p_367709soi1.png" alt="بودرة تثبيت">
     <h4>بودرة تثبيت</h4>
     <div class="price">2.63 ر.ع</div>
-    <p>تثبت المكياج وتمنع اللمعان</p>
-    <button>إضافة إلى السلة</button>
+    <p class="benefit">تثبت المكياج وتخفف اللمعان وتعطي لمسة مطفية.</p>
+    <button class="btn" onclick="addToCart('بودرة تثبيت', 2.63)">إضافة إلى السلة</button>
   </div>
 
   <div class="product">
-    <img src="https://j.top4top.io/m_36778ahor2.png" alt="فاونديشن">
+    <img src="https://j.top4top.io/p_36778ahor2.png" alt="فاونديشن">
     <h4>فاونديشن</h4>
-    <div class="price">2.10 ر.ع</div>
-    <p>تغطية عالية ومظهر طبيعي</p>
-    <button>إضافة إلى السلة</button>
+    <div class="price">2.63 ر.ع</div>
+    <p class="benefit">تغطية متوسطة إلى عالية ومظهر طبيعي متجانس.</p>
+    <button class="btn" onclick="addToCart('فاونديشن', 2.63)">إضافة إلى السلة</button>
   </div>
 
   <div class="product">
-    <img src="https://k.top4top.io/m_3677dcgfz3.png" alt="فرشاة الحواجب">
+    <img src="https://k.top4top.io/p_3677dcgfz3.png" alt="فرشاة حواجب">
     <h4>فرشاة حواجب</h4>
     <div class="price">2.10 ر.ع</div>
-    <p>تحديد دقيق وسهل للحواجب</p>
-    <button>إضافة إلى السلة</button>
+    <p class="benefit">تحديد دقيق وسهل للحواجب ولمسة مرتبة.</p>
+    <button class="btn" onclick="addToCart('فرشاة حواجب', 2.10)">إضافة إلى السلة</button>
   </div>
 
 </div>
+
+<div class="toast" id="toast">✅ تم إضافة المنتج إلى السلة</div>
+
+<script>
+  function getCart(){
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  }
+
+  function setCart(cart){
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+  }
+
+  function updateCartCount(){
+    const cart = getCart();
+    const btn = document.getElementById("cartCountBtn");
+    btn.textContent = `🛒 السلة (${cart.length})`;
+  }
+
+  function toast(msg){
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.display = "block";
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(()=> t.style.display="none", 1400);
+  }
+
+  function addToCart(name, price){
+    const cart = getCart();
+    cart.push({name, price});
+    setCart(cart);
+    toast("✅ تم إضافة المنتج إلى السلة");
+  }
+
+  // زر السلة: يرجع للرئيسية (عشان سلتك هناك)
+  document.getElementById("cartCountBtn").addEventListener("click", ()=>{
+    window.location.href = "index.html";
+  });
+
+  updateCartCount();
+</script>
 
 </body>
 </html>
