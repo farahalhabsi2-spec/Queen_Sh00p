@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>كوين شوب 👑 | Queen Sh00p</title>
 
-  <!-- الأفضل تخزين اللوجو داخل موقعك بدل imgbb -->
   <link rel="icon" href="images/logo.png" type="image/png">
 
   <style>
@@ -49,14 +48,6 @@
       font-size: 16px;
     }
     .sidebar h3 { color: #b30059; margin-top: 10px; }
-    .sidebar ul { list-style: none; padding: 0; margin: 0; }
-    .sidebar li {
-      border-bottom: 1px solid #eee;
-      padding: 8px 0;
-      cursor: pointer;
-    }
-    .sidebar li ul { display: none; padding-right: 15px; }
-    .sidebar li.active ul { display: block; }
 
     /* خلفية شفافة عند فتح الأدراج */
     .overlay{
@@ -137,7 +128,7 @@
       display: none;
     }
 
-    /* درج السلة (يفتح ويغلق) */
+    /* درج السلة */
     .cartDrawer{
       position: fixed;
       top:0;
@@ -195,6 +186,56 @@
       color:#333;
     }
 
+    /* ✅ خانات الأقسام داخل السايدبار */
+    .catGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .catBox{
+      background:#fff;
+      border:1px solid #f2f2f2;
+      border-radius:12px;
+      padding:12px 10px;
+      font-weight:800;
+      color:#b30059;
+      cursor:pointer;
+      box-shadow:0 2px 6px rgba(0,0,0,.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      user-select:none;
+    }
+    .catBox:hover{ background:#ffe6f2; }
+    .hasSub .arrow{
+      color:#b30059;
+      font-weight:900;
+    }
+    .subGrid{
+      display:none;
+      margin-top:-4px;
+      padding:10px;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,.08);
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+    }
+    .subGrid.show{ display:grid; }
+    .subBox{
+      background:#ffe6f2;
+      border:1px solid #ffd1e6;
+      border-radius:12px;
+      padding:10px 8px;
+      font-weight:700;
+      color:#660033;
+      cursor:pointer;
+      text-align:center;
+      user-select:none;
+    }
+    .subBox:hover{ background:#ffd1e6; }
+
     /* الفوتر */
     footer {
       background: #b30059;
@@ -223,46 +264,48 @@
 <body>
 
   <header>
-    <!-- زر القائمة ☰ -->
     <button id="menuBtn" aria-label="فتح الأقسام">☰</button>
-
-    <!-- شعار (لوكو الملكة) -->
     <img src="images/logo.png" alt="كوين شوب" onerror="this.src='https://i.ibb.co/GfL87zPq/logo.png'">
-
-    <!-- زر السلة 🛒 (يفتح ويغلق) -->
     <button id="cartBtn" aria-label="فتح السلة">🛒</button>
   </header>
 
   <div class="overlay" id="overlay"></div>
 
-  <!-- القائمة الجانبية -->
+  <!-- ✅ القائمة الجانبية (خانات) -->
   <div class="sidebar" id="sidebar">
     <button class="close-btn" id="closeMenu">✖</button>
     <h3>📂 الأقسام الرئيسية</h3>
-    <ul>
-      <li>💄 المكياج</li>
-      <li onclick="toggleSub(this)">🧴 العناية
-        <ul>
-          <li>العناية بالشعر</li>
-          <li>العناية بالبشرة</li>
-          <li>العناية بالوجه</li>
-          <li>العناية بالجسم</li>
-          <li>العناية بالشفاه</li>
-          <li>المنطقة الحساسة</li>
-          <li>الفم والأسنان</li>
-          <li>اليدين</li>
-          <li>القدمين</li>
-        </ul>
-      </li>
-      <li>💨 الأجهزة (السيشوار – أدوات التجميل)</li>
-      <li>🌿 الأعشاب</li>
-      <li>🛢️ الزيوت</li>
-      <li>💊 المكملات الغذائية</li>
-      <li>⚖️ منتجات التخسيس</li>
-      <li>👁️ العدسات</li>
-      <li>🌸 العطور</li>
-      <li>👗 ملابس الأطفال</li>
-    </ul>
+
+    <div class="catGrid" id="catGrid">
+
+      <div class="catBox" data-cat="makeup">💄 المكياج</div>
+
+      <div class="catBox hasSub" id="careBox">
+        🧴 العناية <span class="arrow" id="careArrow">▾</span>
+      </div>
+
+      <div class="subGrid" id="careSub">
+        <div class="subBox" data-cat="hair">💆‍♀️ العناية بالشعر</div>
+        <div class="subBox" data-cat="skin">🧖‍♀️ العناية بالبشرة</div>
+        <div class="subBox" data-cat="face">😊 العناية بالوجه</div>
+        <div class="subBox" data-cat="body">🛁 العناية بالجسم</div>
+        <div class="subBox" data-cat="lips">💋 العناية بالشفاه</div>
+        <div class="subBox" data-cat="sensitive">🌸 المنطقة الحساسة</div>
+        <div class="subBox" data-cat="oral">🦷 الفم والأسنان</div>
+        <div class="subBox" data-cat="hands">🖐 اليدين</div>
+        <div class="subBox" data-cat="feet">🦶 القدمين</div>
+      </div>
+
+      <div class="catBox" data-cat="devices">💨 الأجهزة (السيشوار – أدوات التجميل)</div>
+      <div class="catBox" data-cat="herbs">🌿 الأعشاب</div>
+      <div class="catBox" data-cat="oils">🛢️ الزيوت</div>
+      <div class="catBox" data-cat="supplements">💊 المكملات الغذائية</div>
+      <div class="catBox" data-cat="slimming">⚖️ منتجات التخسيس</div>
+      <div class="catBox" data-cat="lenses">👁️ العدسات</div>
+      <div class="catBox" data-cat="perfumes">🌸 العطور</div>
+      <div class="catBox" data-cat="kids">👗 ملابس الأطفال</div>
+
+    </div>
   </div>
 
   <!-- درج السلة -->
@@ -302,13 +345,14 @@
     <h2 style="text-align:center; color:#b30059;">🛍️ منتجاتنا</h2>
 
     <div class="products" id="products">
-      <div class="product" data-name="كريم أساس" onclick="addToCart('كريم أساس',7.0)">
+      <!-- ✅ أضفنا data-cat عشان الفلترة -->
+      <div class="product" data-name="كريم أساس" data-cat="makeup" onclick="addToCart('كريم أساس',7.0)">
         <img src="https://i.ibb.co/3vxhbWD/foundation.jpg" alt="كريم أساس">
         <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
         <button class="addBtn" type="button">➕ أضف للسلة</button>
       </div>
 
-      <div class="product" data-name="سيروم ترطيب" onclick="addToCart('سيروم ترطيب',9.9)">
+      <div class="product" data-name="سيروم ترطيب" data-cat="face" onclick="addToCart('سيروم ترطيب',9.9)">
         <img src="https://i.ibb.co/dKhcd6y/serum.jpg" alt="سيروم ترطيب">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
         <button class="addBtn" type="button">➕ أضف للسلة</button>
@@ -346,7 +390,7 @@
     const overlay = document.getElementById("overlay");
     const alertBox = document.getElementById("alertBox");
 
-    // ✅ زر القائمة يفتح/يغلق
+    // زر القائمة يفتح/يغلق
     document.getElementById("menuBtn").addEventListener("click", () => {
       closeCart();
       sidebar.classList.toggle("active");
@@ -354,9 +398,7 @@
     });
     document.getElementById("closeMenu").addEventListener("click", closeAll);
 
-    function toggleSub(el){ el.classList.toggle("active"); }
-
-    // ✅ زر السلة يفتح/يغلق (Drawer)
+    // زر السلة يفتح/يغلق
     document.getElementById("cartBtn").addEventListener("click", () => {
       sidebar.classList.remove("active");
       cartDrawer.classList.toggle("active");
@@ -365,17 +407,47 @@
     });
     document.getElementById("closeCart").addEventListener("click", closeAll);
 
-    function closeCart(){
-      cartDrawer.classList.remove("active");
-    }
-
+    function closeCart(){ cartDrawer.classList.remove("active"); }
     function closeAll(){
       sidebar.classList.remove("active");
       cartDrawer.classList.remove("active");
       overlay.classList.remove("show");
     }
-
     overlay.addEventListener("click", closeAll);
+
+    // ✅ فتح/إغلاق خانات العناية
+    const careBox = document.getElementById("careBox");
+    const careSub = document.getElementById("careSub");
+    const careArrow = document.getElementById("careArrow");
+
+    careBox.addEventListener("click", () => {
+      careSub.classList.toggle("show");
+      careArrow.textContent = careSub.classList.contains("show") ? "▴" : "▾";
+    });
+
+    // ✅ الضغط على خانة قسم = فلترة المنتجات
+    document.addEventListener("click", (e) => {
+      const box = e.target.closest(".catBox, .subBox");
+      if(!box) return;
+
+      // لا نفلتر عند الضغط على "العناية" لأنها فقط تفتح/تغلق
+      if(box.id === "careBox") return;
+
+      const cat = box.getAttribute("data-cat");
+      if(!cat) return;
+
+      filterByCategory(cat);
+      closeAll();
+    });
+
+    function filterByCategory(cat){
+      const items = document.querySelectorAll("#products .product");
+      items.forEach(p => {
+        const pCat = p.getAttribute("data-cat");
+        if(!pCat){ p.style.display = "block"; return; }
+        p.style.display = (pCat === cat) ? "block" : "none";
+      });
+    }
 
     // ✅ إضافة للسلة + رسالة
     function addToCart(name, price){
@@ -390,7 +462,7 @@
     }
     window.addToCart = addToCart;
 
-    // ✅ عرض السلة داخل الدرج
+    // ✅ عرض السلة
     function renderCart(){
       const itemsWrap = document.getElementById("cartItems");
       const totalEl = document.getElementById("cartTotal");
@@ -413,7 +485,7 @@
         div.innerHTML = `
           <div>
             <div class="name">${item.name}</div>
-            <div class="price">${item.price.toFixed(2)} ر.ع</div>
+            <div class="price">${Number(item.price).toFixed(2)} ر.ع</div>
           </div>
           <button class="removeBtn" onclick="removeFromCart(${idx})">حذف</button>
         `;
@@ -431,7 +503,7 @@
     }
     window.removeFromCart = removeFromCart;
 
-    // ✅ بحث المنتجات
+    // ✅ بحث المنتجات (يشتغل مع الفلترة)
     const search = document.getElementById("productSearch");
     const productsWrap = document.getElementById("products");
 
