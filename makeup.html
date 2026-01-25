@@ -1,29 +1,19 @@
-<button class="accordion">💄 قسم المكياج</button>
-
-<div class="panel">
-  <div class="product">
-    <img src="image1.jpg">
-    <h4>بودرة غابريني</h4>
-    <p>السعر: 3 ريال</p>
-    <p>تثبيت المكياج – تمتص الدهون</p>
-  </div>
-
-  <div class="product">
-    <img src="image2.jpg">
-    <h4>كريم أساس غابريني</h4>
-    <p>السعر: 4 ريال</p>
-    <p>تغطية عالية – يوحد لون البشرة</p>
-  </div>
-
-  <div class="product">
-    <img src="image3.jpg">
-    <h4>آيلاينر غابريني</h4>
-    <p>السعر: 2.5 ريال</p>
-    <p>مقاوم للماء – لون أسود قوي</p>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قسم المكياج | Queen Shoop</title>
 
 <style>
+body{
+  font-family: Tahoma, sans-serif;
+  background:#ffe6f2;
+  margin:0;
+  padding:15px;
+}
+
+/* زر القسم */
 .accordion {
   background-color: #b30059;
   color: white;
@@ -37,12 +27,16 @@
   border-radius: 8px;
 }
 
+/* الحاوية */
 .panel {
   display: none;
   background-color: #fff;
   padding: 10px;
+  margin-top:8px;
+  border-radius: 10px;
 }
 
+/* المنتج */
 .product {
   border-bottom: 1px solid #eee;
   padding: 10px 0;
@@ -50,18 +44,56 @@
 }
 
 .product img {
-  width: 120px;
+  width: 140px;
   border-radius: 10px;
 }
+
+.price {
+  color:#b30059;
+  font-weight:bold;
+}
 </style>
+</head>
+
+<body>
+
+<button class="accordion">💄 قسم المكياج</button>
+
+<div class="panel">
+
+  <div class="product">
+    <img src="image1.jpg" alt="بودرة غابريني">
+    <h4>بودرة غابريني</h4>
+    <p class="price">السعر: 3 ريال</p>
+    <p>تثبيت المكياج – تمتص الدهون</p>
+  </div>
+
+  <div class="product">
+    <img src="image2.jpg" alt="كريم أساس غابريني">
+    <h4>كريم أساس غابريني</h4>
+    <p class="price">السعر: 4 ريال</p>
+    <p>تغطية عالية – يوحد لون البشرة</p>
+  </div>
+
+  <div class="product">
+    <img src="image3.jpg" alt="آيلاينر غابريني">
+    <h4>آيلاينر غابريني</h4>
+    <p class="price">السعر: 2.5 ريال</p>
+    <p>مقاوم للماء – لون أسود قوي</p>
+  </div>
+
+</div>
 
 <script>
 var acc = document.getElementsByClassName("accordion");
+
 for (var i = 0; i < acc.length; i++) {
   acc[i].onclick = function() {
-    this.classList.toggle("active");
     var panel = this.nextElementSibling;
     panel.style.display = panel.style.display === "block" ? "none" : "block";
   }
 }
 </script>
+
+</body>
+</html>
