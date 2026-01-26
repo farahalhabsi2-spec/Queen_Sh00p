@@ -97,23 +97,30 @@
     }
     .product {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      width: 160px;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      width: 170px;
       text-align: center;
       padding: 10px;
       cursor: pointer;
     }
-    .product img { width: 100%; border-radius: 10px; }
+    .product img {
+      width: 100%;
+      border-radius: 12px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      background: #f7f7f7;
+    }
     .product .addBtn {
-      margin-top: 5px;
+      margin-top: 8px;
       background: #b30059;
       color: white;
       border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
+      padding: 8px 10px;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 14px;
+      width: 100%;
     }
 
     /* التنبيه */
@@ -193,9 +200,7 @@
       gap:10px;
       margin-top:12px;
     }
-    .catLink{
-      text-decoration:none;
-    }
+    .catLink{ text-decoration:none; }
     .catBox{
       background:#fff;
       border:1px solid #f2f2f2;
@@ -212,8 +217,6 @@
     }
     .catBox:hover{ background:#ffe6f2; }
 
-    .hasSub .arrow{ font-weight:900; }
-
     .subGrid{
       display:none;
       margin-top:-4px;
@@ -225,7 +228,6 @@
       gap:10px;
     }
     .subGrid.show{ display:grid; }
-
     .subBox{
       background:#ffe6f2;
       border:1px solid #ffd1e6;
@@ -238,6 +240,72 @@
       user-select:none;
     }
     .subBox:hover{ background:#ffd1e6; }
+
+    /* ✅ قسم الماركات (شبكة) */
+    .sectionTitle{
+      text-align:center;
+      color:#b30059;
+      margin: 10px 0 0;
+      font-size: 22px;
+    }
+    .brandsWrap{
+      margin: 12px 16px 0;
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+    }
+    .brandsGrid{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 520px){
+      .brandsGrid{ grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 900px){
+      .brandsGrid{ grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .brandCard{
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 10px;
+      border:1px solid #f1f1f1;
+      border-radius: 16px;
+      text-decoration:none;
+      color:#333;
+      background: linear-gradient(180deg, #ffffff 0%, #fff3fa 100%);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .brandCard:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+    }
+    .brandLogo{
+      width: 100%;
+      max-width: 180px;
+      height: 64px;
+      object-fit: contain;
+      background:#fff;
+      border-radius: 12px;
+      padding: 6px 10px;
+    }
+    .brandName{
+      font-weight: 800;
+      color:#660033;
+      font-size: 14px;
+      text-align:center;
+      line-height: 1.2;
+    }
+    .brandHint{
+      font-size: 12px;
+      color:#777;
+    }
 
     /* الفوتر */
     footer {
@@ -280,11 +348,8 @@
     <h3>📂 الأقسام</h3>
 
     <div class="catGrid">
-
-      <!-- صفحات مستقلة -->
       <a class="catLink" href="makeup.html"><div class="catBox">💄 المكياج <span>›</span></div></a>
 
-      <!-- العناية (فتح/إغلاق للفروع) -->
       <div class="catBox hasSub" id="careBox">🧴 العناية <span class="arrow" id="careArrow">▾</span></div>
       <div class="subGrid" id="careSub">
         <a class="catLink" href="care-hair.html"><div class="subBox">💆‍♀️ الشعر</div></a>
@@ -307,6 +372,8 @@
       <a class="catLink" href="perfumes.html"><div class="catBox">🌸 العطور <span>›</span></div></a>
       <a class="catLink" href="kids.html"><div class="catBox">👗 ملابس الأطفال <span>›</span></div></a>
 
+      <!-- ✅ رابط الماركات داخل نفس الصفحة -->
+      <a class="catLink" href="#brands"><div class="catBox">🏷️ الماركات <span>›</span></div></a>
     </div>
   </div>
 
@@ -334,6 +401,78 @@
     </p>
   </section>
 
+  <!-- ✅ قسم الماركات (داخل نص الموقع) -->
+  <h2 id="brands" class="sectionTitle">✨ الماركات الأكثر شعبية ✨</h2>
+  <section class="brandsWrap">
+    <div class="brandsGrid">
+
+      <!-- ضع صور اللوقو داخل images/brands/ -->
+      <a class="brandCard" href="brand-skin1004.html">
+        <img class="brandLogo" src="images/brands/skin1004.png" alt="SKIN1004"
+             onerror="this.style.display='none'; this.parentElement.querySelector('.brandName').style.marginTop='10px';">
+        <div class="brandName">SKIN1004</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+      <a class="brandCard" href="brand-the-ordinary.html">
+        <img class="brandLogo" src="images/brands/the-ordinary.png" alt="The Ordinary"
+             onerror="this.style.display='none';">
+        <div class="brandName">The Ordinary</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+      <a class="brandCard" href="brand-anua.html">
+        <img class="brandLogo" src="images/brands/anua.png" alt="Anua"
+             onerror="this.style.display='none';">
+        <div class="brandName">Anua</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+      <a class="brandCard" href="brand-beauty-of-joseon.html">
+        <img class="brandLogo" src="images/brands/beauty-of-joseon.png" alt="Beauty of Joseon"
+             onerror="this.style.display='none';">
+        <div class="brandName">BEAUTY OF JOSEON</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+      <a class="brandCard" href="brand-cosrx.html">
+        <img class="brandLogo" src="images/brands/cosrx.png" alt="COSRX"
+             onerror="this.style.display='none';">
+        <div class="brandName">COSRX</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+      <a class="brandCard" href="brand-dr-althea.html">
+        <img class="brandLogo" src="images/brands/dr-althea.png" alt="Dr. Althea"
+             onerror="this.style.display='none';">
+        <div class="brandName">Dr. Althea</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+      <a class="brandCard" href="brand-medicube.html">
+        <img class="brandLogo" src="images/brands/medicube.png" alt="medicube"
+             onerror="this.style.display='none';">
+        <div class="brandName">medicube</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+      <a class="brandCard" href="brand-some-by-mi.html">
+        <img class="brandLogo" src="images/brands/some-by-mi.png" alt="SOME BY MI"
+             onerror="this.style.display='none';">
+        <div class="brandName">SOME BY MI</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+      <a class="brandCard" href="brand-la-roche-posay.html">
+        <img class="brandLogo" src="images/brands/la-roche-posay.png" alt="LA ROCHE-POSAY"
+             onerror="this.style.display='none';">
+        <div class="brandName">LA ROCHE-POSAY</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
+    </div>
+  </section>
+
   <!-- خانة البحث -->
   <div class="searchWrap">
     <span>🔎</span>
@@ -342,19 +481,21 @@
 
   <div class="alert" id="alertBox">✅ تم إضافة المنتج إلى السلة!</div>
 
-  <!-- المنتجات (نفس عندك) -->
+  <!-- المنتجات -->
   <section>
     <h2 style="text-align:center; color:#b30059;">🛍️ منتجاتنا</h2>
 
     <div class="products" id="products">
       <div class="product" data-name="كريم أساس" onclick="addToCart('كريم أساس',7.0)">
-        <img src="https://i.ibb.co/3vxhbWD/foundation.jpg" alt="كريم أساس">
+        <img src="images/products/foundation.jpg" alt="كريم أساس"
+             onerror="this.src='https://via.placeholder.com/600x600?text=Queen+Sh00p';">
         <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
         <button class="addBtn" type="button">➕ أضف للسلة</button>
       </div>
 
       <div class="product" data-name="سيروم ترطيب" onclick="addToCart('سيروم ترطيب',9.9)">
-        <img src="https://i.ibb.co/dKhcd6y/serum.jpg" alt="سيروم ترطيب">
+        <img src="images/products/serum.jpg" alt="سيروم ترطيب"
+             onerror="this.src='https://via.placeholder.com/600x600?text=Queen+Sh00p';">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
         <button class="addBtn" type="button">➕ أضف للسلة</button>
       </div>
@@ -416,7 +557,7 @@
     }
     overlay.addEventListener("click", closeAll);
 
-    // ✅ فتح/إغلاق فروع العناية
+    // فتح/إغلاق فروع العناية
     const careBox = document.getElementById("careBox");
     const careSub = document.getElementById("careSub");
     const careArrow = document.getElementById("careArrow");
@@ -426,7 +567,7 @@
       careArrow.textContent = careSub.classList.contains("show") ? "▴" : "▾";
     });
 
-    // ✅ إضافة للسلة + رسالة
+    // إضافة للسلة + رسالة
     function addToCart(name, price){
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       cart.push({name, price});
@@ -439,7 +580,7 @@
     }
     window.addToCart = addToCart;
 
-    // ✅ عرض السلة
+    // عرض السلة
     function renderCart(){
       const itemsWrap = document.getElementById("cartItems");
       const totalEl = document.getElementById("cartTotal");
@@ -480,7 +621,7 @@
     }
     window.removeFromCart = removeFromCart;
 
-    // ✅ بحث المنتجات
+    // بحث المنتجات
     const search = document.getElementById("productSearch");
     const productsWrap = document.getElementById("products");
     search.addEventListener("input", () => {
