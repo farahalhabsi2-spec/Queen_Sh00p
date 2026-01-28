@@ -1,82 +1,83 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>كوين شوب 👑 | Queen Sh00p</title>
 
-  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="icon" href="images/logo.png" type="image/png" />
 
   <style>
-    body {
-      font-family: 'Tahoma', sans-serif;
-      margin: 0; padding: 0;
-      background: #ffe6f2;
-      color: #333;
+    body{
+      font-family:'Tahoma', sans-serif;
+      margin:0; padding:0;
+      background:#ffe6f2;
+      color:#333;
     }
-    header {
-      background: #b30059;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 18px;
-      position: sticky;
-      top: 0;
-      z-index: 900;
+    header{
+      background:#b30059;
+      color:#fff;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 18px;
+      position:sticky;
+      top:0;
+      z-index:900;
     }
-    header img { height: 40px; }
-    button { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
+    header img{ height:40px; }
+    button{ background:none; border:none; color:#fff; font-size:22px; cursor:pointer; }
 
     /* القائمة الجانبية */
-    .sidebar {
-      position: fixed;
-      top: 0; right: -300px;
-      width: 260px; height: 100%;
-      background: white;
-      box-shadow: -2px 0 8px rgba(0,0,0,0.3);
-      transition: 0.3s;
-      z-index: 1000;
-      padding: 20px;
-      overflow-y: auto;
+    .sidebar{
+      position:fixed;
+      top:0; right:-300px;
+      width:260px; height:100%;
+      background:#fff;
+      box-shadow:-2px 0 8px rgba(0,0,0,0.3);
+      transition:.3s;
+      z-index:1000;
+      padding:20px;
+      overflow-y:auto;
     }
-    .sidebar.active { right: 0; }
-    .close-btn {
-      background: #b30059; color: white;
-      border: none; border-radius: 8px;
-      padding: 7px 10px; cursor: pointer;
-      font-size: 16px;
+    .sidebar.active{ right:0; }
+    .close-btn{
+      background:#b30059; color:#fff;
+      border:none; border-radius:8px;
+      padding:7px 10px;
+      cursor:pointer;
+      font-size:16px;
     }
-    .sidebar h3 { color: #b30059; margin-top: 10px; }
+    .sidebar h3{ color:#b30059; margin:12px 0 8px; }
 
     /* خلفية شفافة */
     .overlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.35);
-      display: none;
-      z-index: 950;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      display:none;
+      z-index:950;
     }
     .overlay.show{ display:block; }
 
     /* ترحيب */
-    .welcome {
-      background: #ffb3d9;
-      margin: 20px;
-      border-radius: 12px;
-      text-align: center;
-      padding: 20px;
-      color: #660033;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    .welcome{
+      background:#ffb3d9;
+      margin:20px;
+      border-radius:14px;
+      text-align:center;
+      padding:18px 14px;
+      color:#660033;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
     }
 
     /* بحث */
     .searchWrap{
-      margin: 0 20px 10px;
-      background: white;
-      border-radius: 10px;
-      padding: 10px 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+      margin:0 20px 10px;
+      background:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.12);
       display:flex;
       gap:10px;
       align-items:center;
@@ -89,72 +90,72 @@
     }
 
     /* المنتجات */
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 10px;
+    .products{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+      padding:10px;
     }
-    .product {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-      width: 170px;
-      text-align: center;
-      padding: 10px;
-      cursor: pointer;
+    .product{
+      background:#fff;
+      border-radius:14px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.12);
+      width:170px;
+      text-align:center;
+      padding:10px;
     }
-    .product img {
-      width: 100%;
-      border-radius: 12px;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      background: #f7f7f7;
+    .product img{
+      width:100%;
+      border-radius:12px;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      background:#f7f7f7;
     }
-    .product .addBtn {
-      margin-top: 8px;
-      background: #b30059;
-      color: white;
-      border: none;
-      padding: 8px 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 14px;
-      width: 100%;
+    .product p{ margin:10px 0 0; }
+    .product .addBtn{
+      margin-top:8px;
+      background:#b30059;
+      color:#fff;
+      border:none;
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:14px;
+      width:100%;
     }
 
     /* التنبيه */
-    .alert {
-      background: #ff99cc;
-      color: #660033;
-      text-align: center;
-      font-weight: bold;
-      margin: 15px 20px;
-      padding: 10px;
-      border-radius: 8px;
-      display: none;
+    .alert{
+      background:#ff99cc;
+      color:#660033;
+      text-align:center;
+      font-weight:bold;
+      margin:15px 20px;
+      padding:10px;
+      border-radius:10px;
+      display:none;
     }
 
     /* درج السلة */
     .cartDrawer{
-      position: fixed;
+      position:fixed;
       top:0;
-      left: -360px;
-      width: 320px;
-      max-width: 92vw;
-      height: 100%;
-      background: white;
-      z-index: 1100;
-      transition: .3s;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.25);
-      padding: 16px;
+      left:-360px;
+      width:320px;
+      max-width:92vw;
+      height:100%;
+      background:#fff;
+      z-index:1100;
+      transition:.3s;
+      box-shadow:2px 0 10px rgba(0,0,0,0.25);
+      padding:16px;
       overflow-y:auto;
     }
-    .cartDrawer.active{ left: 0; }
+    .cartDrawer.active{ left:0; }
     .cartHead{
       display:flex;
-      justify-content: space-between;
+      justify-content:space-between;
       align-items:center;
       gap:10px;
       border-bottom:1px solid #eee;
@@ -165,7 +166,7 @@
     }
     .cartItem{
       border:1px solid #eee;
-      border-radius:10px;
+      border-radius:12px;
       padding:10px;
       margin-bottom:10px;
       display:flex;
@@ -173,14 +174,14 @@
       align-items:center;
       gap:10px;
     }
-    .cartItem .name{font-weight:700}
-    .cartItem .price{color:#666;font-size:13px}
+    .cartItem .name{ font-weight:700; }
+    .cartItem .price{ color:#666; font-size:13px; }
     .removeBtn{
       background:#b30059;
       color:#fff;
       border:none;
       padding:6px 10px;
-      border-radius:8px;
+      border-radius:10px;
       cursor:pointer;
       font-size:13px;
     }
@@ -194,10 +195,10 @@
       color:#333;
     }
 
-    /* ✅ خانات الأقسام */
+    /* خانات الأقسام */
     .catGrid{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns:1fr;
       gap:10px;
       margin-top:12px;
     }
@@ -225,7 +226,7 @@
       background:#fff;
       border-radius:12px;
       box-shadow:0 2px 6px rgba(0,0,0,.08);
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns:repeat(2, 1fr);
       gap:10px;
     }
     .subGrid.show{ display:grid; }
@@ -242,119 +243,99 @@
     }
     .subBox:hover{ background:#ffd1e6; }
 
-    /* ✅ عنوان القسم */
+    /* قسم الماركات */
     .sectionTitle{
       text-align:center;
       color:#b30059;
-      margin: 10px 0 0;
-      font-size: 22px;
+      margin: 12px 0 0;
+      font-size:22px;
     }
-
-    /* ✅ قسم الماركات (شكل مثل الصورة: صورة فوق + الاسم تحت) */
     .brandsWrap{
-      margin: 12px 16px 0;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+      margin:12px 16px 0;
+      background:#fff;
+      border-radius:16px;
+      padding:14px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.10);
     }
     .brandsGrid{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:12px;
     }
-    @media (min-width: 520px){
-      .brandsGrid{ grid-template-columns: repeat(3, 1fr); }
+    @media (min-width:520px){
+      .brandsGrid{ grid-template-columns:repeat(3, 1fr); }
     }
-    @media (min-width: 900px){
-      .brandsGrid{ grid-template-columns: repeat(4, 1fr); }
+    @media (min-width:900px){
+      .brandsGrid{ grid-template-columns:repeat(4, 1fr); }
     }
-
     .brandCard{
-      background:#fff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 10px;
       border:1px solid #f1f1f1;
-      border-radius: 18px;
-      overflow:hidden;
+      border-radius:16px;
       text-decoration:none;
       color:#333;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      transition: transform .15s ease, box-shadow .15s ease;
-      display:flex;
-      flex-direction:column;
-      min-height: 250px;
+      background:linear-gradient(180deg, #ffffff 0%, #fff3fa 100%);
+      box-shadow:0 2px 10px rgba(0,0,0,0.06);
+      transition:transform .15s ease, box-shadow .15s ease;
+      overflow:hidden;
+      position:relative;
     }
     .brandCard:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+      transform:translateY(-2px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.10);
     }
-
-    .brandImgWrap{
+    .brandLogo{
+      width:100%;
+      max-width:210px;
+      height:80px;
+      object-fit:contain;
       background:#fff;
-      padding: 14px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      border-bottom: 1px solid #f2f2f2;
-      height: 150px;
+      border-radius:14px;
+      padding:8px 10px;
     }
-    .brandImg{
-      width: 100%;
-      height: 140px;
-      object-fit: contain;
-      border-radius: 12px;
-      background: #fff;
-    }
-
-    .brandBody{
-      padding: 14px 12px;
-      text-align:center;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      justify-content:center;
-      flex:1;
-      background: linear-gradient(180deg, #ffffff 0%, #fff3fa 100%);
-    }
-
     .brandName{
-      font-weight: 900;
+      font-weight:900;
       color:#b30059;
-      font-size: 18px;
-      line-height:1.2;
-      padding: 10px 12px;
-      background: #ffd6e7;
-      border-radius: 18px;
-      display:inline-block;
+      font-size:15px;
+      text-align:center;
+      line-height:1.3;
+      padding:7px 10px;
+      background:linear-gradient(90deg,#ffe0ec,#fff5fa);
+      border-radius:14px;
     }
     .brandName::before{ content:"🌸 "; }
     .brandName::after{ content:" 🌷"; }
-
     .brandHint{
-      font-size: 13px;
+      font-size:12px;
       color:#777;
     }
 
     /* الفوتر */
-    footer {
-      background: #b30059;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+    footer{
+      background:#b30059;
+      color:#fff;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
     }
-    footer a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      margin: 5px 0;
+    footer a{
+      color:#fff;
+      text-decoration:none;
+      display:block;
+      margin:5px 0;
     }
-    footer a:hover { text-decoration: underline; }
-    footer .social {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      font-size: 24px;
+    footer a:hover{ text-decoration:underline; }
+    footer .social{
+      margin-top:15px;
+      display:flex;
+      justify-content:center;
+      gap:25px;
+      font-size:24px;
     }
   </style>
 </head>
@@ -369,13 +350,12 @@
 
   <div class="overlay" id="overlay"></div>
 
-  <!-- ✅ القائمة الجانبية -->
+  <!-- القائمة الجانبية -->
   <div class="sidebar" id="sidebar">
     <button class="close-btn" id="closeMenu">✖</button>
     <h3>📂 الأقسام</h3>
 
     <div class="catGrid">
-
       <a class="catLink" href="makeup.html"><div class="catBox">💄 المكياج <span>›</span></div></a>
 
       <div class="catBox hasSub" id="careBox">🧴 العناية <span class="arrow" id="careArrow">▾</span></div>
@@ -401,7 +381,6 @@
       <a class="catLink" href="kids.html"><div class="catBox">👗 ملابس الأطفال <span>›</span></div></a>
 
       <a class="catLink" href="#brands"><div class="catBox">🏷️ الماركات <span>›</span></div></a>
-
     </div>
   </div>
 
@@ -429,123 +408,69 @@
     </p>
   </section>
 
-  <!-- ✅ الماركات -->
+  <!-- ✅ الماركات (تصحيح نهائي: كل ماركة مع صورتها الصحيحة) -->
   <h2 id="brands" class="sectionTitle">✨ الماركات الأكثر شعبية ✨</h2>
   <section class="brandsWrap">
     <div class="brandsGrid">
 
-      <!-- SKIN1004 -->
       <a class="brandCard" href="brand-skin1004.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/skin1004.jpg" alt="SKIN1004"
-               onerror="this.src='https://d.top4top.io/p_368050xb60.png'; this.style.objectFit='contain';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">SKIN1004</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://d.top4top.io/p_368050xb60.png" alt="SKIN1004">
+        <div class="brandName">SKIN1004</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <!-- The Ordinary -->
       <a class="brandCard" href="brand-the-ordinary.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/the-ordinary.jpg" alt="The Ordinary"
-               onerror="this.src='https://e.top4top.io/p_3680oltax1.png'; this.style.objectFit='contain';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">The Ordinary</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://e.top4top.io/p_3680oltax1.png" alt="The Ordinary">
+        <div class="brandName">The Ordinary</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <!-- ✅ Anua (الصورة الصحيحة هنا) -->
       <a class="brandCard" href="brand-anua.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/anua.jpg" alt="Anua"
-               onerror="this.src='images/brands/anua.jpg';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">Anua</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://h.top4top.io/p_36807s29m4.png" alt="Anua">
+        <div class="brandName">Anua</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <!-- ✅ Beauty of Joseon (الصورة الصحيحة هنا) -->
       <a class="brandCard" href="brand-beauty-of-joseon.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/beauty-of-joseon.jpg" alt="Beauty of Joseon"
-               onerror="this.src='images/brands/beauty-of-joseon.jpg';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">BEAUTY OF JOSEON</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://f.top4top.io/p_3680xirjo2.png" alt="Beauty of Joseon">
+        <div class="brandName">Beauty of Joseon</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <!-- COSRX -->
       <a class="brandCard" href="brand-cosrx.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/cosrx.jpg" alt="COSRX"
-               onerror="this.src='https://g.top4top.io/p_36803p4vc3.png'; this.style.objectFit='contain';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">COSRX</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://g.top4top.io/p_36803p4vc3.png" alt="COSRX">
+        <div class="brandName">COSRX</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <!-- Dr. Althea -->
       <a class="brandCard" href="brand-dr-althea.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/dr-althea.jpg" alt="Dr. Althea"
-               onerror="this.src='https://l.top4top.io/p_3680g4wc98.png'; this.style.objectFit='contain';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">Dr. Althea</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://l.top4top.io/p_3680g4wc98.png" alt="Dr. Althea">
+        <div class="brandName">Dr. Althea</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <!-- medicube -->
       <a class="brandCard" href="brand-medicube.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/medicube.jpg" alt="medicube"
-               onerror="this.src='https://j.top4top.io/p_36801dvle6.png'; this.style.objectFit='contain';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">medicube</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://j.top4top.io/p_36801dvle6.png" alt="medicube">
+        <div class="brandName">medicube</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <!-- SOME BY MI -->
       <a class="brandCard" href="brand-some-by-mi.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/some-by-mi.jpg" alt="SOME BY MI"
-               onerror="this.src='https://i.top4top.io/p_368035ga05.png'; this.style.objectFit='contain';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">SOME BY MI</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://i.top4top.io/p_368035ga05.png" alt="SOME BY MI">
+        <div class="brandName">SOME BY MI</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <!-- LA ROCHE-POSAY -->
       <a class="brandCard" href="brand-la-roche-posay.html">
-        <div class="brandImgWrap">
-          <img class="brandImg" src="images/brands/la-roche-posay.jpg" alt="LA ROCHE-POSAY"
-               onerror="this.src='https://k.top4top.io/p_3680we4607.png'; this.style.objectFit='contain';">
-        </div>
-        <div class="brandBody">
-          <div class="brandName">LA ROCHE-POSAY</div>
-          <div class="brandHint">اضغطي لعرض المنتجات</div>
-        </div>
+        <img class="brandLogo" src="https://k.top4top.io/p_3680we4607.png" alt="LA ROCHE-POSAY">
+        <div class="brandName">LA ROCHE-POSAY</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
     </div>
   </section>
 
-  <!-- خانة البحث -->
+  <!-- بحث -->
   <div class="searchWrap">
     <span>🔎</span>
     <input id="productSearch" type="search" placeholder="ابحثي عن منتج... (مثال: كريم، سيروم)">
@@ -553,28 +478,28 @@
 
   <div class="alert" id="alertBox">✅ تم إضافة المنتج إلى السلة!</div>
 
-  <!-- المنتجات -->
+  <!-- منتجات -->
   <section>
     <h2 style="text-align:center; color:#b30059;">🛍️ منتجاتنا</h2>
 
     <div class="products" id="products">
-      <div class="product" data-name="كريم أساس" onclick="addToCart('كريم أساس',7.0)">
+      <div class="product" data-name="كريم أساس">
         <img src="https://i.ibb.co/3vxhbWD/foundation.jpg" alt="كريم أساس"
              onerror="this.src='https://via.placeholder.com/600x600?text=Queen+Sh00p';">
         <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
-        <button class="addBtn" type="button">➕ أضف للسلة</button>
+        <button class="addBtn" type="button" onclick="addToCart('كريم أساس', 7.0)">➕ أضف للسلة</button>
       </div>
 
-      <div class="product" data-name="سيروم ترطيب" onclick="addToCart('سيروم ترطيب',9.9)">
+      <div class="product" data-name="سيروم ترطيب">
         <img src="https://i.ibb.co/dKhcd6y/serum.jpg" alt="سيروم ترطيب"
              onerror="this.src='https://via.placeholder.com/600x600?text=Queen+Sh00p';">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
-        <button class="addBtn" type="button">➕ أضف للسلة</button>
+        <button class="addBtn" type="button" onclick="addToCart('سيروم ترطيب', 9.9)">➕ أضف للسلة</button>
       </div>
     </div>
   </section>
 
-  <!-- الفوتر -->
+  <!-- فوتر -->
   <footer>
     <p>✅ معلومات المتجر: السيب – السويق – صحار</p>
     <p>✅ طرق الدفع: Mastercard – Visa – الدفع عند الاستلام</p>
@@ -604,7 +529,7 @@
     const overlay = document.getElementById("overlay");
     const alertBox = document.getElementById("alertBox");
 
-    // زر القائمة
+    // فتح/إغلاق القائمة
     document.getElementById("menuBtn").addEventListener("click", () => {
       closeCart();
       sidebar.classList.toggle("active");
@@ -612,7 +537,7 @@
     });
     document.getElementById("closeMenu").addEventListener("click", closeAll);
 
-    // زر السلة
+    // فتح/إغلاق السلة
     document.getElementById("cartBtn").addEventListener("click", () => {
       sidebar.classList.remove("active");
       cartDrawer.classList.toggle("active");
@@ -639,20 +564,19 @@
       careArrow.textContent = careSub.classList.contains("show") ? "▴" : "▾";
     });
 
-    // إضافة للسلة + رسالة
+    // سلة
     function addToCart(name, price){
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       cart.push({name, price});
       localStorage.setItem("cart", JSON.stringify(cart));
 
       alertBox.style.display = "block";
-      setTimeout(()=>alertBox.style.display="none",1500);
+      setTimeout(()=>alertBox.style.display="none", 1500);
 
       renderCart();
     }
     window.addToCart = addToCart;
 
-    // عرض السلة
     function renderCart(){
       const itemsWrap = document.getElementById("cartItems");
       const totalEl = document.getElementById("cartTotal");
@@ -696,6 +620,7 @@
     // بحث المنتجات
     const search = document.getElementById("productSearch");
     const productsWrap = document.getElementById("products");
+
     search.addEventListener("input", () => {
       const q = search.value.trim().toLowerCase();
       const items = productsWrap.querySelectorAll(".product");
