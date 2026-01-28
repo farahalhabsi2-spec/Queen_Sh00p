@@ -1,159 +1,162 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>كوين شوب 👑 | Queen Sh00p</title>
 
-  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="icon" href="images/logo.png" type="image/png" />
 
   <style>
-    body {
-      font-family: 'Tahoma', sans-serif;
-      margin: 0; padding: 0;
-      background: #ffe6f2;
-      color: #333;
+    body{
+      font-family:'Tahoma',sans-serif;
+      margin:0; padding:0;
+      background:#ffe6f2;
+      color:#333;
     }
-    header {
-      background: #b30059;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 18px;
-      position: sticky;
-      top: 0;
-      z-index: 900;
+    header{
+      background:#b30059;
+      color:white;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 18px;
+      position:sticky;
+      top:0;
+      z-index:900;
     }
-    header img { height: 40px; }
-    button { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
+    header img{height:40px}
+    button{
+      background:none;border:none;color:white;
+      font-size:22px;cursor:pointer;
+    }
 
     /* القائمة الجانبية */
-    .sidebar {
-      position: fixed;
-      top: 0; right: -300px;
-      width: 260px; height: 100%;
-      background: white;
-      box-shadow: -2px 0 8px rgba(0,0,0,0.3);
-      transition: 0.3s;
-      z-index: 1000;
-      padding: 20px;
-      overflow-y: auto;
+    .sidebar{
+      position:fixed;
+      top:0; right:-300px;
+      width:260px; height:100%;
+      background:white;
+      box-shadow:-2px 0 8px rgba(0,0,0,0.3);
+      transition:0.3s;
+      z-index:1000;
+      padding:20px;
+      overflow-y:auto;
     }
-    .sidebar.active { right: 0; }
-    .close-btn {
-      background: #b30059; color: white;
-      border: none; border-radius: 5px;
-      padding: 6px 10px; cursor: pointer;
-      font-size: 16px;
+    .sidebar.active{ right:0; }
+    .close-btn{
+      background:#b30059;color:white;
+      border:none;border-radius:8px;
+      padding:6px 10px;cursor:pointer;
+      font-size:16px;
     }
-    .sidebar h3 { color: #b30059; margin-top: 10px; }
+    .sidebar h3{color:#b30059;margin-top:10px}
 
     /* خلفية شفافة */
     .overlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.35);
-      display: none;
-      z-index: 950;
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.35);
+      display:none;
+      z-index:950;
     }
-    .overlay.show{ display:block; }
+    .overlay.show{display:block}
 
     /* ترحيب */
-    .welcome {
-      background: #ffb3d9;
-      margin: 20px;
-      border-radius: 12px;
-      text-align: center;
-      padding: 20px;
-      color: #660033;
+    .welcome{
+      background:#ffb3d9;
+      margin:20px;
+      border-radius:14px;
+      text-align:center;
+      padding:20px;
+      color:#660033;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
     }
 
     /* بحث */
     .searchWrap{
-      margin: 0 20px 10px;
-      background: white;
-      border-radius: 10px;
-      padding: 10px 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+      margin:0 20px 10px;
+      background:white;
+      border-radius:12px;
+      padding:10px 12px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.12);
       display:flex;
       gap:10px;
       align-items:center;
     }
     .searchWrap input{
-      border:none;
-      outline:none;
+      border:none; outline:none;
       width:100%;
       font-size:15px;
+      background:transparent;
     }
 
     /* المنتجات */
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 10px;
+    .products{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+      padding:10px;
     }
-    .product {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-      width: 170px;
-      text-align: center;
-      padding: 10px;
-      cursor: pointer;
+    .product{
+      background:white;
+      border-radius:14px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.12);
+      width:170px;
+      text-align:center;
+      padding:10px;
+      cursor:pointer;
     }
-    .product img {
-      width: 100%;
-      border-radius: 12px;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      background: #f7f7f7;
+    .product img{
+      width:100%;
+      border-radius:12px;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      background:#f7f7f7;
     }
-    .product .addBtn {
-      margin-top: 8px;
-      background: #b30059;
-      color: white;
-      border: none;
-      padding: 8px 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 14px;
-      width: 100%;
+    .product .addBtn{
+      margin-top:8px;
+      background:#b30059;
+      color:white;
+      border:none;
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:14px;
+      width:100%;
     }
 
     /* التنبيه */
-    .alert {
-      background: #ff99cc;
-      color: #660033;
-      text-align: center;
-      font-weight: bold;
-      margin: 15px 20px;
-      padding: 10px;
-      border-radius: 8px;
-      display: none;
+    .alert{
+      background:#ff99cc;
+      color:#660033;
+      text-align:center;
+      font-weight:bold;
+      margin:15px 20px;
+      padding:10px;
+      border-radius:10px;
+      display:none;
     }
 
     /* درج السلة */
     .cartDrawer{
-      position: fixed;
+      position:fixed;
       top:0;
-      left: -360px;
-      width: 320px;
-      max-width: 92vw;
-      height: 100%;
-      background: white;
-      z-index: 1100;
-      transition: .3s;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.25);
-      padding: 16px;
+      left:-360px;
+      width:320px;
+      max-width:92vw;
+      height:100%;
+      background:white;
+      z-index:1100;
+      transition:.3s;
+      box-shadow:2px 0 10px rgba(0,0,0,0.25);
+      padding:16px;
       overflow-y:auto;
     }
-    .cartDrawer.active{ left: 0; }
+    .cartDrawer.active{ left:0; }
     .cartHead{
       display:flex;
-      justify-content: space-between;
+      justify-content:space-between;
       align-items:center;
       gap:10px;
       border-bottom:1px solid #eee;
@@ -164,7 +167,7 @@
     }
     .cartItem{
       border:1px solid #eee;
-      border-radius:10px;
+      border-radius:12px;
       padding:10px;
       margin-bottom:10px;
       display:flex;
@@ -172,14 +175,14 @@
       align-items:center;
       gap:10px;
     }
-    .cartItem .name{font-weight:700}
+    .cartItem .name{font-weight:800}
     .cartItem .price{color:#666;font-size:13px}
     .removeBtn{
       background:#b30059;
       color:#fff;
       border:none;
       padding:6px 10px;
-      border-radius:8px;
+      border-radius:10px;
       cursor:pointer;
       font-size:13px;
     }
@@ -196,7 +199,7 @@
     /* ✅ خانات الأقسام */
     .catGrid{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns:1fr;
       gap:10px;
       margin-top:12px;
     }
@@ -224,7 +227,7 @@
       background:#fff;
       border-radius:12px;
       box-shadow:0 2px 6px rgba(0,0,0,.08);
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns:repeat(2,1fr);
       gap:10px;
     }
     .subGrid.show{ display:grid; }
@@ -233,7 +236,7 @@
       border:1px solid #ffd1e6;
       border-radius:12px;
       padding:10px 8px;
-      font-weight:700;
+      font-weight:800;
       color:#660033;
       cursor:pointer;
       text-align:center;
@@ -241,103 +244,105 @@
     }
     .subBox:hover{ background:#ffd1e6; }
 
-    /* ✅ قسم الماركات (شبكة) */
+    /* ✅ عنوان الأقسام داخل الصفحة */
     .sectionTitle{
       text-align:center;
       color:#b30059;
       margin: 10px 0 0;
       font-size: 22px;
     }
+
+    /* ✅ قسم الماركات (شبكة) */
     .brandsWrap{
       margin: 12px 16px 0;
-      background: #fff;
-      border-radius: 16px;
-      padding: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+      background:#fff;
+      border-radius:16px;
+      padding:14px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.10);
     }
     .brandsGrid{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
     }
-    @media (min-width: 520px){
-      .brandsGrid{ grid-template-columns: repeat(3, 1fr); }
+    @media (min-width:520px){
+      .brandsGrid{ grid-template-columns:repeat(3,1fr); }
     }
-    @media (min-width: 900px){
-      .brandsGrid{ grid-template-columns: repeat(4, 1fr); }
+    @media (min-width:900px){
+      .brandsGrid{ grid-template-columns:repeat(4,1fr); }
     }
 
     .brandCard{
       display:flex;
-      flex-direction: column;
+      flex-direction:column;
       align-items:center;
       justify-content:center;
       gap:10px;
-      padding: 14px 10px;
+      padding:14px 10px;
       border:1px solid #f1f1f1;
-      border-radius: 16px;
+      border-radius:16px;
       text-decoration:none;
       color:#333;
-      background: linear-gradient(180deg, #ffffff 0%, #fff3fa 100%);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      transition: transform .15s ease, box-shadow .15s ease;
+      background:linear-gradient(180deg,#ffffff 0%, #fff3fa 100%);
+      box-shadow:0 2px 10px rgba(0,0,0,0.06);
+      transition:transform .15s ease, box-shadow .15s ease;
       overflow:hidden;
       position:relative;
     }
     .brandCard:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+      transform:translateY(-2px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.10);
     }
     .brandLogo{
-      width: 100%;
-      max-width: 180px;
-      height: 64px;
-      object-fit: contain;
+      width:100%;
+      max-width:180px;
+      height:110px;
+      object-fit:contain;
       background:#fff;
-      border-radius: 12px;
-      padding: 6px 10px;
+      border-radius:14px;
+      padding:8px 10px;
     }
 
     /* 🌸 اسم الماركة وردي + ورد */
     .brandName{
-      font-weight: 900;
+      font-weight:900;
       color:#b30059;
-      font-size: 15px;
+      font-size:15px;
       text-align:center;
       line-height:1.3;
-      padding: 6px 10px;
-      background: linear-gradient(90deg,#ffe0ec,#fff5fa);
-      border-radius: 14px;
+      padding:6px 10px;
+      background:linear-gradient(90deg,#ffe0ec,#fff5fa);
+      border-radius:14px;
     }
     .brandName::before{ content:"🌸 "; }
     .brandName::after{ content:" 🌷"; }
 
     .brandHint{
-      font-size: 12px;
+      font-size:12px;
       color:#777;
     }
 
     /* الفوتر */
-    footer {
-      background: #b30059;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+    footer{
+      background:#b30059;
+      color:white;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
     }
-    footer a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      margin: 5px 0;
+    footer a{
+      color:white;
+      text-decoration:none;
+      display:block;
+      margin:5px 0;
     }
-    footer a:hover { text-decoration: underline; }
-    footer .social {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      font-size: 24px;
+    footer a:hover{ text-decoration:underline; }
+    footer .social{
+      margin-top:15px;
+      display:flex;
+      justify-content:center;
+      gap:25px;
+      font-size:24px;
     }
   </style>
 </head>
@@ -352,16 +357,15 @@
 
   <div class="overlay" id="overlay"></div>
 
-  <!-- ✅ القائمة الجانبية (خانات منفصلة لكل قسم) -->
+  <!-- ✅ القائمة الجانبية -->
   <div class="sidebar" id="sidebar">
     <button class="close-btn" id="closeMenu">✖</button>
     <h3>📂 الأقسام</h3>
 
     <div class="catGrid">
-
       <a class="catLink" href="makeup.html"><div class="catBox">💄 المكياج <span>›</span></div></a>
 
-      <div class="catBox hasSub" id="careBox">🧴 العناية <span class="arrow" id="careArrow">▾</span></div>
+      <div class="catBox" id="careBox">🧴 العناية <span class="arrow" id="careArrow">▾</span></div>
       <div class="subGrid" id="careSub">
         <a class="catLink" href="care-hair.html"><div class="subBox">💆‍♀️ الشعر</div></a>
         <a class="catLink" href="care-skin.html"><div class="subBox">🧖‍♀️ البشرة</div></a>
@@ -369,7 +373,7 @@
         <a class="catLink" href="care-body.html"><div class="subBox">🛁 الجسم</div></a>
         <a class="catLink" href="care-lips.html"><div class="subBox">💋 الشفاه</div></a>
         <a class="catLink" href="care-sensitive.html"><div class="subBox">🌸 الحساسة</div></a>
-        <a class="catLink" href="care-oral.html"><div class="subBox">🦷 الفم</div></a>
+        <a class="catLink" href="care-oral.html"><div class="subBox">🦷 الفم والأسنان</div></a>
         <a class="catLink" href="care-hands.html"><div class="subBox">🖐 اليدين</div></a>
         <a class="catLink" href="care-feet.html"><div class="subBox">🦶 القدمين</div></a>
       </div>
@@ -377,19 +381,17 @@
       <a class="catLink" href="devices.html"><div class="catBox">💨 الأجهزة <span>›</span></div></a>
       <a class="catLink" href="herbs.html"><div class="catBox">🌿 الأعشاب <span>›</span></div></a>
       <a class="catLink" href="oils.html"><div class="catBox">🛢️ الزيوت <span>›</span></div></a>
-      <a class="catLink" href="supplements.html"><div class="catBox">💊 المكملات <span>›</span></div></a>
-      <a class="catLink" href="slimming.html"><div class="catBox">⚖️ التخسيس <span>›</span></div></a>
+      <a class="catLink" href="supplements.html"><div class="catBox">💊 المكملات الغذائية <span>›</span></div></a>
+      <a class="catLink" href="slimming.html"><div class="catBox">⚖️ منتجات التخسيس <span>›</span></div></a>
       <a class="catLink" href="lenses.html"><div class="catBox">👁️ العدسات <span>›</span></div></a>
       <a class="catLink" href="perfumes.html"><div class="catBox">🌸 العطور <span>›</span></div></a>
       <a class="catLink" href="kids.html"><div class="catBox">👗 ملابس الأطفال <span>›</span></div></a>
 
-      <!-- ✅ رابط الماركات داخل نفس الصفحة -->
       <a class="catLink" href="#brands"><div class="catBox">🏷️ الماركات <span>›</span></div></a>
-
     </div>
   </div>
 
-  <!-- درج السلة -->
+  <!-- ✅ درج السلة -->
   <div class="cartDrawer" id="cartDrawer">
     <div class="cartHead">
       <span>🛒 سلة المشتريات</span>
@@ -404,7 +406,7 @@
     </div>
   </div>
 
-  <!-- رسالة الترحيب -->
+  <!-- ✅ الترحيب -->
   <section class="welcome">
     <h2>👑 أهلاً بكم في كوين شوب 🌸</h2>
     <p>
@@ -413,70 +415,61 @@
     </p>
   </section>
 
-  <!-- ✅ قسم الماركات (داخل نص الموقع) -->
+  <!-- ✅ الماركات داخل نص الموقع + صور وروابط -->
   <h2 id="brands" class="sectionTitle">✨ الماركات الأكثر شعبية ✨</h2>
   <section class="brandsWrap">
     <div class="brandsGrid">
 
-      <a class="brandCard" href="brand-skin1004.html">
-        <img class="brandLogo" src="images/brands/skin1004.png" alt="SKIN1004"
-             onerror="this.style.display='none';">
-        <div class="brandName">SKIN1004</div>
-        <div class="brandHint">اضغطي لعرض المنتجات</div>
-      </a>
-
       <a class="brandCard" href="brand-the-ordinary.html">
-        <img class="brandLogo" src="images/brands/the-ordinary.png" alt="The Ordinary"
-             onerror="this.style.display='none';">
+        <img class="brandLogo" src="https://d.top4top.io/p_368050xb60.png" alt="The Ordinary">
         <div class="brandName">The Ordinary</div>
         <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <a class="brandCard" href="brand-anua.html">
-        <img class="brandLogo" src="images/brands/anua.png" alt="Anua"
-             onerror="this.style.display='none';">
-        <div class="brandName">Anua</div>
+      <a class="brandCard" href="brand-skin1004.html">
+        <img class="brandLogo" src="https://e.top4top.io/p_3680oltax1.png" alt="SKIN1004">
+        <div class="brandName">SKIN1004</div>
         <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
       <a class="brandCard" href="brand-beauty-of-joseon.html">
-        <img class="brandLogo" src="images/brands/beauty-of-joseon.png" alt="Beauty of Joseon"
-             onerror="this.style.display='none';">
+        <img class="brandLogo" src="https://f.top4top.io/p_3680xirjo2.png" alt="Beauty of Joseon">
         <div class="brandName">BEAUTY OF JOSEON</div>
         <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <a class="brandCard" href="brand-cosrx.html">
-        <img class="brandLogo" src="images/brands/cosrx.png" alt="COSRX"
-             onerror="this.style.display='none';">
-        <div class="brandName">COSRX</div>
+      <a class="brandCard" href="brand-anua.html">
+        <img class="brandLogo" src="https://g.top4top.io/p_36803p4vc3.png" alt="Anua">
+        <div class="brandName">Anua</div>
         <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
       <a class="brandCard" href="brand-dr-althea.html">
-        <img class="brandLogo" src="images/brands/dr-althea.png" alt="Dr. Althea"
-             onerror="this.style.display='none';">
+        <img class="brandLogo" src="https://h.top4top.io/p_36807s29m4.png" alt="Dr. Althea">
         <div class="brandName">Dr. Althea</div>
         <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
-      <a class="brandCard" href="brand-medicube.html">
-        <img class="brandLogo" src="images/brands/medicube.png" alt="medicube"
-             onerror="this.style.display='none';">
-        <div class="brandName">medicube</div>
+      <a class="brandCard" href="brand-cosrx.html">
+        <img class="brandLogo" src="https://i.top4top.io/p_368035ga05.png" alt="COSRX">
+        <div class="brandName">COSRX</div>
         <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
       <a class="brandCard" href="brand-some-by-mi.html">
-        <img class="brandLogo" src="images/brands/some-by-mi.png" alt="SOME BY MI"
-             onerror="this.style.display='none';">
+        <img class="brandLogo" src="https://j.top4top.io/p_36801dvle6.png" alt="SOME BY MI">
         <div class="brandName">SOME BY MI</div>
         <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
 
+      <a class="brandCard" href="brand-medicube.html">
+        <img class="brandLogo" src="https://k.top4top.io/p_3680we4607.png" alt="medicube">
+        <div class="brandName">medicube</div>
+        <div class="brandHint">اضغطي لعرض المنتجات</div>
+      </a>
+
       <a class="brandCard" href="brand-la-roche-posay.html">
-        <img class="brandLogo" src="images/brands/la-roche-posay.png" alt="LA ROCHE-POSAY"
-             onerror="this.style.display='none';">
+        <img class="brandLogo" src="https://l.top4top.io/p_3680g4wc98.png" alt="LA ROCHE-POSAY">
         <div class="brandName">LA ROCHE-POSAY</div>
         <div class="brandHint">اضغطي لعرض المنتجات</div>
       </a>
@@ -484,7 +477,7 @@
     </div>
   </section>
 
-  <!-- خانة البحث -->
+  <!-- ✅ البحث -->
   <div class="searchWrap">
     <span>🔎</span>
     <input id="productSearch" type="search" placeholder="ابحثي عن منتج... (مثال: كريم، سيروم)">
@@ -492,19 +485,19 @@
 
   <div class="alert" id="alertBox">✅ تم إضافة المنتج إلى السلة!</div>
 
-  <!-- المنتجات (كما كان عندك) -->
+  <!-- ✅ المنتجات -->
   <section>
     <h2 style="text-align:center; color:#b30059;">🛍️ منتجاتنا</h2>
 
     <div class="products" id="products">
-      <div class="product" data-name="كريم أساس" onclick="addToCart('كريم أساس',7.0)">
+      <div class="product" data-name="كريم أساس" onclick="addToCart('كريم أساس', 7.0)">
         <img src="https://i.ibb.co/3vxhbWD/foundation.jpg" alt="كريم أساس"
              onerror="this.src='https://via.placeholder.com/600x600?text=Queen+Sh00p';">
         <p>كريم أساس<br><strong>7.0 ر.ع</strong></p>
         <button class="addBtn" type="button">➕ أضف للسلة</button>
       </div>
 
-      <div class="product" data-name="سيروم ترطيب" onclick="addToCart('سيروم ترطيب',9.9)">
+      <div class="product" data-name="سيروم ترطيب" onclick="addToCart('سيروم ترطيب', 9.9)">
         <img src="https://i.ibb.co/dKhcd6y/serum.jpg" alt="سيروم ترطيب"
              onerror="this.src='https://via.placeholder.com/600x600?text=Queen+Sh00p';">
         <p>سيروم ترطيب<br><strong>9.9 ر.ع</strong></p>
@@ -513,7 +506,7 @@
     </div>
   </section>
 
-  <!-- الفوتر -->
+  <!-- ✅ الفوتر -->
   <footer>
     <p>✅ معلومات المتجر: السيب – السويق – صحار</p>
     <p>✅ طرق الدفع: Mastercard – Visa – الدفع عند الاستلام</p>
@@ -543,7 +536,7 @@
     const overlay = document.getElementById("overlay");
     const alertBox = document.getElementById("alertBox");
 
-    // زر القائمة يفتح/يغلق
+    // ✅ زر القائمة يفتح/يغلق
     document.getElementById("menuBtn").addEventListener("click", () => {
       closeCart();
       sidebar.classList.toggle("active");
@@ -551,7 +544,7 @@
     });
     document.getElementById("closeMenu").addEventListener("click", closeAll);
 
-    // زر السلة يفتح/يغلق
+    // ✅ زر السلة يفتح/يغلق
     document.getElementById("cartBtn").addEventListener("click", () => {
       sidebar.classList.remove("active");
       cartDrawer.classList.toggle("active");
@@ -568,7 +561,7 @@
     }
     overlay.addEventListener("click", closeAll);
 
-    // فتح/إغلاق فروع العناية
+    // ✅ فتح/إغلاق فروع العناية
     const careBox = document.getElementById("careBox");
     const careSub = document.getElementById("careSub");
     const careArrow = document.getElementById("careArrow");
@@ -578,7 +571,7 @@
       careArrow.textContent = careSub.classList.contains("show") ? "▴" : "▾";
     });
 
-    // إضافة للسلة + رسالة
+    // ✅ إضافة للسلة + رسالة
     function addToCart(name, price){
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       cart.push({name, price});
@@ -591,7 +584,7 @@
     }
     window.addToCart = addToCart;
 
-    // عرض السلة
+    // ✅ عرض السلة
     function renderCart(){
       const itemsWrap = document.getElementById("cartItems");
       const totalEl = document.getElementById("cartTotal");
@@ -632,7 +625,7 @@
     }
     window.removeFromCart = removeFromCart;
 
-    // بحث المنتجات
+    // ✅ بحث المنتجات
     const search = document.getElementById("productSearch");
     const productsWrap = document.getElementById("products");
     search.addEventListener("input", () => {
